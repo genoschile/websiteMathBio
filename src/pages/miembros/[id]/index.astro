@@ -1,0 +1,308 @@
+---
+import { getCollection } from "astro:content";
+import type { Member } from "../../../interface";
+import Layout from "../../../layouts/Layout.astro";
+
+const { id } = Astro.params;
+
+export function getStaticPaths() {
+    return [
+        { params: { id: 1 } },
+        { params: { id: 2 } },
+        { params: { id: 3 } },
+        { params: { id: 4 } },
+        { params: { id: 5 } },
+        { params: { id: 6 } },
+        { params: { id: 7 } },
+        { params: { id: 8 } },
+        { params: { id: 9 } },
+        { params: { id: 100 } },
+    ];
+}
+
+const members: Member[] = await getCollection("members");
+
+// Buscamos el miembro correspondiente al `id` proporcionado en la URL
+const currentId = members.find((m) => m.data.id === +id); // Aseguramos que comparamos correctamente los tipos (string vs number)
+
+// Si no se encuentra un miembro con ese `id`, mostramos un mensaje de error
+if (!currentId) {
+    throw new Error(`Miembro con ID ${id} no encontrado`);
+}
+---
+
+<Layout title={currentId.data.name}>
+    <title>Miembro {id}</title>
+
+    <div class="container-info">
+        <a class="btn-back" href="/miembros">Volver</a>
+
+        <section class="main-section">
+            <div class="images">
+                <img
+                    transition:name={`img${currentId.data.name}`}
+                    src={currentId.data.image}
+                    alt={`Imágen de ${currentId.data.name}`}
+                    class="profile-image"
+                />
+                <div class="details">
+                    <h1>{currentId.data.name}</h1>
+                    <p><strong>Posición:</strong> {currentId.data.position}</p>
+                    <button class="contact-button">Contácteme</button>
+                </div>
+            </div>
+
+            <div class="info-members">
+                <div>
+                    <p><strong>Grado:</strong> {currentId.data.grade}</p>
+                    <p>
+                        <strong>Email:</strong>
+                        {currentId.data.email || "No disponible"}
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="widget">
+            <!-- Tabs Biography
+Education
+Research
+Locations
+Physician Ratings -->
+            <div class="tabs">
+                <input type="radio" id="overview" name="tabs" checked />
+
+                <label for="overview">Overview</label>
+
+                <input type="radio" id="experience" name="tabs" />
+
+                <label for="experience">Experience</label>
+
+                <input type="radio" id="awards" name="tabs" />
+
+                <label for="awards">Awards</label>
+            </div>
+
+            <div class="tab-content">
+                <div class="tab-content-1">
+                    <h2>Overview</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Maiores, ad eum! Vero asperiores nostrum voluptatum
+                        libero blanditiis consectetur vitae nihil facere, nemo
+                        error iste voluptas incidunt cumque atque tempore
+                        soluta?
+                    </p>
+                </div>
+
+                <div class="tab-content-2">
+                    <h2>Experience</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Maiores, ad eum! Vero asperiores nostrum voluptatum
+                        libero blanditiis consectetur vitae nihil facere, nemo
+                        error iste voluptas incidunt cumque atque tempore
+                        soluta?
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Maiores, ad eum! Vero asperiores nostrum voluptatum
+                        libero.
+                    </p>
+                </div>
+
+                <div class="tab-content-3">
+                    <h2>Awards</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Maiores, ad eum! Vero asperiores nostrum voluptatum
+                        libero blanditiis consectetur vitae nihil facere, nemo
+                        error iste voluptas incidunt cumque atque tempore
+                        soluta?
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<script is:inline>
+    const $contentDinamicDiv = document.querySelector(".container-info");
+</script>
+
+<style>
+    .main-section {
+        display: flex;
+        margin: 0 auto;
+        justify-content: space-between; /* Distribuye imagen y info a lados opuestos */
+        align-items: flex-start; /* Alinea al inicio verticalmente */
+        gap: 1rem;
+        padding: 1rem;
+        width: 90%; /* Ajusta al tamaño del contenedor */
+        max-width: 1200px;
+        background: #09f;
+        border-radius: 1rem;
+        color: #fff; /* Texto en blanco */
+    }
+
+    .images {
+        display: flex;
+        align-items: flex-start; /* Alinea elementos al inicio */
+        gap: 1rem;
+        flex-shrink: 0; /* Evita que la imagen se reduzca */
+    }
+
+    .profile-image {
+        aspect-ratio: 1 / 1; /* Imagen cuadrada */
+        max-width: 150px; /* Tamaño máximo */
+        border-radius: 0.5rem; /* Bordes redondeados */
+        object-fit: cover; /* Asegura que la imagen no se distorsione */
+    }
+
+    .details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    .contact-button {
+        background: #fff;
+        color: #09f;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease;
+    }
+
+    .contact-button:hover {
+        background: #006dcc;
+        color: #fff;
+    }
+
+    .info-members {
+        display: flex;
+        flex-direction: column; /* Apila elementos verticalmente */
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 50%; /* Ocupa la mitad derecha */
+        gap: 0.5rem;
+    }
+
+    .container-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        padding: 1rem;
+        margin: 1rem auto;
+        max-width: 1200px;
+    }
+
+    .btn-back {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+        background-color: var(--color-black);
+        color: var(--color-white);
+        text-decoration: none;
+        border-radius: 0.25rem;
+        align-self: flex-start;
+        transition:
+            background-color 0.3s,
+            color 0.3s;
+
+        &:hover {
+            background-color: var(--color-black-opacity);
+            color: var(--color-black);
+        }
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    img {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        font-size: 1.25rem;
+    }
+
+    /* new */
+
+    .widget {
+        width: 100%;
+        padding: 1rem;
+
+        border-radius: 1rem;
+
+        box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.025);
+    }
+
+    .tabs {
+        --tab-count: 3;
+        --active: 0;
+        display: flex;
+        isolation: isolate;
+        height: 3.5rem;
+        border-block-end: 1px solid #e0ebec;
+        position: relative;
+    }
+
+    .tabs input {
+        display: none;
+    }
+
+    .tabs label {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: #053b03;
+        cursor: pointer;
+        transition: color 0.5s ease-in-out;
+    }
+
+    .tabs input:checked + label {
+        color: #d41212;
+    }
+
+    .tabs::after {
+        z-index: -1;
+        pointer-events: none;
+        position: absolute;
+        content: "";
+        inset: 0 0 -1px;
+        width: calc((100% / var(--tab-count)) - 2px);
+        border: 1px solid #e0ebec;
+        border-radius: 0.5rem 0.5rem 0 0;
+        background-image: linear-gradient(#edf4ff, #fff);
+
+        translate: calc(var(--active) * 100%);
+
+        transition: translate 0.5s ease-in-out;
+    }
+
+    .tabs:has(:checked:nth-of-type(1)) {
+        --active: 0;
+    }
+
+    .tabs:has(:checked:nth-of-type(2)) {
+        --active: 1;
+    }
+
+    .tabs:has(:checked:nth-of-type(3)) {
+        --active: 2;
+    }
+</style>

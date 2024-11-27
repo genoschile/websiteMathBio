@@ -1,0 +1,155 @@
+---
+import Footer from "../components/footer.astro";
+
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="home">
+	<h1>home</h1>
+
+	<section>
+		<div class="slider">
+			<a name="img_1">
+				<img
+					src="https://images.unsplash.com/photo-1525382455947-f319bc05fb35?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+				/>
+			</a>
+			<a name="img_2">
+				<img
+					src="https://images.unsplash.com/photo-1504713721722-f73b4ccdfe6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+				/>
+			</a>
+			<a name="img_3">
+				<img
+					src="https://images.unsplash.com/photo-1532458198880-add09ce3b2f5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
+				/>
+			</a>
+			<a name="img_4">
+				<img
+					src="https://images.unsplash.com/photo-1524767615-3d4139c938a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=2255&q=80"
+				/>
+			</a>
+		</div>
+
+		<div
+			style="background: radial-gradient(ellipse 80% 80% at 50% -20%,#7877c64d,#fff0); position: absolute; top: 0; width: 100%; height: 100%; left:0; z-index: -1"
+		>
+		</div>
+
+		<ul class="markers">
+			<li><a href="#img_1"></a></li>
+			<li><a href="#img_2"></a></li>
+			<li><a href="#img_3"></a></li>
+			<li><a href="#img_4"></a></li>
+		</ul>
+	</section>
+
+	<Footer />
+</Layout>
+
+<style>
+	*,
+	*::before,
+	*::after {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	h1 {
+		font-size: 1.75rem;
+		margin-block-end: 0.25em;
+	}
+
+	h2 {
+		font-size: 1.25rem;
+		margin-block-end: 1em;
+	}
+
+	p {
+		margin-block-end: 1.5em;
+	}
+
+	.hero {
+		aspect-ratio: 16/5;
+	}
+
+	.hero img {
+		display: block;
+		inline-size: 100%;
+		block-size: 100%;
+		object-fit: cover;
+	}
+
+	.content {
+		padding-block: 2rem;
+	}
+
+	.banner {
+		font-size: 1.5rem;
+		line-height: 1.25;
+		text-align: center;
+		color: #081a28;
+		background-image: linear-gradient(to right, #b8d4e3, #a6cde2);
+		background-size: cover;
+		padding: 2.5rem;
+		margin-block-end: 2rem;
+	}
+
+	.icon {
+		display: block;
+		font-size: 3rem;
+	}
+
+	.slider {
+		width: 100%;
+		height: var(--height);
+		display: block;
+		overflow: hidden;
+		mask-image: linear-gradient(
+			to right,
+			transparent,
+			#000 10% 90%,
+			transparent
+		);
+	}
+
+	.slider .list {
+		display: flex;
+		width: 100%;
+		min-width: calc(var(--width) * var(--quantity));
+		position: relative;
+	}
+
+	.slider .list .item {
+		width: var(--width);
+		height: var(--height);
+		position: absolute;
+		left: 100%;
+		animation: autoRun 10s linear infinite;
+		transition: filter 0.5s;
+		animation-delay: calc((10s / var(--quantity)) * (var(--position) - 1));
+	}
+
+	.slider .list .item img {
+		width: 100%;
+	}
+
+	.slider:hover .item {
+		animation-play-state: paused !important;
+		filter: grayscale(1);
+	}
+
+	.slider .item:hover {
+		filter: grayscale(0);
+	}
+
+	@keyframes autoRun {
+		from {
+			left: 100%;
+		}
+		to {
+			left: calc(var(--width) * -1);
+		}
+	}
+</style>

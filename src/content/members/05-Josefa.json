@@ -1,0 +1,15 @@
+{
+    "name": "Josefa Hillmmer",
+    "id": 5,
+    "position": "Ayudante de Investigación",
+    "grade": "M.Sc",
+    "email": "samuel.molina@ug.uchile.cl",
+    "image": "src/assets/miembros/josefa-profile.jpeg",
+    "publications": [],
+    "talks": [],
+    "projects": [
+        {
+            "id": 1
+        }
+    ]
+}

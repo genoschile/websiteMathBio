@@ -1,0 +1,18 @@
+{
+    "id": 1,
+    "title": "IDENTIFICATION OF MUTATIONAL SIGNATURES ASSOCIATED WITH THE SITE OF TUMOUR ORIGIN IN CHILEAN PATIENTS WITH CANCER OF UNKNOWN ORIGIN",
+    "url": "https://www.ncbi.nlm.nih.gov/pubmed/32029541",
+    "description": "Identification of mutational signatures associated with the site of tumour origin in Chilean patients with cancer of unknown origin: General objective: This project's main aim is to efficiently classify the tumour's primary site in diagnosed CUP Chilean patients through mathematical and machine learning models based on genomic and clinical characterization obtained from a liquid biopsy.", 
+    "fondecyt": "11241185",
+    "team": [
+        {
+            "id": 100
+        },
+        {
+            "id": 2
+        },
+        {
+            "id": 3
+        }
+    ]
+}

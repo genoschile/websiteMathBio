@@ -1,0 +1,15 @@
+{
+    "name": "Felipe Mardones",
+    "id": 2,
+    "position": "Ayudante de Investigación",
+    "grade": "Ing. en Biotecnología",
+    "email": "felipe.mardones386@gmail.com",
+    "image": "src/assets/miembros/felipe-profile.jpeg",
+    "publications": [],
+    "talks": [],
+    "projects": [
+        {
+            "id": 1
+        }
+    ]
+}

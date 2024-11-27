@@ -1,0 +1,15 @@
+{
+    "name": "Benjamín Astudillo",
+    "id": 100,
+    "position": "Ayudante de Investigación",
+    "grade": "Ing. Civil en Bioinformática",
+    "email": "waib3nja@gmail.com",
+    "image": "src/assets/miembros/1.jpeg",
+    "publications": [],
+    "talks": [],
+    "projects": [
+        {
+            "id": 1
+        }
+    ]
+}

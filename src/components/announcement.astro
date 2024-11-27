@@ -1,0 +1,21 @@
+---
+const currentText = "¡Bienvenido a MathBio-Lab!";
+---
+
+<section class="announcement-bar">
+    {currentText}
+</section>
+
+<style>
+    .announcement-bar {
+        padding: 0.75rem 3rem;
+        font-size: 1rem;
+        text-align: center;
+        font-weight: 600;
+        color: light-dark(var(--color-black), var(--color-black));
+        background-color: light-dark(
+            var(--color-black-opacity),
+            var(--color-white)
+        );
+    }
+</style>

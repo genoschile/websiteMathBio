@@ -1,0 +1,19 @@
+{
+    "name": "Dra. Karen Oróstica",
+    "id": 1,
+    "position": "Investigadora Principal",
+    "grade": "PhD",
+    "email": "korostica09@gmail.com",
+    "image": "/src/assets/miembros/karen-profile.jpeg",
+    "publications": [],
+    "talks": [
+        {
+            "id": 1
+        }
+    ],
+    "projects": [
+        {
+            "id": 1
+        }
+    ]
+}

@@ -1,0 +1,92 @@
+---
+const themes = ["light", "dark", "system"];
+---
+
+<div class="theme-switcher">
+    {themes.map((t) => {
+        return (
+            <label>
+                {t.charAt(0).toUpperCase() + t.slice(1)}
+                <input id={t} type="radio" name="themeSwitcher" />
+            </label>
+        );
+    })}
+</div>
+
+<style>
+    .theme-switcher {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        & label {
+            display: grid;
+            cursor: pointer;
+        }
+
+        & input[type="radio"] {
+            margin-top: 0.5rem;
+        }
+    }
+
+    /* Estilos para el tema claro */
+    :root[data-theme='light'] {
+        --background-color: #ffffff;
+        --text-color: #000000;
+    }
+
+    /* Estilos para el tema oscuro */
+    :root[data-theme='dark'] {
+        --background-color: #000000;
+        --text-color: #ffffff;
+    }
+
+    /* Estilos globales */
+    body {
+        background-color: var(--background-color);
+        color: var(--text-color);
+        transition: background-color 0.3s, color 0.3s;
+    }
+</style>
+
+<script lang="ts">
+    document.addEventListener("DOMContentLoaded", () => {
+        // Seleccionar todos los inputs de la clase `theme-switcher`
+        const $themeSwitcher = document.querySelectorAll<HTMLInputElement>(".theme-switcher input");
+
+        // Función para aplicar el tema
+        function applyTheme(theme) {
+            if (theme === "system") {
+                // Detectar la preferencia del sistema operativo
+                const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+            } else {
+                document.documentElement.setAttribute("data-theme", theme);
+            }
+
+            // Guardar la preferencia del usuario en localStorage
+            localStorage.setItem("theme", theme);
+        }
+
+        // Función que maneja el cambio de tema
+        function changeTheme(e) {
+            const selectedTheme = (e.target).id;
+            applyTheme(selectedTheme);
+        }
+
+        // Inicializar el tema según la preferencia guardada o la configuración del sistema
+        const savedTheme = localStorage.getItem("theme") || "system";
+        applyTheme(savedTheme);
+
+        // Asegurar que el botón de radio correspondiente esté seleccionado
+        $themeSwitcher.forEach((radio) => {
+            if (radio.id === savedTheme) {
+                radio.checked = true;
+            }
+
+            // Escuchar cambios en cada botón de radio
+            radio.addEventListener("change", changeTheme);
+        });
+    });
+</script>
