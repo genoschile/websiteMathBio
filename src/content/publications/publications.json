@@ -1,0 +1,37 @@
+[
+    {
+        "name": "",
+        "path": "",
+        "resume": "",
+        "description": "",
+        "doi": "",
+        "author":"",
+        "co-author": "",
+        "keys": ["key2", "key2"], 
+        "date": "",
+        "id": 1,
+        "pdf": "",
+        "cite": [
+            {
+                "apa": ""
+            }
+        ]
+    }, 
+    {
+        "name": "name",
+        "path": "path",
+        "resume": "",
+        "description": "",
+        "doi": "",
+        "author":"",
+        "co-author": "",
+        "date": "",
+        "id": 2,
+        "pdf": "",
+        "cite": [
+            {
+                "apa": ""
+            }
+        ]
+    }
+]

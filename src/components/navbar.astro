@@ -1,4 +1,5 @@
 ---
+import Close from "../icons/close.astro";
 import Menu from "../icons/menu.astro";
 import Announcement from "./announcement.astro";
 import LanguageMenu from "./LanguageMenu.astro";
@@ -20,112 +21,144 @@ const currentPath = Astro.url.pathname;
 <Announcement />
 
 <header class="header">
-    <nav>
-        <input type="checkbox" id="sidebar-active" />
-        <label for="">
-            <Menu />
-        </label>
+    <nav class="nav">
+        <div class="nav__container">
+            <figure class="nav__figure">
+                <img src="./logo.svg" alt="" class="nav__logo" />
+            </figure>
 
-        <label id="overlay" for="sidebar-active"></label>
-
-        <img src="/MathBio.png" alt="" />
-
-        <div class="links-container">
-            <label for="sidebar-active" class="close-sidebar-button">
-
+            <label for="menu-input" class="nav__toggle">
+                <input type="checkbox" id="menu-input" class="nav__input" />
             </label>
-        </div>
 
-        <ul>
-            {
-                links.map((link) => (
-                    <li
-                        class="list-element"
-                        class={currentPath === link.href ? "active" : ""}
-                    >
-                        <a href={link.href}>{link.label}</a>
-                    </li>
-                ))
-            }
-        </ul>
+            <ul class="nav__list">
+                {
+                    links.map((link) => (
+                        <li
+                            class={
+                                currentPath === link.href
+                                    ? "nav__item active"
+                                    : "nav__item"
+                            }
+                        >
+                            <a class="nav__link" href={link.href}>
+                                {link.label}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
     </nav>
 </header>
 
 <style>
     .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-direction: row;
         padding: 1.25rem;
         background-color: hsl(318, 71%, 37%);
 
         position: sticky;
         top: 0;
-        z-index: 2;
 
         animation: enhace-header linear both;
         animation-timeline: scroll(root block);
         animation-range: 0 200px;
-
-        & nav {
-            flex: 2;
-
-            & ul {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 0.6rem;
-                list-style: none;
-
-                & li {
-                    position: relative;
-                    border-radius: 1rem;
-                    padding: 0.5rem;
-
-
-                    & a {
-                        font-size: 0.9rem;
-                        text-decoration: none;
-                        color: white;
-
-                    }
-
-                    &:hover {
-                        background-color: #555;
-                    }
-
-                    &::before {
-                        content: "";
-                        position: absolute;
-                        bottom: -5px;
-                        left: 50%;
-                        transform: translateX(-50%) scaleX(0);
-                        transform-origin: center;
-                        width: 100%;
-                        height: 1px;
-                        background-color: white;
-                        transition: transform 0.3s ease-in-out;
-                        z-index: 0;
-                    }
-
-                    &:hover::before {
-                        transform: translateX(-50%) scaleX(1);
-                    }
-                }
-            }
-        }
-
-        & div {
-            flex: 1;
-            display: grid;
-            inset-block-start: 0;
-            position: relative;
-        }
+        z-index: 3;
     }
 
-    .active {
-        background-color: var(--color-btn);
+    .nav {
+        background-color: #000;
+    }
+
+    .nav__container {
+        color: white;
+        width: min(90%, 1200px);
+        margin: 0 auto;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        height: 80px;
+
+        --menu-icon: url("./open.svg");
+        --menu-show: translateY(-100%);
+    }
+
+    .nav__container:has(.nav__input:checked) {
+        --menu-icon: url("./close.svg");
+        --menu-show: translateY(0);
+    }
+
+    .nav__list {
+        transform: var(--menu-show);
+
+        margin: 0;
+
+        list-style: none;
+
+        position: fixed;
+        inset: 0;
+        display: grid;
+
+        align-content: center;
+        justify-content: center;
+
+        padding: 1.5rem 5%;
+
+        background-color: #000;
+
+        z-index: 3;
+
+        transition: transform 0.3s;
+    }
+
+    .nav__figure,
+    .nav__toggle {
+        z-index: 10;
+    }
+
+    .nav__input {
+        display: none;
+    }
+
+    .nav__toggle {
+        width: 30px;
+        height: 30px;
+        background-image: var(--menu-icon);
+        background-size: cover;
+        cursor: pointer;
+
+        transition: background-image 0.3s;
+    }
+
+    .nav_input {
+        width: 40px;
+        height: 40px;
+    }
+
+    .nav__link {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    @media (width < 764px) {
+        .nav__container {
+            --menu-show: translateY(0);
+        }
+
+        .nav__toggle {
+            display: none;
+        }
+
+        .nav__list {
+            position: static;
+            grid-auto-flow: column;
+            place-content: center;
+            padding: 0;
+
+            transition: unset;
+        }
     }
 
     @keyframes enhace-header {
