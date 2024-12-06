@@ -1,41 +1,72 @@
-<header>
-    <input type="checkbox" id="menu-toggle" class="menu-toggle" />
-    <label for="menu-toggle" class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </label>
-    <nav>
-        <a href="#home">Inicio</a>
-        <a href="#about">Acerca de</a>
-        <a href="#services">Servicios</a>
-        <a href="#contact">Contacto</a>
-    </nav>
+---
+const links = [
+    { href: "/", label: "Inicio" },
+    { href: "/nosotros", label: "Nosotros" },
+    { href: "/miembros", label: "Miembros" },
+    { href: "/proyectos", label: "Proyectos" },
+    { href: "/cursos", label: "Cursos" },
+    { href: "/software", label: "Software" },
+    { href: "/galeria", label: "Galería" },
+];
+---
+
+<header class="header">
+        <figure class="logo">
+            <img src="/logo.svg" alt="Logo MathBio" />
+        </figure>
+        <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+        <label for="menu-toggle" class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <nav class="nav-links">
+            {
+                links.map((link) => {
+                    return <a href={link.href}>{link.label}</a>;
+                })
+            }
+        </nav>
+
 </header>
 
 <style>
-    /* Estilos generales */
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f9;
-    }
-
-    header {
-        position: relative;
+    .header {
+        position: sticky;
+        top: 0;
         background-color: #333;
         color: white;
+        z-index: 10;
         padding: 10px 20px;
+        display: flex;
+        justify-content: center;
+        animation: enhace-header linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 0 200px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1.24rem;
     }
 
-    /* Estilos del menú */
+    /* Logo */
+    .logo {
+        & img {
+            width: 200px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+
+    /* Ocultar el toggle inicialmente */
     .menu-toggle {
         display: none;
     }
 
     .hamburger {
-        display: flex;
+        display: none;
         flex-direction: column;
         justify-content: space-between;
         width: 30px;
@@ -43,6 +74,7 @@
         cursor: pointer;
     }
 
+    /* Líneas del menú */
     .hamburger span {
         display: block;
         width: 100%;
@@ -52,44 +84,64 @@
         transition: all 0.3s ease;
     }
 
-    /* Estilo del menú */
-    nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background-color: #444;
-        display: none;
-        flex-direction: column;
-        padding: 10px 0;
-        z-index: 1000;
+    /* Enlaces del menú */
+    .nav-links {
+        display: flex;
+        gap: 15px;
     }
 
-    nav a {
+    .nav-links a {
         color: white;
         text-decoration: none;
-        padding: 10px 20px;
-        transition: background 0.3s ease;
+        padding: 5px 10px;
+        transition: background-color 0.3s ease;
     }
 
-    nav a:hover {
+    .nav-links a:hover {
         background-color: #555;
+        border-radius: 5px;
     }
 
-    /* Interacción con el toggle */
-    .menu-toggle:checked + label .hamburger span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
+    /* Estilos para pantallas pequeñas */
+    @media (max-width: 768px) {
+        .hamburger {
+            display: flex;
+        }
+
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #444;
+            padding: 10px 0;
+        }
+
+        .menu-toggle:checked ~ .nav-links {
+            display: flex;
+        }
+
+        .menu-toggle:checked + label .hamburger span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle:checked + label .hamburger span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle:checked + label .hamburger span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
     }
 
-    .menu-toggle:checked + label .hamburger span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .menu-toggle:checked + label .hamburger span:nth-child(3) {
-        transform: rotate(-45deg) translate(5px, -5px);
-    }
-
-    .menu-toggle:checked ~ nav {
-        display: flex;
+    @keyframes enhace-header {
+        to {
+            background: rgba(72, 86, 237, 0.244);
+            backdrop-filter: blur(5px);
+            font-size: 1rem;
+            color: #333;
+        }
     }
 </style>
