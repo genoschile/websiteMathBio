@@ -112,6 +112,11 @@ if (!karen) {
 		font-size: 1.2rem;
 		transition: background-color 0.3s ease;
 		padding: 0.3rem
+		cursor: pointer;
+
+		&:hover {
+			background-color: #555;
+		}
 	}
 
 	.container {
@@ -119,10 +124,11 @@ if (!karen) {
 		max-width: 1200px;
 		padding: 1rem;
 		width: 100%;
-		min-height: 100dvh;
+
 		display: grid;
 		gap: 1rem;
 		place-items: center;
+		isolation: isolate;
 
 		& header {
 			display: flex;
@@ -175,7 +181,7 @@ if (!karen) {
 					object-fit: cover;
 					box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 					transition: transform 0.3s;
-					z-index: 0;
+
 				}
 			}
 
@@ -198,7 +204,7 @@ if (!karen) {
 					transform: translateX(-50%);
 					opacity: 0;
 					transition: all 0.3s ease;
-					z-index: 2;
+
 				}
 
 				& .members-lab {
@@ -287,10 +293,10 @@ if (!karen) {
 			transform: translateY(0);
 		}
 		50% {
-			transform: translateY(-5px); /* Mueve hacia arriba un poco */
+			transform: translateY(-2px); 
 		}
 		100% {
-			transform: translateY(5px); /* Mueve hacia abajo un poco */
+			transform: translateY(3px); 
 		}
 	}
 

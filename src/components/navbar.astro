@@ -1,9 +1,5 @@
 ---
-import Close from "../icons/close.astro";
-import Menu from "../icons/menu.astro";
 import Announcement from "./announcement.astro";
-import LanguageMenu from "./LanguageMenu.astro";
-import Toggle from "./toggle.astro";
 
 const links = [
     { href: "/", label: "Inicio" },
@@ -21,66 +17,62 @@ const currentPath = Astro.url.pathname;
 <Announcement />
 
 <header class="header">
-    <nav class="nav">
-        <div class="nav__container">
-            <figure class="nav__figure">
-                <img src="./logo.svg" alt="" class="nav__logo" />
-            </figure>
+    <nav class="nav__container">
+        <figure class="nav__figure">
+            <img src="./logo.svg" alt="Logo" class="nav__logo" />
+        </figure>
 
-            <label for="menu-input" class="nav__toggle">
-                <input type="checkbox" id="menu-input" class="nav__input" />
-            </label>
+        <label for="menu-input" class="nav__toggle">
+            <input
+                type="checkbox"
+                id="menu-input"
+                class="nav__input"
+                aria-label="Toggle navigation"
+            />
+        </label>
 
-            <ul class="nav__list">
-                {
-                    links.map((link) => (
-                        <li
-                            class={
-                                currentPath === link.href
-                                    ? "nav__item active"
-                                    : "nav__item"
-                            }
-                        >
-                            <a class="nav__link" href={link.href}>
-                                {link.label}
-                            </a>
-                        </li>
-                    ))
-                }
-            </ul>
-        </div>
+        <ul class="nav__list">
+            {
+                links.map((link) => (
+                    <li
+                        class={
+                            currentPath === link.href
+                                ? "nav__item active"
+                                : "nav__item"
+                        }
+                    >
+                        <a class="nav__link" href={link.href}>
+                            {link.label}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
     </nav>
 </header>
 
 <style>
+    /* Base Styles */
     .header {
         padding: 1.25rem;
         background-color: hsl(318, 71%, 37%);
-
         position: sticky;
         top: 0;
-
+        z-index: 1000;
+        isolation: isolate;
         animation: enhace-header linear both;
         animation-timeline: scroll(root block);
         animation-range: 0 200px;
-        z-index: 3;
-    }
-
-    .nav {
-        background-color: #000;
     }
 
     .nav__container {
-        color: white;
         width: min(90%, 1200px);
         margin: 0 auto;
-
         display: flex;
         align-items: center;
         justify-content: space-between;
-
         height: 80px;
-
+        color: white;
         --menu-icon: url("./open.svg");
         --menu-show: translateY(-100%);
     }
@@ -92,30 +84,31 @@ const currentPath = Astro.url.pathname;
 
     .nav__list {
         transform: var(--menu-show);
-
         margin: 0;
-
         list-style: none;
-
         position: fixed;
         inset: 0;
         display: grid;
-
         align-content: center;
         justify-content: center;
-
         padding: 1.5rem 5%;
-
         background-color: #000;
-
-        z-index: 3;
-
-        transition: transform 0.3s;
+        z-index: 10;
+        transition: transform 0.3s ease-in-out;
     }
 
     .nav__figure,
     .nav__toggle {
-        z-index: 10;
+        z-index: 3;
+    }
+
+    .nav__figure {
+        justify-self: flex-start;
+
+        & img {
+            width: 350px;
+            height: 350px;
+        }
     }
 
     .nav__input {
@@ -128,37 +121,23 @@ const currentPath = Astro.url.pathname;
         background-image: var(--menu-icon);
         background-size: cover;
         cursor: pointer;
-
         transition: background-image 0.3s;
-    }
-
-    .nav_input {
-        width: 40px;
-        height: 40px;
     }
 
     .nav__link {
         color: #fff;
         text-decoration: none;
+        text-align: center;
+        font-size: 1.25rem;
     }
 
-    @media (width < 764px) {
-        .nav__container {
-            --menu-show: translateY(0);
-        }
+    .nav__item:not(:last-child) {
+        margin-bottom: 1rem;
+    }
 
-        .nav__toggle {
-            display: none;
-        }
-
-        .nav__list {
-            position: static;
-            grid-auto-flow: column;
-            place-content: center;
-            padding: 0;
-
-            transition: unset;
-        }
+    .active .nav__link {
+        font-weight: bold;
+        color: hsl(318, 71%, 50%);
     }
 
     @keyframes enhace-header {
@@ -166,7 +145,30 @@ const currentPath = Astro.url.pathname;
             background: rgba(232, 103, 183, 0.244);
             backdrop-filter: blur(5px);
             font-size: 18px;
-            color: black;
+        }
+    }
+
+    /* Responsive Adjustments */
+    @media (min-width: 768px) {
+        .nav__list {
+            position: static;
+            display: flex;
+            transform: none;
+            padding: 0;
+            background: none;
+            opacity: 0;
+            height: 100%;
+        }
+
+        .nav__item {
+            margin-bottom: 0;
+            margin-left: 1.5rem;
+            opacity: 0;
+            height: 100%;
+        }
+
+        .nav__toggle {
+            display: none;
         }
     }
 </style>
