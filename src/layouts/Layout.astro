@@ -3,6 +3,7 @@ import { ViewTransitions } from 'astro:transitions'; // client router
 import Navbar from '../components/navbar.astro';
 import Footer from '../components/footer.astro';
 import Navbar2 from '../components/navbar2.astro';
+import Nax from '../components/nax.astro';
 
 interface Props {
 	title: string | undefined;
@@ -42,6 +43,7 @@ const { title } = Astro.props;
 		--color-btn: #9f0;
 		--color-black-opacity: rgba(0, 0, 0, 0.2); 
 		--color-white-opacity: rgba(255, 255, 255, 0.5); 
+		--bg-prefer-black: #263238;
 	}
 
 	*,

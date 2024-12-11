@@ -1,155 +1,179 @@
 ---
-import Footer from "../components/footer.astro";
-
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="home">
 	<h1>home</h1>
 
-	<section>
-		<div class="slider">
-			<a name="img_1">
-				<img
-					src="https://images.unsplash.com/photo-1525382455947-f319bc05fb35?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-				/>
-			</a>
-			<a name="img_2">
-				<img
-					src="https://images.unsplash.com/photo-1504713721722-f73b4ccdfe6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-				/>
-			</a>
-			<a name="img_3">
-				<img
-					src="https://images.unsplash.com/photo-1532458198880-add09ce3b2f5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
-				/>
-			</a>
-			<a name="img_4">
-				<img
-					src="https://images.unsplash.com/photo-1524767615-3d4139c938a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=2255&q=80"
-				/>
-			</a>
+	<main>
+		<!-- Contenedor principal de Swiper -->
+		<div class="swiper-container">
+			<div class="swiper info-cards">
+				<!-- Wrapper adicional requerido -->
+				<div class="swiper-wrapper" id="my-slider">
+					<!-- Los slides -->
+					<a
+						class="swiper-slide"
+						href="/images/1.jpeg"
+						data-pswp-width="800"
+						data-pswp-height="800"
+						target="_blank"
+						data-cropped="true"
+					>
+						<img src="/images/1.jpeg" alt="Image 3" />
+					</a>
+					<a
+						class="swiper-slide"
+						href="/images/1.jpeg"
+						data-pswp-width="800"
+						data-pswp-height="800"
+						target="_blank"
+						data-cropped="true"
+					>
+						<img src="/images/1.jpeg" alt="Image 3" />
+					</a>
+					<a
+						class="swiper-slide"
+						href="/images/1.jpeg"
+						data-pswp-width="800"
+						data-pswp-height="800"
+						target="_blank"
+						data-cropped="true"
+					>
+						<img src="/images/1.jpeg" alt="Image 3" />
+					</a>
+					<a
+						class="swiper-slide"
+						href="/images/2.jpeg"
+						data-pswp-width="800"
+						data-pswp-height="800"
+						target="_blank"
+						data-cropped="true"
+					>
+						<img src="/images/2.jpeg" alt="Image 2" />
+					</a>
+				</div>
+				<!-- Botones de navegación -->
+				<div class="swiper-button-prev"></div>
+				<div class="swiper-button-next"></div>
+			</div>
 		</div>
-
-		<div
-			style="background: radial-gradient(ellipse 80% 80% at 50% -20%,#7877c64d,#fff0); position: absolute; top: 0; width: 100%; height: 100%; left:0; z-index: -1"
-		>
-		</div>
-
-		<ul class="markers">
-			<li><a href="#img_1"></a></li>
-			<li><a href="#img_2"></a></li>
-			<li><a href="#img_3"></a></li>
-			<li><a href="#img_4"></a></li>
-		</ul>
-	</section>
-
-	<Footer />
+	</main>
 </Layout>
 
 <style>
-	*,
-	*::before,
-	*::after {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
+	/* Estilo del contenedor principal */
+	main {
+		max-width: 1000px; /* Controla el tamaño máximo */
+		width: 100%; /* Toma todo el ancho disponible */
+		margin: 0 auto; /* Centra el main horizontalmente */
+		padding: 20px; /* Espaciado interno opcional */
+		display: grid;
+		place-items: center; /* Centra contenido en ambos ejes */
 	}
 
-	h1 {
-		font-size: 1.75rem;
-		margin-block-end: 0.25em;
+	/* Contenedor adicional para ajustar proporción */
+	.swiper-container {
+		width: 100%; /* Ancho completo dentro de main */
+		max-width: 900px; /* Tamaño máximo del carrusel */
+		height: auto;
 	}
 
-	h2 {
-		font-size: 1.25rem;
-		margin-block-end: 1em;
+	/* Ajuste general de los slides */
+	.swiper {
+		width: 100%;
 	}
 
-	p {
-		margin-block-end: 1.5em;
+	.swiper-slide {
+		height: 500px; /* Ajusta la altura según lo deseado */
+		border-radius: 10px;
+		overflow: hidden;
 	}
 
-	.hero {
-		aspect-ratio: 16/5;
-	}
-
-	.hero img {
-		display: block;
-		inline-size: 100%;
-		block-size: 100%;
+	.swiper-slide img {
+		width: 100%;
+		height: 100%;
 		object-fit: cover;
 	}
 
-	.content {
-		padding-block: 2rem;
+	/* Estilo de botones */
+	.swiper-button-next,
+	.swiper-button-prev {
+		background-color: white;
+		width: 60px;
+		height: 60px;
+		border-radius: 10px;
+		background-image: url("/svgs/arrowLeft.svg");
+		background-repeat: no-repeat;
+		background-size: 100% auto;
 	}
 
-	.banner {
-		font-size: 1.5rem;
-		line-height: 1.25;
-		text-align: center;
-		color: #081a28;
-		background-image: linear-gradient(to right, #b8d4e3, #a6cde2);
-		background-size: cover;
-		padding: 2.5rem;
-		margin-block-end: 2rem;
+	.swiper-button-prev {
+		transform: rotate(180deg); /* Reutiliza el mismo ícono */
 	}
 
-	.icon {
-		display: block;
-		font-size: 3rem;
+	.swiper-button-next::after,
+	.swiper-button-prev::after {
+		content: "";
 	}
 
-	.slider {
-		width: 100%;
-		height: var(--height);
-		display: block;
-		overflow: hidden;
-		mask-image: linear-gradient(
-			to right,
-			transparent,
-			#000 10% 90%,
-			transparent
-		);
-	}
-
-	.slider .list {
-		display: flex;
-		width: 100%;
-		min-width: calc(var(--width) * var(--quantity));
-		position: relative;
-	}
-
-	.slider .list .item {
-		width: var(--width);
-		height: var(--height);
-		position: absolute;
-		left: 100%;
-		animation: autoRun 10s linear infinite;
-		transition: filter 0.5s;
-		animation-delay: calc((10s / var(--quantity)) * (var(--position) - 1));
-	}
-
-	.slider .list .item img {
-		width: 100%;
-	}
-
-	.slider:hover .item {
-		animation-play-state: paused !important;
-		filter: grayscale(1);
-	}
-
-	.slider .item:hover {
-		filter: grayscale(0);
-	}
-
-	@keyframes autoRun {
-		from {
-			left: 100%;
+	/* Responsive */
+	@media (max-width: 768px) {
+		.swiper-slide {
+			width: 70%; /* Ajuste para pantallas móviles */
+			height: 400px;
 		}
-		to {
-			left: calc(var(--width) * -1);
+
+		.swiper-button-prev,
+		.swiper-button-next {
+			display: none; /* Oculta botones en móviles */
 		}
 	}
 </style>
+
+<script>
+	// Core de Swiper y estilos
+	import Swiper from "swiper";
+	import "swiper/css";
+	// Módulo Navigation de Swiper y estilos
+	import { Navigation } from "swiper/modules";
+	import "swiper/css/navigation";
+	// Photoswipe y estilos
+	import PhotoSwipeLightbox from "photoswipe/lightbox";
+	import "photoswipe/style.css";
+
+	document.addEventListener("astro:page-load", () => {
+		// Configurar Swiper
+		// Configurar Swiper
+		const swiper = new Swiper(".swiper", {
+			modules: [Navigation],
+			loop: true,
+			slidesPerView: "auto",
+			spaceBetween: 20,
+			breakpoints: {
+				// Cuando la pantalla es >= 768px
+				768: {
+					slidesPerView: 2,
+					spaceBetween: 30,
+				},
+				// Cuando la pantalla es >= 1024px
+				1024: {
+					slidesPerView: 3,
+					spaceBetween: 40,
+				},
+			},
+			navigation: {
+				prevEl: ".swiper-button-prev",
+				nextEl: ".swiper-button-next",
+			},
+		});
+
+		// Configurar e inicializar Photoswipe
+		const lightbox = new PhotoSwipeLightbox({
+			gallery: "#my-slider",
+			children: "a",
+			pswpModule: () => import("photoswipe"),
+		});
+		lightbox.init();
+	});
+</script>

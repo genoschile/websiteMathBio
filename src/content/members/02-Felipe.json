@@ -7,6 +7,13 @@
     "image": "src/assets/miembros/felipe-profile.jpeg",
     "publications": [],
     "talks": [],
+    "social": [
+        {
+            "linkdn": "url",
+            "facebook": "",
+            "github": ""
+        }
+    ],
     "projects": [
         {
             "id": 1
