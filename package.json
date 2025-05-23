@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "astro": "^4.16.13",
+    "@tailwindcss/vite": "^4.1.7",
+    "astro": "^5.8.0",
     "photoswipe": "^5.4.4",
     "swiper": "^11.1.15",
+    "tailwindcss": "^4.1.7",
     "typescript": "^5.7.2"
   }
 }

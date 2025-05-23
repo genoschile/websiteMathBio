@@ -1,66 +1,32 @@
 ---
-import { ViewTransitions } from 'astro:transitions'; // client router 
-import Navbar from '../components/navbar.astro';
-import Footer from '../components/footer.astro';
-import Navbar2 from '../components/navbar2.astro';
-import Nax from '../components/nax.astro';
+import "./src/styles/global.css";
+
+import Footer from "../components/layout/footer.astro";
+import Header from "../components/layout/header.astro";
 
 interface Props {
-	title: string | undefined;
+  title: string | undefined;
 }
 
 const { title } = Astro.props;
 ---
 
 <!doctype html>
-
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
 
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-		<ViewTransitions />
-	</head>
-
-	<body>
-		<Navbar2 />
-		<slot />
-		<Footer />
-	</body>
-
+  <body class="min-h-screen">
+    <Header />
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>
-
-<style is:global>
-
-	:root {
-		color-scheme: light dark;
-		--color-black: #13151a;
-		--color-white: #f0f0f0;
-		--color-btn: #9f0;
-		--color-black-opacity: rgba(0, 0, 0, 0.2); 
-		--color-white-opacity: rgba(255, 255, 255, 0.5); 
-		--bg-prefer-black: #263238;
-	}
-
-	*,
-	::before,
-	::after {
-		box-sizing: border-box;
-		margin: 0;
-		padding: 0;
-	}
-
-	html {
-		font-family: system-ui, sans-serif;
-		background: light-dark(var(--color-white), var(--color-black));
-	}
-
-	body {
-		min-height: 100dvh;
-	}
-	
-</style>

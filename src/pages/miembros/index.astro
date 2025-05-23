@@ -11,12 +11,7 @@ const members: Member[] = await getCollection("members");
 
 const karen = members.find((member) => member.data.id === 1);
 
-if (!karen) {
-	return {
-		status: 404,
-		body: JSON.stringify({ error: "Karen no encontrada" }),
-	};
-}
+const hasKaren = karen && karen.data;
 ---
 
 <Layout title="Home">
@@ -27,65 +22,66 @@ if (!karen) {
 		</header>
 
 		<main>
-			<div class="principal">
-				<h2>{karen.data.name}</h2>
-				<p>{karen.data.position}</p>
-				<p>{karen.data.grade}</p>
-				<a href={`${currentPath}/${karen.data.id}`}>
-					<img
-						transition:name={`img${karen.data.name}`}
-						src={karen.data.image}
-						alt={karen.data.name}
-					/>
-				</a>
-			</div>
+			{hasKaren && (
+				<div class="principal">
+					<h2>{karen.data.name}</h2>
+					<p>{karen.data.position}</p>
+					<p>{karen.data.grade}</p>
+					<a href={`${currentPath}/${karen.data.id}`}>
+						<img
+							transition:name={`img${karen.data.name}`}
+							src={karen.data.image}
+							alt={karen.data.name}
+						/>
+					</a>
+				</div>
+			)}
 
 			<div class="resto">
-				{
-					members.slice(1).map((member) => (
-						<div class="members-lab">
-							<h2 class="name">{member.data.name}</h2>
-							<p class="grade">{member.data.grade}</p>
-							<a href={`${currentPath}/${member.data.id}`}>
-								<img
-									transition:name={`img${member.data.name}`}
-									src={member.data.image}
-									alt={member.data.name}
-								/>
-							</a>
+				{members.slice(1).map((member) => (
+					<div class="members-lab">
+						<h2 class="name">{member.data.name}</h2>
+						<p class="grade">{member.data.grade}</p>
+						<a href={`${currentPath}/${member.data.id}`}>
+							<img
+								transition:name={`img${member.data.name}`}
+								src={member.data.image}
+								alt={member.data.name}
+							/>
+						</a>
 
-							<div class="social-icons">
-								<a
-									href="https://facebook.com"
-									target="_blank"
-									class="icon facebook"
-								>
-									<Facebook />
-								</a>
-								<a
-									href="https://twitter.com"
-									target="_blank"
-									class="icon twitter"
-								>
-									<Github />	
-								</a>
-								<a
-									href="https://instagram.com"
-									target="_blank"
-									class="linkedin icon"
-								>
-									<Linkedin />
-								</a>
-							</div>
+						<div class="social-icons">
+							<a
+								href="https://facebook.com"
+								target="_blank"
+								class="icon facebook"
+							>
+								<Facebook />
+							</a>
+							<a
+								href="https://twitter.com"
+								target="_blank"
+								class="icon twitter"
+							>
+								<Github />
+							</a>
+							<a
+								href="https://instagram.com"
+								target="_blank"
+								class="linkedin icon"
+							>
+								<Linkedin />
+							</a>
 						</div>
-					))
-				}
+					</div>
+				))}
 			</div>
 		</main>
 
 		<footer></footer>
 	</div>
 </Layout>
+
 
 <script>
 	const grid = document.querySelector(".resto");

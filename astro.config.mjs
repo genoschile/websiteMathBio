@@ -1,7 +1,10 @@
 import { defineConfig } from 'astro/config';
 
+import tailwindcss from '@tailwindcss/vite';
+
 export default defineConfig({
   integrations: [],
+
   collections: {
     members: {
       // Aquí defines el formato de la colección con JSON
@@ -20,5 +23,9 @@ export default defineConfig({
     talks: {
         path: './src/content/talks/*.json', // Ruta de tus archivos JSON
     }
+  },
+
+  vite: {
+    plugins: [tailwindcss()],
   },
 });

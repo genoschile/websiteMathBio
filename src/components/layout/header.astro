@@ -1,0 +1,115 @@
+---
+import Github from "../../icons/github.astro";
+
+const navLinks = [
+  { href: "/", label: "Inicio", Icon: Github },
+  { href: "/publications", label: "Publications", Icon: Github },
+  { href: "/team", label: "Team", Icon: Github },
+  { href: "/gallery", label: "Galería", Icon: Github },
+  { href: "/news", label: "News", Icon: Github },
+  { href: "/contact", label: "Contacto", Icon: Github },
+];
+---
+
+<header class="bg-white shadow-md sticky top-0 z-50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      {/* Logo */}
+      <a
+        href="/"
+        class="flex items-center gap-2 text-indigo-600 hover:text-indigo-500 transition-colors font-semibold text-xl"
+      >
+        <Github style="width: 28px; height: 28px;" />
+        Lab Notes
+      </a>
+
+      {/* Desktop Nav */}
+      <nav
+        id="desktop-nav"
+        class="hidden md:flex space-x-2 font-medium text-sm"
+      >
+        {
+          navLinks.map(({ href, label, Icon }) => (
+            <a
+              href={href}
+              class={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2
+              ${Astro.url.pathname === href ? "bg-indigo-600 text-white" : "text-gray-700 hover:bg-indigo-100 hover:text-indigo-600"}
+            `}
+            >
+              <Icon style="width: 18px; height: 18px;" />
+              {label}
+            </a>
+          ))
+        }
+      </nav>
+
+      {/* Mobile Nav Button */}
+      <button
+        id="menu-btn"
+        aria-label="Open menu"
+        class="md:hidden p-2 rounded-md hover:bg-gray-200 transition-colors"
+      >
+        <Github style="width: 24px; height: 24px;" />
+      </button>
+    </div>
+  </div>
+</header>
+
+{/* Mobile Menu (slide from right) */}
+<div
+  id="mobile-menu"
+  class="fixed top-0 right-0 h-full w-64 max-w-xs bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50 flex flex-col p-4"
+>
+  <div class="flex justify-between items-center mb-6">
+    <a
+      href="/"
+      class="flex items-center gap-2 text-indigo-600 font-semibold text-lg"
+    >
+      <Github style="width: 24px; height: 24px;" />
+      Lab Notes
+    </a>
+    <button
+      id="close-btn"
+      aria-label="Close menu"
+      class="p-2 rounded-md hover:bg-gray-200 transition-colors"
+    >
+      ✕
+    </button>
+  </div>
+  <nav id="mobile-nav" class="flex flex-col space-y-2 font-medium text-sm">
+    {
+      navLinks.map(({ href, label, Icon }) => (
+        <a
+          href={href}
+          class={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2
+          ${Astro.url.pathname === href ? "bg-indigo-600 text-white" : "text-gray-700 hover:bg-indigo-100 hover:text-indigo-600"}
+        `}
+        >
+          <Icon style="width: 18px; height: 18px;" />
+          {label}
+        </a>
+      ))
+    }
+  </nav>
+</div>
+
+<script>
+  const menuBtn = document.getElementById("menu-btn") as HTMLButtonElement;
+  const closeBtn = document.getElementById("close-btn") as HTMLButtonElement;
+  const mobileMenu = document.getElementById("mobile-menu") as HTMLElement;
+
+  function openMenu(): void {
+    mobileMenu.classList.remove("translate-x-full");
+    mobileMenu.classList.add("translate-x-0");
+    document.body.style.overflow = "hidden"; // bloquear scroll fondo
+  }
+
+  function closeMenu(): void {
+    mobileMenu.classList.add("translate-x-full");
+    mobileMenu.classList.remove("translate-x-0");
+    document.body.style.overflow = ""; // permitir scroll
+  }
+
+  menuBtn.addEventListener("click", openMenu);
+  closeBtn.addEventListener("click", closeMenu);
+</script>

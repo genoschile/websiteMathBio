@@ -1,11 +1,29 @@
 ---
 import Cards from "../components/cards.astro";
+import PageHeader from "../components/layout/pageHeader.astro";
 import SliderSwiper from "../components/sliderSwiper.astro";
+import Button from "../components/ui/button.astro";
+import Github from "../icons/github.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="home">
-	<SliderSwiper />
-	<Cards />
+  <section
+    class="text-center py-12 bg-gradient-to-br from-primary/10 via-background to-background rounded-xl shadow-lg"
+  >
+    <PageHeader
+      title="Welcome to Lab Notes"
+      description="Advancing the frontiers of science through innovative research and collaboration. Discover our work, team, and latest breakthroughs."
+    />
+    <div class="mt-6 space-x-4">
+      <Button asChild size="lg">
+        <a href="/publications"
+          >Explore Publications <Github class="ml-2 h-5 w-5" /></a
+        >
+      </Button>
+      <Button asChild variant="outline" size="lg">
+        <a href="/contact">Get In Touch</a>
+      </Button>
+    </div>
+  </section>
 </Layout>
-

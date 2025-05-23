@@ -1,0 +1,49 @@
+---
+import Footer from "../components/footer.astro";
+import Navbar2 from "../components/navbar2.astro";
+import "./src/styles/global.css";
+import PageHeader from "../components/layout/pageHeader.astro";
+
+import Mail from "../icons/facebook.astro";
+
+interface Props {
+  title: string | undefined;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+
+  <body>
+    <Navbar2 />
+    <PageHeader
+      title="Contact Us"
+      description="Get in touch or visit our lab. We look forward to hearing from you."
+      icon={Mail}
+    />
+
+    <slot />
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  html {
+    font-family: system-ui, sans-serif;
+    background: light-dark(var(--color-white), var(--color-black));
+  }
+
+  body {
+    min-height: 100dvh;
+  }
+</style>
