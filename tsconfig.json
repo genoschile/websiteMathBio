@@ -3,5 +3,14 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "allowJs": true
-  }
+  },
+  "baseUrl": ".",
+  "paths": {
+    "@/*": ["src/*"],
+    "@components/*": ["src/components/*"],
+    "@layouts/*": ["src/layouts/*"],
+    "@pages/*": ["src/pages/*"],
+    "@utils/*": ["src/utils/*"],
+    "@assets/*": ["src/assets/*"]
+  },
 }

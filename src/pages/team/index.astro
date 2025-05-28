@@ -2,55 +2,20 @@
 import Facebook from "../../icons/facebook.astro";
 import Linkedin from "../../icons/linkedin.astro";
 import Github from "../../icons/github.astro";
-// import type { Member } from "../../interface";
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
 const currentPath = Astro.url.pathname;
-// const members: Member[] = await getCollection("members");
+const posts = await getCollection('members');
 
-type Member = {
-  id: number;
-  name: string;
-  position: string;
-  grade: string;
-  image: string;
-};
-
-const members: Member[] = [
-  {
-    id: 1,
-    name: "Karen López",
-    position: "Líder de grupo",
-    grade: "Doctora en Matemáticas",
-    image: "/images/karen.jpg"
-  },
-  {
-    id: 2,
-    name: "Carlos Ruiz",
-    position: "Investigador",
-    grade: "Maestría en Bioinformática",
-    image: "/images/carlos.jpg"
-  },
-  {
-    id: 3,
-    name: "Ana María Torres",
-    position: "Asistente de investigación",
-    grade: "Estudiante de pregrado",
-    image: "/images/ana.jpg"
-  },
-  {
-    id: 4,
-    name: "Luis Mendoza",
-    position: "Colaborador externo",
-    grade: "PhD en Biología Computacional",
-    image: "/images/luis.jpg"
-  }
-];
-
-
+const members = posts.map((post) => ({
+  id: post.data.id,
+  name: post.data.name,
+  position: post.data.position,
+  grade: post.data.grade,
+  image: post.data.image
+}));
 const karen = members.find((member) => member.id === 1);
-
 const hasKaren = karen && karen;
 ---
 
