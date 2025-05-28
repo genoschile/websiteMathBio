@@ -1,37 +1,49 @@
 [
-    {
-        "name": "",
-        "path": "",
-        "resume": "",
-        "description": "",
-        "doi": "",
-        "author":"",
-        "co-author": "",
-        "keys": ["key2", "key2"], 
-        "date": "",
-        "id": 1,
-        "pdf": "",
-        "cite": [
-            {
-                "apa": ""
-            }
-        ]
-    }, 
-    {
-        "name": "name",
-        "path": "path",
-        "resume": "",
-        "description": "",
-        "doi": "",
-        "author":"",
-        "co-author": "",
-        "date": "",
-        "id": 2,
-        "pdf": "",
-        "cite": [
-            {
-                "apa": ""
-            }
-        ]
-    }
+  {
+    "id": 1,
+    "name": "Genomic Insights into Disease Resistance",
+    "resume": "An overview of genomic patterns that influence resistance mechanisms.",
+    "description": "This publication explores the genomic adaptations found in various organisms that contribute to disease resistance.",
+    "title": "Genomic Insights into Disease Resistance",
+    "authors": ["Dr. María González", "Dr. Alan Ruiz"],
+    "year": "2023",
+    "url": "https://example.com/publication1",
+    "type": "journal",
+    "doi": "10.1234/genomics.2023.001",
+    "tags": ["genomics", "disease", "resistance"],
+    "team": [
+      { "id": 1 },
+      { "id": 2 }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Machine Learning in Transcriptomics",
+    "resume": "A review of ML applications in gene expression analysis.",
+    "description": "The study details learning algorithms used in transcriptome data analysis to uncover gene expression patterns.",
+    "title": "Machine Learning in Transcriptomics",
+    "authors": ["Dr. Elena Torres", "Dr. Luis Becker"],
+    "year": "2022",
+    "url": "https://example.com/publication2",
+    "type": "conference",
+    "doi": "10.5678/mltrans.2022.045",
+    "tags": ["machine learning", "transcriptomics", "bioinformatics"],
+    "team": [
+      { "id": 3 }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "CRISPR-Cas9 Target Prediction Models",
+    "resume": "Improving CRISPR precision with predictive modeling.",
+    "description": "Research on neural network-based models that enhance target prediction accuracy for CRISPR.",
+    "title": "CRISPR-Cas9 Target Prediction Models",
+    "authors": ["Dr. Javier Muñoz", "Dr. Carla Espinoza"],
+    "year": "2021",
+    "url": "https://example.com/publication3",
+    "type": "journal",
+    "doi": "10.9101/crispr.2021.112",
+    "tags": ["CRISPR", "gene editing", "AI"],
+    "team": []
+  }
 ]

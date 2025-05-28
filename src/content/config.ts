@@ -1,5 +1,5 @@
 import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
+import { file, glob } from "astro/loaders";
 
 // file("src/content/members/*.js")
 
@@ -77,9 +77,37 @@ const talksCollection = defineCollection({
   ),
 });
 
+const publicationsCollection = defineCollection({
+  loader: file("src/content/publications/publications.json"),
+
+  schema: z.object({
+    id: z.number(),
+    name: z.string(),
+    resume: z.string(),
+    description: z.string(),
+    title: z.string(),
+    authors: z.array(z.string()),
+    year: z.string(), 
+    url: z.string().url(),
+    abstract: z.string().optional(),
+    image: z.string().optional(),
+    type: z.enum(["journal", "conference", "book", "other"]),
+    doi: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    team: z
+      .array(
+        z.object({
+          id: z.number(),
+        })
+      )
+      .optional(),
+  }),
+});
+
 export const collections = {
   members: membersCollection,
   images: imagesCollection,
   projects: projectsCollection,
   talks: talksCollection,
+  publications: publicationsCollection,
 };
