@@ -5,12 +5,13 @@ const {
   variant,
   size,
   class: className,
+  href = "#",
   ...rest
 } = Astro.props;
 
 const classes = getButtonClasses({ variant, size, className });
 ---
 
-<button class={classes} {...rest}>
+<a href={href} class={classes} {...rest}>
   <slot />
-</button>
+</a>

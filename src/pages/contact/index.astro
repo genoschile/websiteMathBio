@@ -1,0 +1,69 @@
+---
+import Github from "../../icons/github.astro";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Contact">
+  <section class="space-y-8">
+    <!-- Page Header -->
+    <header class="text-center space-y-2">
+      <div class="inline-flex items-center justify-center gap-2 text-2xl font-bold">
+        <Github class="w-6 h-6" />
+        <span>Contact Us</span>
+      </div>
+      <p class="text-muted-foreground max-w-lg mx-auto">
+        Get in touch or visit our lab. We look forward to hearing from you.
+      </p>
+    </header>
+
+    <!-- Content Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Contact Info Card -->
+      <div class="bg-white shadow-lg rounded-lg p-6 space-y-4 border border-border">
+        <div class="flex items-center gap-2 text-lg font-semibold">
+          <Github class="w-6 h-6" />
+          <span>Our Address & Details</span>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <Github class="h-6 w-6 text-primary mt-1 shrink-0" />
+          <div>
+            <h3 class="font-semibold text-foreground">Lab Location</h3>
+            <p class="text-muted-foreground">
+              123 Science Avenue, Tech Park <br />
+              Research City, ST 90210 <br />
+              United States
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <Github class="h-5 w-5 text-primary shrink-0" />
+          <div>
+            <h3 class="font-semibold text-foreground">Email Us</h3>
+            <span class="text-primary">info@labnotes.example.com</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <Github class="h-5 w-5 text-primary shrink-0" />
+          <div>
+            <h3 class="font-semibold text-foreground">Call Us</h3>
+            <span class="text-primary">+1 (234) 567-890</span>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-border">
+          <h3 class="font-semibold text-foreground mb-2">Office Hours</h3>
+          <p class="text-sm text-muted-foreground">Monday - Friday: 9:00 AM - 5:00 PM</p>
+          <p class="text-sm text-muted-foreground">Weekends & Holidays: Closed</p>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="w-full h-full">
+        <h1 class="text-lg font-semibold mb-4">Find Us Here</h1>
+      </div>
+    </div>
+  </section>
+</Layout>

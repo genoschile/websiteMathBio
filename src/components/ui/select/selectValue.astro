@@ -1,0 +1,7 @@
+---
+const { className = "" } = Astro.props;
+---
+
+<span class={`block truncate ${className}`}>
+  <slot />
+</span>

@@ -3,27 +3,258 @@ import Cards from "../components/cards.astro";
 import PageHeader from "../components/layout/pageHeader.astro";
 import SliderSwiper from "../components/sliderSwiper.astro";
 import Button from "../components/ui/button.astro";
+import Card from "../components/ui/card/card.astro";
+import CardContent from "../components/ui/card/cardContent.astro";
+import CardDescription from "../components/ui/card/cardDescription.astro";
+import CardFooter from "../components/ui/card/cardFooter.astro";
+import CardHeader from "../components/ui/card/cardHeader.astro";
+import CardTitle from "../components/ui/card/cardTitle.astro";
+import LinkButton from "../components/ui/linkButton.astro";
+import SlotButton from "../components/ui/slotButton.astro";
 import Github from "../icons/github.astro";
 import Layout from "../layouts/Layout.astro";
+
+export const recentPublications = [
+  {
+    id: "pub-001",
+    title: "Advancements in Quantum Computing Algorithms",
+    authors: ["Alice Smith", "Bob Johnson", "Carol Lee"],
+    year: 2025,
+    journal: "Journal of Computer Science and Engineering",
+    abstract:
+      "This paper explores novel quantum algorithms that significantly reduce the computational complexity of solving large-scale optimization problems.",
+    link: "https://doi.org/10.1234/jcse.2025.001",
+  },
+  {
+    id: "pub-002",
+    title: "Innovations in Renewable Energy Storage",
+    authors: ["David Kim", "Eve Martinez"],
+    year: 2024,
+    journal: "Renewable Energy Letters",
+    abstract:
+      "A new battery technology is introduced that improves energy density and charging speed, enabling more efficient renewable energy storage solutions.",
+    link: "https://doi.org/10.5678/rel.2024.045",
+  },
+  {
+    id: "pub-003",
+    title: "Machine Learning Models for Medical Diagnosis",
+    authors: ["Frank Zhao", "Grace Patel", "Hannah Clark"],
+    year: 2025,
+    journal: "International Journal of Medical Informatics",
+    abstract:
+      "This study presents several machine learning models trained on large medical datasets to improve early diagnosis accuracy of chronic diseases.",
+    link: "https://doi.org/10.9101/ijmi.2025.789",
+  },
+];
+
+export const mockNewsItems = [
+  {
+    id: "breakthrough-1",
+    title: "New AI Model Outperforms State-of-the-Art",
+    date: "2025-05-20",
+    summary:
+      "Researchers at Lab Notes have developed a new AI model that surpasses current benchmarks on natural language understanding tasks.",
+    imageUrl: "/images/news/ai-model.jpg",
+    link: "/news/ai-model-outperforms",
+    aiHint: "AI model breakthrough",
+  },
+  {
+    id: "climate-study",
+    title: "Climate Change Study Reveals Surprising Trends",
+    date: "2025-05-15",
+    summary:
+      "A long-term study conducted by our environmental science team shows unexpected changes in temperature patterns across Europe.",
+    imageUrl: "/images/news/climate-study.jpg",
+    link: "/news/climate-trends",
+    aiHint: "climate change data",
+  },
+  {
+    id: "team-award",
+    title: "Lab Notes Team Wins Innovation Award",
+    date: "2025-05-10",
+    summary:
+      "The team has received recognition for their innovative approach to collaborative scientific research and development.",
+    imageUrl: "/images/news/award.jpg",
+    link: "/news/innovation-award",
+    aiHint: "team award",
+  },
+];
+
+const LatestPublications = mockNewsItems.slice(0, 2);
 ---
 
 <Layout title="home">
-  <section
-    class="text-center py-12 bg-gradient-to-br from-primary/10 via-background to-background rounded-xl shadow-lg"
-  >
-    <PageHeader
-      title="Welcome to Lab Notes"
-      description="Advancing the frontiers of science through innovative research and collaboration. Discover our work, team, and latest breakthroughs."
-    />
-    <div class="mt-6 space-x-4">
-      <Button asChild size="lg">
-        <a href="/publications"
-          >Explore Publications <Github class="ml-2 h-5 w-5" /></a
-        >
-      </Button>
-      <Button asChild variant="outline" size="lg">
-        <a href="/contact">Get In Touch</a>
-      </Button>
-    </div>
-  </section>
+  <div class="space-y-12">
+    <section
+      class="text-center py-12 bg-gradient-to-br from-primary/10 via-background to-background rounded-xl shadow-lg"
+    >
+      <PageHeader
+        title="Welcome to Lab Notes"
+        description="Advancing the frontiers of science through innovative research and collaboration. Discover our work, team, and latest breakthroughs."
+      />
+
+      <div class="mt-6 space-x-4">
+        <SlotButton variant="default" size="lg">
+          <a href="/publications" class="inline-flex items-center">
+            Explore Publications <Github class="ml-2 h-5 w-5" />
+          </a>
+        </SlotButton>
+
+        <LinkButton variant="outline" size="lg" href="/contact">
+          Get In Touch
+        </LinkButton>
+      </div>
+    </section>
+
+    <section>
+      <Card className="overflow-hidden shadow-lg">
+        <div class="md:flex">
+          <div class="md:shrink-0">
+            <img
+              src="https://placehold.co/600x400.png"
+              alt="Lab researchers working"
+              width={600}
+              height={400}
+              class="h-full w-full object-cover md:w-80"
+              data-ai-hint="lab research"
+            />
+          </div>
+          <CardHeader className="p-6 md:p-8 flex-1">
+            <CardTitle className="text-2xl font-semibold text-primary"
+              >Our Mission</CardTitle
+            >
+            <CardDescription className="mt-2 text-base">
+              We are dedicated to pushing the boundaries of scientific knowledge
+              in [Your Lab's Field, e.g., molecular biology, computational
+              neuroscience]. Our interdisciplinary team collaborates on
+              cutting-edge projects aimed at solving complex challenges and
+              making a tangible impact on society.
+            </CardDescription>
+            <SlotButton class="mt-4" variant="default" size="default">
+              <a href="/team" class="inline-flex items-center">
+                Meet Our Team <Github class="ml-2 h-4 w-4" />
+              </a>
+            </SlotButton>
+          </CardHeader>
+        </div>
+      </Card>
+    </section>
+
+    <section>
+      <h2
+        class="text-2xl font-semibold tracking-tight mb-6 flex items-center gap-2"
+      >
+        <Github class="h-6 w-6 text-primary" />
+        Latest News
+      </h2>
+      <div class="grid gap-6 md:grid-cols-2">
+        {
+          LatestPublications.map((item) => (
+            <Card
+              key={item.id}
+              className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              {item.imageUrl && (
+                <div class="relative h-48 w-full">
+                  <img
+                    src={item.imageUrl}
+                    alt={item.title}
+                    class="rounded-t-lg object-cover"
+                    data-ai-hint={item.aiHint}
+                  />
+                </div>
+              )}
+              <CardHeader>
+                <CardTitle>{item.title}</CardTitle>
+                <CardDescription>{item.date}</CardDescription>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p class="text-sm text-muted-foreground">{item.summary}</p>
+              </CardContent>
+              <CardFooter>
+                <SlotButton
+                  class="mt-4"
+                  variant="link"
+                  size="default"
+                  class="p-0 text-primary"
+                >
+                  <a href={item.link || `/news#${item.id}`}>
+                    Read More <Github class="ml-1 h-4 w-4" />
+                  </a>
+                </SlotButton>
+              </CardFooter>
+            </Card>
+          ))
+        }
+      </div>
+      {
+        mockNewsItems.length > 2 && (
+          <div class="mt-6 text-center">
+            <SlotButton asChild variant="outline">
+              <a href="/news">View All News</a>
+            </SlotButton>
+          </div>
+        )
+      }
+    </section>
+
+    {/* Recent Publications Section */}
+    <section>
+      <h2
+        class="text-2xl font-semibold tracking-tight mb-6 flex items-center gap-2"
+      >
+        <Github className="h-6 w-6 text-primary" />
+        Recent Publications
+      </h2>
+      <div class="space-y-6">
+        {
+          recentPublications.map((pub) => (
+            <Card
+              key={pub.id}
+              className="shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <CardHeader>
+                <CardTitle>{pub.title}</CardTitle>
+                <CardDescription>
+                  {pub.authors.join(", ")} - {pub.year}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p class="text-sm text-muted-foreground italic">
+                  {pub.journal}
+                </p>
+                {pub.abstract && (
+                  <p class="mt-2 text-sm text-foreground line-clamp-2">
+                    {pub.abstract}
+                  </p>
+                )}
+              </CardContent>
+              <CardFooter>
+                {pub.link && (
+                  <Button variant="link" asChild class="p-0 text-primary">
+                    <a
+                      href={pub.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Publication <Github class="ml-1 h-4 w-4" />
+                    </a>
+                  </Button>
+                )}
+              </CardFooter>
+            </Card>
+          ))
+        }
+      </div>
+      {
+        mockNewsItems.length > 2 && (
+          <div class="mt-6 text-center">
+            <SlotButton asChild variant="outline">
+              <a href="/publications">View All Publications</a>
+            </SlotButton>
+          </div>
+        )
+      }
+    </section>
+  </div>
 </Layout>

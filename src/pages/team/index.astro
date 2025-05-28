@@ -2,19 +2,61 @@
 import Facebook from "../../icons/facebook.astro";
 import Linkedin from "../../icons/linkedin.astro";
 import Github from "../../icons/github.astro";
-import type { Member } from "../../interface";
+// import type { Member } from "../../interface";
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
 const currentPath = Astro.url.pathname;
-const members: Member[] = await getCollection("members");
+// const members: Member[] = await getCollection("members");
 
-const karen = members.find((member) => member.data.id === 1);
+type Member = {
+  id: number;
+  name: string;
+  position: string;
+  grade: string;
+  image: string;
+};
 
-const hasKaren = karen && karen.data;
+const members: Member[] = [
+  {
+    id: 1,
+    name: "Karen López",
+    position: "Líder de grupo",
+    grade: "Doctora en Matemáticas",
+    image: "/images/karen.jpg"
+  },
+  {
+    id: 2,
+    name: "Carlos Ruiz",
+    position: "Investigador",
+    grade: "Maestría en Bioinformática",
+    image: "/images/carlos.jpg"
+  },
+  {
+    id: 3,
+    name: "Ana María Torres",
+    position: "Asistente de investigación",
+    grade: "Estudiante de pregrado",
+    image: "/images/ana.jpg"
+  },
+  {
+    id: 4,
+    name: "Luis Mendoza",
+    position: "Colaborador externo",
+    grade: "PhD en Biología Computacional",
+    image: "/images/luis.jpg"
+  }
+];
+
+
+const karen = members.find((member) => member.id === 1);
+
+const hasKaren = karen && karen;
 ---
 
 <Layout title="Home">
+
+	
 	<div class="container">
 		<header>
 			<h1>Team MathBio</h1>
@@ -24,14 +66,14 @@ const hasKaren = karen && karen.data;
 		<main>
 			{hasKaren && (
 				<div class="principal">
-					<h2>{karen.data.name}</h2>
-					<p>{karen.data.position}</p>
-					<p>{karen.data.grade}</p>
-					<a href={`${currentPath}/${karen.data.id}`}>
+					<h2>{karen.name}</h2>
+					<p>{karen.position}</p>
+					<p>{karen.grade}</p>
+					<a href={`${currentPath}/${karen.id}`}>
 						<img
-							transition:name={`img${karen.data.name}`}
-							src={karen.data.image}
-							alt={karen.data.name}
+							transition:name={`img${karen.name}`}
+							src={karen.image}
+							alt={karen.name}
 						/>
 					</a>
 				</div>
@@ -40,13 +82,13 @@ const hasKaren = karen && karen.data;
 			<div class="resto">
 				{members.slice(1).map((member) => (
 					<div class="members-lab">
-						<h2 class="name">{member.data.name}</h2>
-						<p class="grade">{member.data.grade}</p>
-						<a href={`${currentPath}/${member.data.id}`}>
+						<h2 class="name">{member.name}</h2>
+						<p class="grade">{member.grade}</p>
+						<a href={`${currentPath}/${member.id}`}>
 							<img
-								transition:name={`img${member.data.name}`}
-								src={member.data.image}
-								alt={member.data.name}
+								transition:name={`img${member.name}`}
+								src={member.image}
+								alt={member.name}
 							/>
 						</a>
 
