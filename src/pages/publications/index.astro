@@ -1,16 +1,19 @@
 ---
-import PageHeader from "../../components/layout/pageHeader.astro";
-import Card from "../../components/ui/card/card.astro";
-import CardContent from "../../components/ui/card/cardContent.astro";
-import CardDescription from "../../components/ui/card/cardDescription.astro";
-import CardFooter from "../../components/ui/card/cardFooter.astro";
-import CardHeader from "../../components/ui/card/cardHeader.astro";
-import CardTitle from "../../components/ui/card/cardTitle.astro";
-import SlotButton from "../../components/ui/slotButton.astro";
-import Github from "../../icons/github.astro";
-import Layout from "../../layouts/Layout.astro";
+import PageHeader from "@components/layout/pageHeader.astro";
+import Card from "@components/ui/card/card.astro";
+import CardContent from "@components/ui/card/cardContent.astro";
+import CardDescription from "@components/ui/card/cardDescription.astro";
+import CardFooter from "@components/ui/card/cardFooter.astro";
+import CardHeader from "@components/ui/card/cardHeader.astro";
+import CardTitle from "@components/ui/card/cardTitle.astro";
+import SlotButton from "@components/ui/slotButton.astro";
+import Github from "@icons/github.astro";
+import Layout from "@layouts/Layout.astro";
+
 import { getCollection } from "astro:content";
+
 import FilterAndSortPublications from "./components/filterAndSort.astro";
+import Publications from "@/icons/publications.astro";
 
 const mockPublications = await getCollection("publications");
 
@@ -25,6 +28,24 @@ const publications = mockPublications.map((pub) => ({
 }));
 
 const filteredAndSortedPublications = publications;
+
+const url = new URL(Astro.request.url);
+const searchTerm = url.searchParams.get("q");
+
+const filteredPosts = publications.filter((post) => {
+  if (!searchTerm) {
+    return true;
+  }
+  const lowerCaseSearchTerm = searchTerm.toLowerCase();
+  const titleMatches = post.title.toLowerCase().includes(lowerCaseSearchTerm);
+  const bodyMatches = post.description
+    .toLowerCase()
+    .includes(lowerCaseSearchTerm);
+
+  return titleMatches || bodyMatches;
+});
+
+console.log("Filtered posts:", filteredPosts.length);
 ---
 
 <Layout title="Publications">
@@ -32,7 +53,7 @@ const filteredAndSortedPublications = publications;
     <PageHeader
       title="Publications"
       description="Browse our lab's research papers and articles."
-      icon={Github}
+      icon={Publications}
     />
 
     <FilterAndSortPublications />
@@ -41,7 +62,10 @@ const filteredAndSortedPublications = publications;
       filteredAndSortedPublications.length > 0 ? (
         <div class="space-y-6">
           {filteredAndSortedPublications.map((pub) => (
-            <Card class="shadow-md hover:shadow-lg transition-shadow duration-300">
+            <Card
+              data-publication
+              class="shadow-md hover:shadow-lg transition-shadow duration-300"
+            >
               <CardHeader>
                 <CardTitle>{pub.title}</CardTitle>
                 <CardDescription>{pub.authors.join(", ")}</CardDescription>
@@ -64,11 +88,7 @@ const filteredAndSortedPublications = publications;
               {pub.url && (
                 <CardFooter>
                   <SlotButton variant="link" asChild class="p-0 text-primary">
-                    <a
-                      href={pub.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href={pub.url} target="_blank" rel="noopener noreferrer">
                       View Publication
                     </a>
                   </SlotButton>

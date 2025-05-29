@@ -1,4 +1,5 @@
 ---
+import Publications from "@/icons/publications.astro";
 import Cards from "../components/cards.astro";
 import PageHeader from "../components/layout/pageHeader.astro";
 import SliderSwiper from "../components/sliderSwiper.astro";
@@ -68,19 +69,31 @@ const LatestPublications = mockNewsItems.slice(0, 2);
 ---
 
 <Layout title="home">
+  <PageHeader
+    title="Welcome to MathBio Lab page"
+    description="Advancing the frontiers of science through innovative research and collaboration. Discover our work, team, and latest breakthroughs."
+  />
+
   <div class="space-y-12">
     <section
-      class="text-center py-12 bg-gradient-to-br from-primary/10 via-background to-background rounded-xl shadow-lg"
+      class="text-center w-fit mx-auto pb-5 bg-gradient-to-br from-primary/10 via-background to-background rounded-xl border-2 border-gray-400 "
     >
-      <PageHeader
-        title="Welcome to Lab Notes"
-        description="Advancing the frontiers of science through innovative research and collaboration. Discover our work, team, and latest breakthroughs."
-      />
+      <figure class="w-full justify-center items-center flex flex-col">
+        <img
+          src="/images/home/menu-2.jpg"
+          alt="Lab researchers working"
+          class="w-full h-auto rounded-t-xl object-cover aspect-video radius-md  mask-b-from-0.5 max-w-lg"
+          data-ai-hint="lab research"
+        />
+        <figcaption class="-mt-6 text-lg font-semibold text-black/80">
+          Research in Universidad de Talca
+        </figcaption>
+      </figure>
 
       <div class="mt-6 space-x-4">
         <SlotButton variant="default" size="lg">
           <a href="/publications" class="inline-flex items-center">
-            Explore Publications <Github class="ml-2 h-5 w-5" />
+            Explore Publications <Publications class="ml-2 h-5 w-5" />
           </a>
         </SlotButton>
 

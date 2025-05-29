@@ -1,20 +1,19 @@
 ---
-import Github from "../../icons/github.astro";
-import Layout from "../../layouts/Layout.astro";
+import PageHeader from "@components/layout/pageHeader.astro";
+import Github from "@icons/github.astro";
+import Layout from "@layouts/Layout.astro";
+import Contacts from "@/icons/contacts.astro";
 ---
 
 <Layout title="Contact">
+
+  <PageHeader 
+    title="Contact Us"
+    description="Get in touch with our lab for inquiries, collaborations, or feedback."
+    icon={Contacts}
+  />
+
   <section class="space-y-8">
-    <!-- Page Header -->
-    <header class="text-center space-y-2">
-      <div class="inline-flex items-center justify-center gap-2 text-2xl font-bold">
-        <Github class="w-6 h-6" />
-        <span>Contact Us</span>
-      </div>
-      <p class="text-muted-foreground max-w-lg mx-auto">
-        Get in touch or visit our lab. We look forward to hearing from you.
-      </p>
-    </header>
 
     <!-- Content Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">

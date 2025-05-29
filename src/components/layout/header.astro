@@ -1,18 +1,25 @@
 ---
-import Github from "../../icons/github.astro";
+import Contacts from "@/icons/contacts.astro";
+import Gallery from "@/icons/gallery.astro";
+import Init from "@/icons/init.astro";
+import News from "@/icons/news.astro";
+import Teams from "@/icons/teams.astro";
+import Github from "@icons/github.astro";
+import Menu from "@icons/menu.astro";
+import Publications from "@icons/publications.astro";
 
 const navLinks = [
-  { href: "/", label: "Inicio", Icon: Github },
-  { href: "/publications", label: "Publications", Icon: Github },
-  { href: "/team", label: "Team", Icon: Github },
-  { href: "/gallery", label: "Galería", Icon: Github },
-  { href: "/news", label: "News", Icon: Github },
-  { href: "/contact", label: "Contacto", Icon: Github },
+  { href: "/", label: "Inicio", Icon: Init },
+  { href: "/team", label: "Team", Icon: Teams },
+  { href: "/publications", label: "Publicaciones", Icon: Publications },
+  { href: "/gallery", label: "Galería", Icon: Gallery },
+  { href: "/news", label: "News", Icon: News },
   {
     href: "/collaborations",
     label: "Collaborations",
-    Icon: Github,
+    Icon: Teams,
   },
+  { href: "/contact", label: "Contacto", Icon: Contacts },
 ];
 ---
 
@@ -52,9 +59,9 @@ const navLinks = [
       <button
         id="menu-btn"
         aria-label="Open menu"
-        class="xl:hidden p-2 rounded-md hover:bg-gray-200 transition-colors"
+        class="xl:hidden p-2 rounded-md hover:bg-gray-200 transition-colors cursor-pointer"
       >
-        <Github style="width: 24px; height: 24px;" />
+        <Menu style="width: 24px; height: 24px;" />
       </button>
     </div>
   </div>
@@ -76,7 +83,7 @@ const navLinks = [
     <button
       id="close-btn"
       aria-label="Close menu"
-      class="p-2 rounded-md hover:bg-gray-200 transition-colors"
+      class="p-2 rounded-md font-bold cursor-pointer hover:bg-gray-200 transition-colors"
     >
       ✕
     </button>
