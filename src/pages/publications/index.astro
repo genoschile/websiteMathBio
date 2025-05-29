@@ -2,51 +2,47 @@
 import PageHeader from "@components/layout/pageHeader.astro";
 import Card from "@components/ui/card/card.astro";
 import CardContent from "@components/ui/card/cardContent.astro";
-import CardDescription from "@components/ui/card/cardDescription.astro";
-import CardFooter from "@components/ui/card/cardFooter.astro";
 import CardHeader from "@components/ui/card/cardHeader.astro";
 import CardTitle from "@components/ui/card/cardTitle.astro";
-import SlotButton from "@components/ui/slotButton.astro";
-import Github from "@icons/github.astro";
+
 import Layout from "@layouts/Layout.astro";
 
-import { getCollection } from "astro:content";
-
-import FilterAndSortPublications from "./components/filterAndSort.astro";
 import Publications from "@/icons/publications.astro";
 
-const mockPublications = await getCollection("publications");
+const url = new URL(Astro.request.url);
 
-if (!mockPublications || mockPublications.length === 0) {
-  console.warn("No publications found in the collection.");
-} else {
-  console.log("Found publications:", mockPublications.length);
-}
+import Searcheyes from "@/icons/searcheyes.astro";
 
-const publications = mockPublications.map((pub) => ({
+import Input from "@components/ui/input.astro";
+import { getCollection } from "astro:content";
+
+const currentSearchTerm = url.searchParams.get("q") || "";
+const currentYearFilter = url.searchParams.get("year") || "all";
+const currentSortBy = url.searchParams.get("sort") || "year_desc";
+
+const availableYears = ["all", "2024", "2023", "2022", "2021", "2020"];
+
+const publications = await getCollection("publications");
+
+const currentPapers = publications.map((pub) => ({
   ...pub.data,
 }));
-
-const filteredAndSortedPublications = publications;
-
-const url = new URL(Astro.request.url);
-const searchTerm = url.searchParams.get("q");
-
-const filteredPosts = publications.filter((post) => {
-  if (!searchTerm) {
-    return true;
-  }
-  const lowerCaseSearchTerm = searchTerm.toLowerCase();
-  const titleMatches = post.title.toLowerCase().includes(lowerCaseSearchTerm);
-  const bodyMatches = post.description
-    .toLowerCase()
-    .includes(lowerCaseSearchTerm);
-
-  return titleMatches || bodyMatches;
-});
-
-console.log("Filtered posts:", filteredPosts.length);
 ---
+
+<template id="publication-template">
+  <li class="border rounded-md p-4 shadow-sm mb-4">
+    <h3 class="title font-semibold text-lg"></h3>
+    <p class="authors text-sm text-muted-foreground"></p>
+    <p class="meta text-xs italic"></p>
+    <p class="abstract mt-2 text-sm text-foreground line-clamp-3"></p>
+    <p class="tags mt-2 text-xs text-muted-foreground"></p>
+    <a
+      class="url text-primary text-sm mt-2 inline-block"
+      target="_blank"
+      rel="noopener noreferrer">View Publication</a
+    >
+  </li>
+</template>
 
 <Layout title="Publications">
   <div>
@@ -56,54 +52,278 @@ console.log("Filtered posts:", filteredPosts.length);
       icon={Publications}
     />
 
-    <FilterAndSortPublications />
+    <Card class="mb-8 shadow-lg">
+      <CardHeader>
+        <CardTitle class="flex items-center gap-2">
+          <Searcheyes />
+          Filter & Sort Options
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <form class="contents form-publications">
+          <div class="space-y-1">
+            <label for="search-publications" class="text-md font-medium flex"
+              >Search
+            </label>
+            <div class="relative">
+              <Input
+                id="search-publications"
+                name="search-publications"
+                type="search"
+                aria-label="Search publications"
+                placeholder="Search title, authors, keywords..."
+                className="pl-8"
+              />
+            </div>
+          </div>
 
-    {
-      filteredAndSortedPublications.length > 0 ? (
-        <div class="space-y-6">
-          {filteredAndSortedPublications.map((pub) => (
-            <Card
-              data-publication
-              class="shadow-md hover:shadow-lg transition-shadow duration-300"
+          <div class="md:col-span-3 flex justify-end mt-4">
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
             >
-              <CardHeader>
-                <CardTitle>{pub.title}</CardTitle>
-                <CardDescription>{pub.authors.join(", ")}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p class="text-sm text-muted-foreground italic">
-                  {pub.type} ({pub.year} "hola")
-                </p>
-                {pub.abstract && (
-                  <p class="mt-2 text-sm text-foreground line-clamp-3">
-                    {pub.abstract}
-                  </p>
-                )}
-                {pub.tags && pub.tags.length > 0 && (
-                  <p class="mt-2 text-xs text-muted-foreground">
-                    <strong>Tags:</strong> {pub.tags.join(", ")}
-                  </p>
-                )}
-              </CardContent>
-              {pub.url && (
-                <CardFooter>
-                  <SlotButton variant="link" asChild class="p-0 text-primary">
-                    <a href={pub.url} target="_blank" rel="noopener noreferrer">
-                      View Publication
-                    </a>
-                  </SlotButton>
-                </CardFooter>
-              )}
-            </Card>
-          ))}
+              Apply Filters
+            </button>
+          </div>
+        </form>
+
+        <div class="search-readout text-sm text-muted-foreground mb-4">
+          Showing all publications
         </div>
-      ) : (
-        <div class="text-center py-12">
-          <p class="text-xl text-muted-foreground">
-            No publications match your criteria.
+      </CardContent>
+    </Card>
+
+    <ul id="search-results" class="space-y-4">
+      {currentPapers.map((paper) => (
+        <li class="border rounded-md p-4 shadow-sm mb-4">
+          <h3 class="title font-semibold text-lg">{paper.title}</h3>
+          <p class="authors text-sm text-muted-foreground">
+            {paper.authors.join(", ")}
           </p>
-        </div>
-      )
-    }
+          <p class="meta text-xs italic">
+            {paper.type} ({paper.year})
+          </p>
+          {paper.abstract && (
+            <p class="abstract mt-2 text-sm text-foreground line-clamp-3">
+              {paper.abstract}
+            </p>
+          )}
+          {paper.tags && paper.tags.length > 0 && (
+            <p class="tags mt-2 text-xs text-muted-foreground">
+              <strong>Tags:</strong> {paper.tags.join(", ")}
+            </p>
+          )}
+          {paper.url && (
+            <a
+              href={paper.url}
+              class="url text-primary text-sm mt-2 inline-block"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Publication
+            </a>
+          )}
+        </li>
+      ))}
+      {currentPapers.length === 0 && (
+        <li class="text-center text-muted-foreground">
+          No publications found.
+        </li>
+      )}
+    </ul>
   </div>
 </Layout>
+
+<script>
+  import DOMPurify from "dompurify";
+  import Fuse from "fuse.js";
+
+  let SEARCH_PUBLICATIONS: any;
+  let FUSE_INSTANCE: any;
+
+  const FUSE_OPTIONS = {
+    keys: [
+      {
+        name: "title",
+        weight: 0.7,
+      },
+      {
+        name: "abstract",
+        weight: 0.5,
+      },
+      {
+        name: "authors",
+        weight: 0.5,
+      },
+      {
+        name: "tags",
+        weight: 0.3,
+      },
+    ],
+    includeScore: true,
+    shouldSort: true,
+    threshold: 0.5,
+  };
+
+  const SPINNER = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256" id="spinner"><path d="M236,128a108,108,0,0,1-216,0c0-42.52,24.73-81.34,63-98.9A12,12,0,1,1,93,50.91C63.24,64.57,44,94.83,44,128a84,84,0,0,0,168,0c0-33.17-19.24-63.43-49-77.09A12,12,0,1,1,173,29.1C211.27,46.66,236,85.48,236,128Z"></path><style>
+				#spinner {
+					animation: spin 1s linear infinite;
+				}
+				@keyframes spin {
+					100% {
+						transform: rotate(360deg);
+					}
+				}
+				</style></svg>`;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const $inputSearch = document.querySelector(
+      "#search-publications"
+    ) as HTMLInputElement;
+    const $formPublications = document.querySelector(
+      ".form-publications"
+    ) as HTMLFormElement;
+    const $readOut = document.querySelector(
+      ".search-readout"
+    ) as HTMLDivElement;
+
+    const $searchResults = document.querySelector(
+      "#search-results"
+    ) as HTMLUListElement;
+
+    const updateTitleDocument = (search: string) => {
+      document.title = `Publications - ${search}`;
+    };
+
+    const updateSearchReadout = (search: string) => {
+      if (!$readOut) return;
+
+      $readOut.textContent = search
+        ? `Showing results for "${search}"`
+        : "Showing all publications";
+    };
+
+    const generateSearchList = (results: any[]): string => {
+      if (!results || results.length === 0) {
+        return "";
+      }
+
+      return results
+        .map((r) => {
+          const { title, authors, year, type, abstract, tags, url } = r.item;
+
+          return `
+        <li class="border rounded-md p-4 shadow-sm mb-4">
+          <h3 class="font-semibold text-lg">${title}</h3>
+          <p class="text-sm text-muted-foreground">${authors?.join(", ")}</p>
+          <p class="text-xs italic">${type} (${year})</p>
+          ${
+            abstract
+              ? `<p class="mt-2 text-sm text-foreground line-clamp-3">${abstract}</p>`
+              : ""
+          }
+          ${
+            tags && tags.length
+              ? `<p class="mt-2 text-xs text-muted-foreground"><strong>Tags:</strong> ${tags.join(", ")}</p>`
+              : ""
+          }
+          ${
+            url
+              ? `<a href="${url}" class="text-primary text-sm mt-2 inline-block" target="_blank" rel="noopener noreferrer">View Publication</a>`
+              : ""
+          }
+        </li>
+      `;
+        })
+        .join("");
+    };
+
+    const fetchSearchResults = async (searchTerm: string) => {
+      if (!searchTerm || searchTerm.trim() === "") {
+        SEARCH_PUBLICATIONS = null;
+        return;
+      }
+
+      if (!$searchResults) {
+        console.warn("Search results container not found.");
+        return;
+      }
+
+      if (!SEARCH_PUBLICATIONS) {
+        try {
+          const res = await fetch("search.json");
+
+          if (!res.ok) {
+            console.error("Failed to fetch search results:", res.statusText);
+            return;
+          }
+
+          const data = await res.json();
+
+          console.log("Search results:", data);
+
+          SEARCH_PUBLICATIONS = data;
+        } catch (error) {
+          console.error("Error fetching search results:", error);
+          return;
+        }
+      }
+
+      if (SEARCH_PUBLICATIONS && !FUSE_INSTANCE) {
+        FUSE_INSTANCE = new Fuse(SEARCH_PUBLICATIONS, FUSE_OPTIONS);
+      }
+
+      if (!FUSE_INSTANCE) {
+        console.error("Fuse.js instance not initialized.");
+        return;
+      }
+
+      /* search */
+
+      const searchResults = FUSE_INSTANCE.search(searchTerm);
+
+      $searchResults.innerHTML =
+        searchResults.length > 0
+          ? generateSearchList(searchResults)
+          : `No results found for "${searchTerm}"`;
+
+      console.log("Search results:", searchResults);
+    };
+
+    const updateSearchPageUrl = (searchTerm: string) => {
+      const url = new URL(window.location.href);
+      if (searchTerm) {
+        url.searchParams.set("q", searchTerm);
+      } else {
+        url.searchParams.delete("q");
+      }
+      window.history.replaceState({}, "", url.toString());
+    };
+
+    $formPublications?.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const formData = new FormData($formPublications);
+      const searchTerm = DOMPurify.sanitize(
+        formData.get("search-publications")?.toString() || ""
+      );
+
+      if (!searchTerm || searchTerm.trim() === "") return;
+
+      const url = new URL("/publications", window.location.origin);
+      url.searchParams.set("q", searchTerm);
+
+      window.location.assign(url.toString());
+
+      updateTitleDocument(searchTerm);
+    });
+
+    $inputSearch?.addEventListener("input", () => {
+      const searchTerm = DOMPurify.sanitize($inputSearch.value);
+      updateTitleDocument(searchTerm);
+      fetchSearchResults(searchTerm);
+      updateSearchReadout(searchTerm);
+      updateSearchPageUrl(searchTerm);
+    });
+  });
+</script>

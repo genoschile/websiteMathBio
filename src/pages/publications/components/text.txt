@@ -1,0 +1,35 @@
+         <!-- <div class="space-y-1">
+        <label for="year-filter" class="text-md font-medium"
+          >Filter by Year</label
+        >
+        <Select value={currentYearFilter} name="year">
+          <SelectTrigger id="year-filter">
+            <SelectValue placeholder="Select year" />
+          </SelectTrigger>
+          <SelectContent>
+            {
+              availableYears.map((year) => (
+                <SelectItem key={year} value={year}>
+                  {year === "all" ? "All Years" : year}
+                </SelectItem>
+              ))
+            }
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div class="space-y-1">
+        <label for="sort-by" class="text-md font-medium">Sort by</label>
+        <Select value={currentSortBy} name="sort">
+          <SelectTrigger id="sort-by">
+            <Github class="mr-2 h-4 w-4 text-muted-foreground" />
+            <SelectValue placeholder="Sort by" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="year_desc">Year (Newest First)</SelectItem>
+            <SelectItem value="year_asc">Year (Oldest First)</SelectItem>
+            <SelectItem value="title_asc">Title (A-Z)</SelectItem>
+            <SelectItem value="title_desc">Title (Z-A)</SelectItem>
+          </SelectContent>
+        </Select>
+      </div> -->

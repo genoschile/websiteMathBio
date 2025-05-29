@@ -20,7 +20,7 @@ export function getStaticPaths() {
     ];
 }
 
-const members: Member[] = await getCollection("members");
+const members = await getCollection("members");
 
 // Buscamos el miembro correspondiente al `id` proporcionado en la URL
 const currentId = members.find((m) => m.data.id === +id); // Aseguramos que comparamos correctamente los tipos (string vs number)
@@ -125,10 +125,6 @@ Physician Ratings -->
         </div>
     </div>
 </Layout>
-
-<script is:inline>
-    const $contentDinamicDiv = document.querySelector(".container-info");
-</script>
 
 <style>
     .main-section {
