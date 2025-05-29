@@ -1,0 +1,943 @@
+[
+  {
+    "name": "chromPlot: visualization of genomic data in chromosomal context",
+    "path": "https://academic.oup.com/bioinformatics/article/32/15/2366/1743488",
+    "keys": "",
+    "resume": "Visualizing genomic data in chromosomal context can help detecting errors in data processing and may suggest new hypotheses to be tested. Here, we report a new tool for displaying large and diverse genomic data along chromosomes. The software is implemented in R so that  visualization can be easily integrated with its numerous packages for processing genomic data. It supports simultaneous visualization of multiple tracks of data. Large genomic regions such as QTLs or synteny tracts may be shown along histograms of number of genes, genetic variants, or any other type of genomic element. Tracks can also contain values for continuous or categorical variables and the user can choose among points, connected lines, colored segments, or histograms for representing data. chromPlot takes data from tables in data.frame in GRanges formats. The information necessary to draw chromosomes for mouse and human is included with the package. For other organisms, chromPlot can read Gap and cytoBandIdeo tables from the UCSC Genome Browser. We present common use cases here, and a full tutorial is included as the package’s vignette.",
+    "description": "",
+    "doi": "10.1093/bioinformatics/btw137",
+    "author": "Karen Y. Oróstica",
+    "co-author": "Ricardo A. Verdugo",
+    "date": "2016",
+    "id": 1,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Oróstica, K. Y., & Verdugo, R. A. (2016). ChromPlot: Visualization of genomic data in chromosomal context. Bioinformatics, 32(15), 2366–2368. https://doi.org/10.1093/bioinformatics/btw137"
+      }
+    ]
+  },
+  {
+    "name": "Efficient computer implementation to test the validity of the generalized version of Chargaff’s second parity rule.",
+    "path": "https://www.researchgate.net/publication/309759506_Efficient_computer_implementation_to_test_the_validity_of_the_generalized_version_of_Chargaff's_second_parity_rule",
+    "keys": "",
+    "journal": "MDPI AG",
+    "resume": "Chargaff’s second parity rule holds that for each of the two DNA strands in a genome, the %A is similar to %T and %G is similar to %C. Although the validity of the second rule is still in debate and the biological cause is unknown, a generalized form of the second parity rule has already been proposed. The generalization states that the frequency of a string of a particular length is similar to the frequency of its reverse complement in the same strand. In a previous work, we have developed a statistical hypothesis test for the generalized second Chargaff parity rule for any particular string in a genome. One obstacle to test all available genomes with this statistical test was the efficiency of the computational implementation. In this work, we circumvent this issue, implementing our statistical test in an efficient and multi-processing computer program. The development was carried out in Python, using packets for handling sequences in FASTA format and the required calculations. For each input genome, a database SQLite is generated holding the absolute frequencies of all existing strings in the genome up to a user defined length, and their reverse complements. Multiple sequences are accepted as input, each sequence being analyzed in one CPU. Thus, a bacterial genome, ~4M characters, with 4 sequences takes about 14 seconds to process entirely in 4 CPUs. This computer program will allow our test to be carried out in all available completely sequenced genomes and assess the validity of Chargaff’s second parity rule and its generalized version.",
+    "description": "",
+    "doi": "10.3390/mol2net-02-17010",
+    "author": "Camilo Fuentes",
+    "co-author": [
+      {
+        "nombre": "Karen Oróstica"
+      },
+      {
+        "nombre": "Ignacio Vidal"
+      },
+      {
+        "nombre": "Eduardo Alarcón"
+      },
+      {
+        "nombre": "Gonzalo Riadi"
+      }
+    ],
+    "date": "2016",
+    "id": 2,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Fuentes, C.; Orostica, K.; Alarcón, E.; Vidal, I.; Riadi, G. (2016).Efficient computer implementation to test the validity of the generalized version of Chargaff’s second parity rule., in Proceedings of the MOL2NET'16, Conference on Molecular, Biomed., Comput. & Network Science and Engineering, 2nd ed., 15–20 October 2022, MDPI: Basel, Switzerland, doi:10.3390/mol2net-02-17010"
+      }
+    ]
+  },
+  {
+    "name": "Visualization of Results from Systems Genetics Studies in Chromosomal Context",
+    "path": "https://link.springer.com/protocol/10.1007/978-1-4939-6427-7_13",
+    "keys": "",
+    "journal": "Systems Genetics: Methods and Protocols",
+    "resume": "This chapter describes methods currently available for visualizing results from systems genetics experiments. Here, we abstract from the statistical methods used for genetic mapping, which are dependent on the specific resource being used, i.e. F2, RILs, or outbred populations among others. We use a public dataset with results from a mouse eQTL experiment for three examples of visualization: genome-wide dot plots of marker-by-gene association, karyotype-like plots, and circos plots. Dot plots give a first overview of the results from eQTL mapping, allowing detecting genome-wide patterns of cis- and trans-genetic association to transcription level. Karyotype-like plots provide chromosomal context and allow integrating multiple tracks of information in a single plot. Circos plots can, in addition, display long-range interactions to provide an overview of genetic connectivity at the genome level. All examples are developed and explained using R code, an open-source language with powerful statistical and graphical capabilities. The principles reviewed here, however, can be applied with other software options, organisms, and to any type of molecular phenotype that can be assigned to a genomic position.",
+    "description": "",
+    "doi": "10.1007/978-1-4939-6427-7_13",
+    "author": "Karen Y. Oróstica",
+    "co-author": "Ricardo A. Verdugo",
+    "date": "2017",
+    "id": 3,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Oróstica, K.Y., Verdugo, R.A. (2017). Visualization of Results from Systems Genetics Studies in Chromosomal Context. In: Schughart, K., Williams, R. (eds) Systems Genetics. Methods in Molecular Biology, vol 1488. Humana Press, New York, NY. https://doi.org/10.1007/978-1-4939-6427-7_13"
+      }
+    ]
+  },
+  {
+    "name": "A proposed new measure to verify the general version of Chargaff 2nd rule.",
+    "path": "https://sciforum.net/paper/view/6090",
+    "keys": "Chargaff, kmers,bioinformatics,sequence",
+    "journal": "MDPI AG",
+    "resume": "In the 40’s, Erwin Chargaff was the first to observe the parity between Adenines (A) and Timinies (T) and Citosines (C) and Guanines (G), in the molecule of DNA. In the 60’s, Chargaff found a second parity rule. This time in a single strand of DNA. The amounts of A’s and T’s, and the amounts of C’s and G’s is similar. The explanation of the first rule is the complementary nature of the double stranded helix of the DNA molecule. However, for the 2nd rule, a biological explanation has remained a mystery. In the last 40 years, a generalization of the second rule was proposed, to explain the 2nd rule as a particular case. This generalization states that for any given k-mer and its reverse complement (RC), the number of times both are found is similar in a single strand of DNA. Two measures have been proposed to test the generalized Chargaff’s 2nd rule (gC2r), both include an artifact regarding the length of the genomes. This has led the authors to think there is a minimum length of a genome and a maximum k-mer for compliance. We propose a new way to measure the compliance of any given genome to the gC2r. The measure is the proportion of the genome which complies with gC2r. The compliance is measured per pair of kmer/k-merRC, using the natural logarithm of the number of times the k-mer is found, divided by the number of times its reverse complement is found in the genome or ln(#k-mer/k-merRC). This measure is independent of the size of the analyzed k-mer and the size of the genome. This measure has been implemented in a software, ChargaffCracker, which can rapidly analyze sequences and deliver a statistical report. We have generated random genomes based on the proportions and lengths of biological prokaryote genome sequences and compared them. We conclude hypothesizing that: 1. The compliance of the gC2r is a consequence, not cause of the 2nd rule and; 2. Although Chargaff’s 2nd rule might be a consequence of transpositions and inversions, the limits of compliance of the gC2r is a property of the sequence model of genomes, not of the biology of organisms. However, this property might have been selected to fulfill biological needs in genome evolution.",
+    "doi": "https://doi.org/10.3390/mol2net-04-06090",
+    "author": "Camilo Fuentes",
+    "co-author": [
+      {
+        "nombre": "Karen Oróstica"
+      },
+      {
+        "nombre": "Ignacio Vidal"
+      },
+      {
+        "nombre": "Gonzalo Riadi"
+      }
+    ],
+    "date": "2018",
+    "id": 4,
+    "pdf": "https://web.archive.org/web/20210715150701/https://sciforum.net/manuscripts/6090/slides.pdf",
+    "cite": [
+      {
+        "apa": "Fuentes Beals, C.; Riadi Mahias, G.; Oróstica, K.; Vidal, I. A proposed new measure to verify the general version of Chargaff 2nd rule., in Proceedings of the MOL2NET'18, Conference on Molecular, Biomed., Comput. & Network Science and Engineering, 4th ed., 15 January 2018–20 January 2019, MDPI: Basel, Switzerland, doi:10.3390/mol2net-04-06090"
+      }
+    ]
+  },
+  {
+    "name": "Mining the relationship betweencar theft and places of social interest in santiago chile",
+    "path": "https://dl.acm.org/doi/abs/10.1145/3308558.3316464",
+    "keys": "",
+    "journal": "",
+    "book": "Companion proceedings of the 2019 world wide web conference",
+    "resume": "Recent work suggests that certain places can be more attractive for car theft based how many people regularly visit them, as well as other factors. In this sense, we must also consider the city or district itself where vehicles are stolen. All cities have different cultural and socioeconomic characteristics that influence car theft patterns. In particular, the distribution of public services and places attract a large crowd could play a key role in the occurrence of car theft. Santiago, a city that displays drastic socioeconomic differences among its districts, presents increasingly-high car theft rates. This represents a serious issue for the city, as for any other major city, which –at least for Santiago– has not been analyzed in depth using quantitative approaches. In this work, we present a preliminary study of how places that create social interest, such as restaurants, bars, schools, and shopping malls, increase car theft frequency in Santiago. We also study if some types of places are more attractive than others for this type of crime. To evaluate this, we propose to analyze car theft points (CTP) from insurance companies and their relationship with places of social interest (PSI) extracted from Google Maps, using a proximity based approach. Our findings show a high correlation between CTP and PSI for all of the social interest categories that we studied in the different districts of the Santiago. In particular our work contributes to the understanding of the social factors that are associated to car thefts.",
+    "description": "",
+    "doi": "10.1093/bioinformatics/btw137",
+    "author": "Karen Y. Oróstica",
+    "co-author": "Barbara Poblete",
+    "date": "2019",
+    "id": 5,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Oróstica, K., & Poblete, B. (2019). Mining the relationship between car theft and places of social interest in Santiago Chile. The Web Conference 2019 - Companion of the World Wide Web Conference, WWW 2019, 811–814. https://doi.org/10.1145/3308558.3316464"
+      }
+    ]
+  },
+  {
+    "name": "BEST: a Shiny/R web-based application to easily retrieve cross-related enzyme functional parameters and information from BRENDA",
+    "path": "https://academic.oup.com/bioinformatics/article/37/10/1480/5913389",
+    "keys": "",
+    "journal": "Bioinformatics",
+    "resume": "Motivation BRENDA is the largest enzyme functional database, containing information of 84 000 experimentally characterized enzyme entries. This database is an invaluable resource for researchers in the biological field, which classifies enzyme-related information in categories that are very useful to obtain specific functional and protein engineering information for enzyme families. However, the BRENDA web interface, the most used by researchers with a non-informatic background, does not allow the user to cross-reference data from different categories or sub-categories in the database. Obtaining information in an easy and fast way, in a friendly web interface, without the necessity to have a deep informatics knowledge, will facilitate and improve research in the enzymology and protein engineering field. Results: We developed the Brenda Easy Search Tool (BEST), an interactive Shiny/R application that enables querying the BRENDA database for complex cross-tabulated characteristics, and retrieving enzyme-related parameters and information readily and efficiently, which can be used for the study of enzyme function or as an input for other bioinformatics tools.",
+    "description": "",
+    "doi": "10.1093/bioinformatics/btw137",
+    "author": "Juan Saez Hidalgo",
+    "co-author": [
+      {
+        "nombre": "Karen Y. Oróstica"
+      },
+      {
+        "nombre": "Anamaria Sanchez–Daza"
+      },
+      {
+        "nombre": "Álvaro Olivera–Nappa"
+      }
+    ],
+    "date": "2021",
+    "id": 6,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Saez Hidalgo, J., Orostica, K. Y., Sanchez-Daza, A., & Olivera-Nappa, A. (2021). BEST: A Shiny/R web-based application to easily retrieve cross-related enzyme functional parameters and information from BRENDA. Bioinformatics, 37(10), 1480–1481. https://doi.org/10.1093/bioinformatics/btaa848"
+      }
+    ]
+  },
+  {
+    "name": "Mutational signatures and transmissibility of SARS-CoV-2 Gamma and Lambda variants",
+    "path": "https://arxiv.org/abs/2108.10018",
+    "keys": "",
+    "journal": "arXiv preprint arXiv:2108.10018",
+    "resume": "The emergence of SARS-CoV-2 variants of concern endangers the long-term control of COVID19, especially in countries with limited genomic surveillance. In this work, we explored genomic drivers of contagion in Chile. We sequenced 3443 SARS-CoV-2 genomes collected between January and July 2021, where the Gamma (P.1), Lambda (C.37), Alpha (B.1.1.7), B.1.1.348, and B.1.1 lineages were predominant. Using a Bayesian model tailored for limited genomic surveillance, we found that Lambda and Gamma variants’ reproduction numbers were about 5% and 16% larger than Alpha’s, respectively. We observed an overabundance of mutations in the Spike gene, strongly correlated with the variant’s transmissibility. Furthermore, the variants’ mutational signatures featured a breakpoint concurrent with the beginning of vaccination (mostly CoronaVac, an inactivated virus vaccine), indicating an additional putative selective pressure. Thus, our work provides a reliable method for quantifying novel variants’ transmissibility under subsampling (as newly-reported Delta, B.1.617.2) and highlights the importance of continuous genomic surveillance.",
+    "description": "",
+    "doi": "https://doi.org/10.48550/arXiv.2108.10018",
+    "author": "Karen Y. Oróstica",
+    "co-author": [
+      {
+        "nombre": "Sebastian Contreras"
+      },
+      {
+        "nombre": "Sebastian B. Mohr"
+      },
+      {
+        "nombre": "Jonas Dehning"
+      },
+      {
+        "nombre": "Simon Bauer"
+      },
+      {
+        "nombre": "David Medina-Ortiz"
+      },
+      {
+        "nombre": "Emil N. Iftekhar"
+      },
+      {
+        "nombre": "Karen Mujica"
+      },
+      {
+        "nombre": "Paulo C. Covarrubias"
+      },
+      {
+        "nombre": "Soledad Ulloa"
+      },
+      {
+        "nombre": "Andrés E. Castillo"
+      },
+      {
+        "nombre": "Ricardo A. Verdugo"
+      },
+      {
+        "nombre": "Jorge Fernández"
+      },
+      {
+        "nombre": "Alvaro Olivera-Nappa"
+      },
+      {
+        "nombre": "Viola Priesemann"
+      }
+    ],
+    "date": "2021",
+    "id": 7,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Oróstica, K. Y., Contreras, S., Mohr, S. B., Dehning, J., Bauer, S., Medina-Ortiz, D., Iftekhar, E. N., Mujica, K., Covarrubias, P. C., Ulloa, S., Castillo, A. E., Verdugo, R. A., Fernández, J., Olivera-Nappa, Á., & Priesemann, V. (2021). Mutational signatures and transmissibility of SARS-CoV-2 Gamma and Lambda variants. http://arxiv.org/abs/2108.10018"
+      }
+    ]
+  },
+  {
+    "name": "Longitudinal study of wound healing status and bacterial colonisation of Staphylococcus aureus and Corynebacterium diphtheriae in epidermolysis bullosa patients",
+    "path": "https://onlinelibrary.wiley.com/doi/full/10.1111/iwj.13922",
+    "keys": "Corynebacterium diphtheriae, epidermolysis bullosa, skin diseases, Staphylococcus aureus, wound healing",
+    "journal": "International Wound Journal",
+    "resume": "Epidermolysis bullosa (EB) is an inherited disorder characterised by skin fragilityand the appearance of blisters and wounds. Patient wounds are often colonised orinfected with bacteria, leading to impaired healing, pain and high risk of death bysepsis. Little is known about the impact of bacterial composition and susceptibilityin wound resolution, and there is a need for longitudinal studies to understandhealing outcomes with different types of bacterial colonisation. A prospective lon-gitudinal study of 70 wounds from 15 severe EB patients (Junctional and Reces-sive Dystrophic EB) from Chile. Wounds were selected independently of theirinfected status. Wound cultures, including bacterial species identification, compo-sition and Staphylococcus aureus (SA) antibiotic susceptibility were registered.Wounds were separated into categories according to their healing capacity, recog-nising chronic, and healing wounds. Hundred-one of the 102 wound cultureswere positive for bacterial growth. From these, 100 were SA-positive; 31 wereresistant to Ciprofloxacin (31%) and only seven were methicillin-resistant SA (7%).Ciprofloxacin-resistant SA was found significantly predominant in chronicwounds (**P < .01). Interestingly, atoxigenic Corynebacterium diphtheriae(CD) was identified and found to be the second most abundant recovered bacteria(31/101), present almost always in combination with SA (30/31). CD was only found in Recessive Dystrophic EB patients and not related to wound chronicity.Other less frequent bacterial species found included Pseudomonas aeruginosa,Streptococus spp. and Proteus spp. Infection was negatively associated with thehealing status of wounds.",
+    "description": "",
+    "doi": "10.1111/iwj.13922",
+    "author": "Ignacia Fuentes",
+    "co-author": [
+      {
+        "nombre": "María Joao"
+      },
+      {
+        "nombre": "Pilar Morandé"
+      },
+      {
+        "nombre": "Carmen Varela"
+      },
+      {
+        "nombre": "Karen Y. Oróstica"
+      },
+      {
+        "nombre": "Francisco Acevedo"
+      },
+      {
+        "nombre": "Boris Rebolledo-Jaramillo"
+      },
+      {
+        "nombre": "Esteban Arancibia"
+      },
+      {
+        "nombre": "Lorena Porte"
+      },
+      {
+        "nombre": "Francis Palisson"
+      }
+    ],
+    "date": "2022",
+    "id": 8,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Fuentes, I., Yubero, M. J., Morandé, P., Varela, C., Oróstica, K., Acevedo, F., Rebolledo-Jaramillo, B., Arancibia, E., Porte, L., & Palisson, F. (2022). Longitudinal study of wound healing status and bacterial colonisation of Staphylococcus aureus and Corynebacterium diphtheriae in epidermolysis bullosa patients. International Wound Journal, 20(3), 774–783. https://doi.org/10.1111/iwj.13922"
+      }
+    ]
+  },
+  {
+    "name": "New year, new SARS-CoV-2 variant: Resolutions on genomic surveillance protocols to face Omicron",
+    "path": "https://www.thelancet.com/journals/lanam/article/PIIS2667-193X(22)00020-5/fulltext",
+    "keys": "",
+    "journal": "The Lancet Regional Healt-Americas",
+    "resume": "The emergence of SARS-CoV-2 variants with enhanced transmissibility and partial immune escape (also known as Variants of Concern, VOC) has characterised the second year of the COVID-19 pandemic. Genomic surveillance allows identifying hidden, fast-spreading lineages and VOCs before they become a public health threat. The Chilean Public Health Institute (Instituto de Salud Publica, ISP) has led SARS-CoV-2 genomic surveillance initiatives in Chile. Using sequencing data, the ISP has signalled the introduction of VOCs and characterised their transmissibility and mutational signatures, contributing to a better understanding of the local features of the pandemic.",
+    "description": "",
+    "doi": "10.1016/j.lana.2022.100203",
+    "author": "Karen Y. Oróstica",
+    "co-author": [
+      {
+        "nombre": "Sebastian Contreras"
+      },
+      {
+        "nombre": "Anamaria Sanchez–Daza"
+      },
+      {
+        "nombre": "Jorge Fernández"
+      },
+      {
+        "nombre": "Viola Priesemann"
+      },
+      {
+        "nombre": "Alvaro Olivera-Nappa"
+      }
+    ],
+    "date": "2022",
+    "id": 9,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Oróstica, K. Y., Contreras, S., Mohr, S. B., Dehning, J., Bauer, S., Medina-Ortiz, D., Iftekhar, E. N., Mujica, K., Covarrubias, P. C., Ulloa, S., Castillo, A. E., Verdugo, R. A., Fernández, J., Olivera-Nappa, Á., & Priesemann, V. (2021). New year, new SARS-CoV-2 variant: Resolutions on genomic surveillance protocols to face Omicron. https://doi.org/https://doi.org/10.1016/j.lana.2022.100203"
+      }
+    ]
+  },
+  {
+    "name": "Total mutational load and clinical features as predictors of the metastatic status in lung adenocarcinoma and squamous cell carcinoma patients",
+    "path": "https://link.springer.com/article/10.1186/s12967-022-03572-8",
+    "keys": "Random Forest, Smoking, Clinical variables, Lung Adenocarcinoma (LUAD), Lung Squamous Cell Carcinoma (LSCC) and Metastasis",
+    "journal": "Journal of Translational Medicine",
+    "resume": "Recently, extensive cancer genomic studies have revealed mutational and clinical data of large cohorts of cancer patients. For example, the Pan-Lung Cancer 2016 dataset (part of The Cancer Genome Atlas project), summarises the mutational and clinical profiles of different subtypes of Lung Cancer (LC). Mutational and clinical signatures have been used independently for tumour typification and prediction of metastasis in LC patients. Is it then possible to achieve better typifications and predictions when combining both data streams?",
+    "description": "",
+    "doi": "https://doi.org/10.1186/s12967-022-03572-8",
+    "author": "Karen Y. Oróstica",
+    "co-author": [
+      {
+        "nombre": "Juan Saez-Hidalgo"
+      },
+      {
+        "nombre": "Pamela R. de Santiago"
+      },
+      {
+        "nombre": "Solange Rivas"
+      },
+      {
+        "nombre": "Sebastian Contreras"
+      },
+      {
+        "nombre": "Gonzalo Navarro"
+      },
+      {
+        "nombre": "Juan A. Asenjo"
+      },
+      {
+        "nombre": "Alvaro Olivera-Nappa"
+      },
+      {
+        "nombre": "Ricardo Arminsén"
+      }
+    ],
+    "date": "2022",
+    "id": 10,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Oróstica, K. Y., Saez-Hidalgo, J., de Santiago, P. R., Rivas, S., Contreras, S., Navarro, G., Asenjo, J. A., Olivera-Nappa, Á., & Armisén, R. (2022). Total mutational load and clinical features as predictors of the metastatic status in lung adenocarcinoma and squamous cell carcinoma patients. Journal of Translational Medicine, 20(1). https://doi.org/10.1186/s12967-022-03572-8"
+      }
+    ]
+  },
+  {
+    "name": "Model-based assessment of sampling protocols for infectious disease genomic surveillance",
+    "path": "https://www.sciencedirect.com/science/article/pii/S0960077922012723",
+    "keys": "Genomic surveillance, COVID-19, SARS-CoV-2, Dynamical systems, Sampling, Undersampling",
+    "journal": "Chaos, Solitons & Fractals",
+    "resume": "Genomic surveillance of infectious diseases allows monitoring circulating and emerging variants and quantifying their epidemic potential. However, due to the high costs associated with genomic sequencing, only a limited number of samples can be analysed. Thus, it is critical to understand how sampling impacts the information generated. Here, we combine a compartmental model for the spread of COVID-19 (distinguishing several SARS-CoV-2 variants) with different sampling strategies to assess their impact on genomic surveillance. In particular, we compare adaptive sampling, i.e., dynamically reallocating resources between screening at points of entry and inside communities, and constant sampling, i.e., assigning fixed resources to the two locations. We show that adaptive sampling uncovers new variants up to five weeks earlier than constant sampling, significantly reducing detection delays and estimation errors. This advantage is most prominent at low sequencing rates. Although increasing the sequencing rate has a similar effect, the marginal benefits of doing so may not always justify the associated costs. Consequently, it is convenient for countries with comparatively few resources to operate at lower sequencing rates, thereby profiting the most from adaptive sampling. Finally, our methodology can be readily adapted to study undersampling in other dynamical systems.",
+    "description": "",
+    "doi": "https://doi.org/10.1016/j.chaos.2022.113093",
+    "author": "Sebastian Contreras",
+    "co-author": [
+      {
+        "nombre": "Karen Y. Oróstica"
+      },
+      {
+        "nombre": "Anamaria Sanchez–Daza"
+      },
+      {
+        "nombre": "Joel Wagner"
+      },
+      {
+        "nombre": "Philipp Dönges"
+      },
+      {
+        "nombre": "David Medina-Ortiz"
+      },
+      {
+        "nombre": "Matias Jara"
+      },
+      {
+        "nombre": "Ricardo A. Verdugo"
+      },
+      {
+        "nombre": "Carlos Conca"
+      },
+      {
+        "nombre": "Viola Priesemann"
+      },
+      {
+        "nombre": "Alvaro Olivera-Nappa"
+      }
+    ],
+    "date": "2023",
+    "id": 11,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Contreras, S., Oróstica, K. Y., Daza-Sanchez, A., Wagner, J., Dönges, P., Medina-Ortiz, D., Jara, M., Verdugo, R., Conca, C., Priesemann, V., & Olivera-Nappa, Á. (2023). Model-based assessment of sampling protocols for infectious disease genomic surveillance. Chaos, Solitons & Fractals, 167, 113093. https://doi.org/10.1016/J.CHAOS.2022.113093"
+      }
+    ]
+  },
+  {
+    "name": "Early-life nutrition interacts with developmental genes to shape the brain and sleep behavior in Drosophila melanogaster",
+    "path": "https://academic.oup.com/sleep/article/46/4/zsad016/7010599",
+    "keys": "prenatal nutrition, sleep, mushroom bodies, genome-wide association, behavioral genetics, genetic networks",
+    "journal": "Sleep",
+    "resume": "Epidermolysis bullosa (EB) is an inherited disorder characterised by skin fragility and the appearance of blisters and wounds. Patient wounds are often colonised or infected with bacteria, leading to impaired healing, pain and high risk of death by sepsis. Little is known about the impact of bacterial composition and susceptibility in wound resolution, and there is a need for longitudinal studies to understand healing outcomes with different types of bacterial colonisation. A prospective longitudinal study of 70 wounds from 15 severe EB patients (Junctional and Recessive Dystrophic EB) from Chile. Wounds were selected independently of their infected status. Wound cultures, including bacterial species identification, composition and Staphylococcus aureus (SA) antibiotic susceptibility were registered. Wounds were separated into categories according to their healing capacity, recognising chronic, and healing wounds. Hundred-one of the 102 wound cultures were positive for bacterial growth. From these, 100 were SA-positive; 31 were resistant to Ciprofloxacin (31%) and only seven were methicillin-resistant SA (7%). Ciprofloxacin-resistant SA was found significantly predominant in chronic wounds (**P < .01). Interestingly, atoxigenic Corynebacterium diphtheriae (CD) was identified and found to be the second most abundant recovered bacteria (31/101), present almost always in combination with SA (30/31). CD was only found in Recessive Dystrophic EB patients and not related to wound chronicity. Other less frequent bacterial species found included Pseudomonas aeruginosa, Streptococus spp. and Proteus spp. Infection was negatively associated with the healing status of wounds.",
+    "description": "",
+    "doi": "https://doi.org/10.1093/sleep/zsad016",
+    "author": "Gonzalo H. Olivares",
+    "co-author": [
+      {
+        "nombre": "Franco Núñez-Villegas"
+      },
+      {
+        "nombre": "Noemi Candia"
+      },
+      {
+        "nombre": "Karen Y. Oróstica"
+      },
+      {
+        "nombre": "M. Constanza González-Ramírez"
+      },
+      {
+        "nombre": "Franco Vega-Macaya"
+      },
+      {
+        "nombre": "Nolberto Zúñiga"
+      },
+      {
+        "nombre": "Cristian Molina"
+      },
+      {
+        "nombre": "Carlos Oliva"
+      },
+      {
+        "nombre": "Trudy F. C. Mackay"
+      },
+      {
+        "nombre": "Ricardo A. Verdugo"
+      },
+      {
+        "nombre": "Patricio Olguín"
+      }
+    ],
+    "date": "2023",
+    "id": 12,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Olivares, G. H., Núñez-Villegas, F., Candia, N., Oróstica, K., González-Ramírez, M. C., Vega-Macaya, F., Zúñiga, N., Molina, C., Oliva, C., Mackay, T. F. C., Verdugo, R. A., & Olguín, P. (2023). Early-life nutrition interacts with developmental genes to shape the brain and sleep behavior in Drosophila melanogaster. Sleep, 46(4). https://doi.org/10.1093/sleep/zsad016"
+      }
+    ]
+  },
+  {
+    "name": "Exploring the clinical and genetical spectrum of ADPKD in Chile to assess ProPKD score as a risk prediction tool",
+    "path": "https://link.springer.com/article/10.1186/s41231-023-00157-5",
+    "keys": "ADPKD, Genetic analysis, End-stage renal disease, ProPKD score",
+    "journal": "Translational Medicine Comunications",
+    "resume": "Autosomal dominant polycystic kidney disease (ADPKD) is a common inherited condition associated primarily with PKD1 and PKD2 genes. However, ADPKD patients in Latin America have had limited access to comprehensive care. The ProPKD score predicts the likelihood of kidney failure before the age of 60. This study aimed to describe the clinical and genetic characteristics of Chilean ADPKD patients and assess the ProPKD score.",
+    "description": "",
+    "doi": "https://doi.org/10.1186/s41231-023-00157-5",
+    "author": "Esperanza Bayyad",
+    "co-author": [
+      {
+        "nombre": "Anita Plaza"
+      },
+      {
+        "nombre": "Jaime Klenner"
+      },
+      {
+        "nombre": "Patricio Downey"
+      },
+      {
+        "nombre": "Paulina Salas"
+      },
+      {
+        "nombre": "Daniela Maragaño"
+      },
+      {
+        "nombre": "Patricio Herrera"
+      },
+      {
+        "nombre": "Paula Lehmann"
+      },
+      {
+        "nombre": "Lily Quiroz"
+      },
+      {
+        "nombre": "María Jesus Zavala"
+      },
+      {
+        "nombre": "Karen Y. Oróstica"
+      },
+      {
+        "nombre": "Claudio Flores"
+      },
+      {
+        "nombre": "Leopoldo Ardiles"
+      },
+      {
+        "nombre": "Jorge Maturana"
+      },
+      {
+        "nombre": "Paola Krall"
+      }
+    ],
+    "date": "2023",
+    "id": 13,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Bayyad, E., Plaza, A., Klenner, J., Downey, P., Salas, P., Maragaño, D., Herrera, P., Lehmann, P., Quiroz, L., Zavala, M. J., Orostica, K., Flores, C., Ardiles, L., Maturana, J., & Krall, P. (2023). Exploring the clinical and genetical spectrum of ADPKD in Chile to assess ProPKD score as a risk prediction tool. Translational Medicine Communications, 8(1). https://doi.org/10.1186/s41231-023-00157-5"
+      }
+    ]
+  },
+  {
+    "name": "Beyond tobacco: genomic disparities in lung cancer between smokers and never-smokers",
+    "path": "https://bmccancer.biomedcentral.com/articles/10.1186/s12885-024-12737-1",
+    "keys": "Lung Adenocarcinoma, Chilean, Tobacco consumption, Latin American populations, EGFR mutation, KRAS, MAP2K1, Cancer disparities",
+    "journal": "BMC Cancer",
+    "resume": "Tobacco use is one of the main risk factors for Lung Cancer (LC) development. However, about 10–20% of those diagnosed with the disease are never-smokers. For Non-Small Cell Lung Cancer (NSCLC) there are clear differences in both the clinical presentation and the tumor genomic profiles between smokers and never-smokers. For example, the Lung Adenocarcinoma (LUAD) histological subtype in never-smokers is predominately found in young women of European, North American, and Asian descent. While the clinical presentation and tumor genomic profiles of smokers have been widely examined, never-smokers are usually underrepresented, especially those of a Latin American (LA) background. In this work, we characterize, for the first time, the difference in the genomic profiles between smokers and never-smokers LC patients from Chile.",
+    "description": "",
+    "doi": "https://doi.org/10.1186/s12885-024-12737-1",
+    "author": "Javiera Garrido",
+    "co-author": [
+      {
+        "nombre": "Yanara Bernal"
+      },
+      {
+        "nombre": "Evelin González"
+      },
+      {
+        "nombre": "Alejandro Blanco"
+      },
+      {
+        "nombre": "Gonzalo Sepúlveda-Hermosilla"
+      },
+      {
+        "nombre": "Matías Freire"
+      },
+      {
+        "nombre": "Karen Y. Oróstica"
+      },
+      {
+        "nombre": "Solange Rivas"
+      },
+      {
+        "nombre": "Katherine Marcelain"
+      },
+      {
+        "nombre": "Gareth Owen"
+      },
+      {
+        "nombre": "Carolina Ibañez"
+      },
+      {
+        "nombre": "Alejandro Corvalan"
+      },
+      {
+        "nombre": "Marcelo Garrido"
+      },
+      {
+        "nombre": "Rodrigo Assar"
+      },
+      {
+        "nombre": "Rodrigo Lizana"
+      },
+      {
+        "nombre": "Javier Cáceres-Molina"
+      },
+      {
+        "nombre": "Diego Ampuero"
+      },
+      {
+        "nombre": "Liliana Ramos"
+      },
+      {
+        "nombre": "Paola Pérez"
+      },
+      {
+        "nombre": "Osvaldo Aren"
+      },
+      {
+        "nombre": "Sara Chernilo"
+      },
+      {
+        "nombre": "Cristina Fernández"
+      },
+      {
+        "nombre": "María Loreto Spencer"
+      },
+      {
+        "nombre": "Jaqueline Flores Aguila"
+      },
+      {
+        "nombre": "Giuliano Bernal Dossetto"
+      },
+      {
+        "nombre": "Mónica Ahumada Olea"
+      },
+      {
+        "nombre": "Germán Rasse"
+      },
+      {
+        "nombre": "Carolina Sánchez"
+      },
+      {
+        "nombre": "Maria Galli de Amorim"
+      },
+      {
+        "nombre": "Thais F. Bartelli"
+      },
+      {
+        "nombre": "Diana Noronha Nunes"
+      },
+      {
+        "nombre": "Emmanuel Dias-Neto"
+      },
+      {
+        "nombre": "Helano C. Freitas"
+      },
+      {
+        "nombre": "Ricardo Arminsén"
+      }
+    ],
+    "date": "2024",
+    "id": 14,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Garrido, J., Bernal, Y., González, E. et al. Beyond tobacco: genomic disparities in lung cancer between smokers and never-smokers. BMC Cancer 24, 951 (2024). https://doi.org/10.1186/s12885-024-12737-1"
+      }
+    ]
+  },
+  {
+    "name": "A Comprehensive Analysis of the Effect of A>I(G) RNA-Editing Sites on Genotoxic Drug Response and Progression in Breast Cancer",
+    "path": "https://www.mdpi.com/2227-9059/12/4/728",
+    "keys": "Breast cancer, RNA editing, RNA-edited sites, ADAR1, drug sensitivity, PARP inhibitors, anthracyclines, alkylating agents, cancer therapy",
+    "journal": "Biomedicines",
+    "resume": "Dysregulated A>I(G) RNA editing, which is mainly catalyzed by ADAR1 and is a type of post-transcriptional modification, has been linked to cancer. A low response to therapy in breast cancer (BC) is a significant contributor to mortality. However, it remains unclear if there is an association between A>I(G) RNA-edited sites and sensitivity to genotoxic drugs. To address this issue, we employed a stringent bioinformatics approach to identify differentially RNA-edited sites (DESs) associated with low or high sensitivity (FDR 0.1, log2 fold change 2.5) according to the IC50 of PARP inhibitors, anthracyclines, and alkylating agents using WGS/RNA-seq data in BC cell lines. We then validated these findings in patients with basal subtype BC. These DESs are mainly located in non-coding regions, but a lesser proportion in coding regions showed predicted deleterious consequences. Notably, some of these DESs are previously reported as oncogenic variants, and in genes related to DNA damage repair, drug metabolism, gene regulation, the cell cycle, and immune response. In patients with BC, we uncovered DESs predominantly in immune response genes, and a subset with a significant association (log-rank test p < 0.05) between RNA editing level in LSR, SMPDL3B, HTRA4, and LL22NC03-80A10.6 genes, and progression-free survival. Our findings provide a landscape of RNA-edited sites that may be involved in drug response mechanisms, highlighting the value of A>I(G) RNA editing in clinical outcomes for BC.",
+    "description": "",
+    "doi": "https://doi.org/10.3390/biomedicines12040728",
+    "author": "Yanara A. Bernal",
+    "co-author": [
+      {
+        "nombre": "Alejandro Blanco"
+      },
+      {
+        "nombre": "Eduardo A. Sagredo"
+      },
+      {
+        "nombre": "Karen Y. Oróstica"
+      },
+      {
+        "nombre": "Ivan Alfaro"
+      },
+      {
+        "nombre": "Katherine Marcelain"
+      },
+      {
+        "nombre": "Ricardo Arminsén"
+      }
+    ],
+    "date": "2024",
+    "id": 15,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Bernal, Y. A., Blanco, A., Sagredo, E. A., Oróstica, K., Alfaro, I., Marcelain, K., & Armisén, R. (2024). A Comprehensive Analysis of the Effect of A>I(G) RNA-Editing Sites on Genotoxic Drug Response and Progression in Breast Cancer. Biomedicines, 12(4). https://doi.org/10.3390/biomedicines12040728"
+      }
+    ]
+  },
+  {
+    "name": "WCN24-850 A complex pediatric case with homozygous IFT140 variants involving renal cysts: a comprehensive analysis to guide diagnosis and patient care",
+    "path": "https://www.kireports.org/article/S2468-0249(24)00778-2/fulltext",
+    "keys": "",
+    "journal": "Kidney International Reports",
+    "resume": "Epidermolysis bullosa (EB) is an inherited disorder characterised by skin fragility and the appearance of blisters and wounds. Patient wounds are often colonised or infected with bacteria, leading to impaired healing, pain and high risk of death by sepsis. Little is known about the impact of bacterial composition and susceptibility in wound resolution, and there is a need for longitudinal studies to understand healing outcomes with different types of bacterial colonisation. A prospective longitudinal study of 70 wounds from 15 severe EB patients (Junctional and Recessive Dystrophic EB) from Chile. Wounds were selected independently of their infected status. Wound cultures, including bacterial species identification, composition and Staphylococcus aureus (SA) antibiotic susceptibility were registered. Wounds were separated into categories according to their healing capacity, recognising chronic, and healing wounds. Hundred-one of the 102 wound cultures were positive for bacterial growth. From these, 100 were SA-positive; 31 were resistant to Ciprofloxacin (31%) and only seven were methicillin-resistant SA (7%). Ciprofloxacin-resistant SA was found significantly predominant in chronic wounds (**P < .01). Interestingly, atoxigenic Corynebacterium diphtheriae (CD) was identified and found to be the second most abundant recovered bacteria (31/101), present almost always in combination with SA (30/31). CD was only found in Recessive Dystrophic EB patients and not related to wound chronicity. Other less frequent bacterial species found included Pseudomonas aeruginosa, Streptococus spp. and Proteus spp. Infection was negatively associated with the healing status of wounds.",
+    "description": "",
+    "doi": "https://doi.org/10.1093/sleep/zsad016",
+    "author": "Paola Krall",
+    "co-author": [
+      {
+        "nombre": "Esperanza Bayyad"
+      },
+      {
+        "nombre": "Bárbara Poblete"
+      },
+      {
+        "nombre": "Victor Faúndes"
+      },
+      {
+        "nombre": "María Isabel González"
+      },
+      {
+        "nombre": "Karen Y. Oróstica"
+      },
+      {
+        "nombre": "Jorge Maturana"
+      },
+      {
+        "nombre": "Ignacio Castro"
+      },
+      {
+        "nombre": "Jerka Krstulovic"
+      },
+      {
+        "nombre": "Jaime Tobar"
+      },
+      {
+        "nombre": "Gastón Méndez"
+      },
+      {
+        "nombre": "Jose Luis Guerrero"
+      }
+    ],
+    "date": "2024",
+    "id": 16,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Krall, P., Bayyad, E., Poblete, B., Faúndes, V., González, M. I., Orostica, K., Maturana, J., Castro, I., Krstulovic, J., Tobar, J., Mendez, G., & Guerrero, J. L. (2024). WCN24-850 A complex pediatric case with homozygous IFT140 variants involving renal cysts: a comprehensive analysis to guide diagnosis and patient care. Kidney International Reports, 9(4), S334–S335. https://doi.org/10.1016/j.ekir.2024.02.689"
+      }
+    ]
+  },
+  {
+    "name": "Early mutational signatures and transmissibility of SARS-CoV-2 Gamma and Lambda variants in Chile",
+    "path": "https://www.nature.com/articles/s41598-024-66885-2",
+    "keys": "",
+    "Subjects": "Applied mathematics, Epidemiology, Mutation, Statistics, Viral infection",
+    "journal": "Scientific Reports",
+    "resume": "Genomic surveillance (GS) programmes were crucial in identifying and quantifying the mutating patterns of SARS-CoV-2 during the COVID-19 pandemic. In this work, we develop a Bayesian framework to quantify the relative transmissibility of different variants tailored for regions with limited GS. We use it to study the relative transmissibility of SARS-CoV-2 variants in Chile. Among the 3443 SARS-CoV-2 genomes collected between January and June 2021, where sampling was designed to be representative, the Gamma (P.1), Lambda (C.37), Alpha (B.1.1.7), B.1.1.348, and B.1.1 lineages were predominant. We found that Lambda and Gamma variants’ reproduction numbers were 5% (95% CI: [1%, 14%]) and 16% (95% CI: [11%, 21%]) larger than Alpha’s, respectively. Besides, we observed a systematic mutation enrichment in the Spike gene for all circulating variants, which strongly correlated with variants’ transmissibility during the studied period (r = 0.93, p-value = 0.025). We also characterised the mutational signatures of local samples and their evolution over time and with the progress of vaccination, comparing them with those of samples collected in other regions worldwide. Altogether, our work provides a reliable method for quantifying variant transmissibility under subsampling and emphasises the importance of continuous genomic surveillance.",
+    "description": "",
+    "doi": "https://doi.org/10.1186/s41231-023-00157-5",
+    "author": "Karen Y. Oróstica",
+    "co-author": [
+      {
+        "nombre": "Sebastian B. Mohr"
+      },
+      {
+        "nombre": "Jonas Dehning"
+      },
+      {
+        "nombre": "Simon Bauer"
+      },
+      {
+        "nombre": "David Medina-Ortiz"
+      },
+      {
+        "nombre": "Emil N. Iftekhar"
+      },
+      {
+        "nombre": "Karen Mujica"
+      },
+      {
+        "nombre": "Paulo C. Covarrubias"
+      },
+      {
+        "nombre": "Soledad Ulloa"
+      },
+      {
+        "nombre": "Andrés E. Castillo"
+      },
+      {
+        "nombre": "Anamaría Daza-Sánchez"
+      },
+      {
+        "nombre": "Ricardo A. Verdugo"
+      },
+      {
+        "nombre": "Jorge Fernández"
+      },
+      {
+        "nombre": "Alvaro Olivera-Nappa"
+      },
+      {
+        "nombre": "Viola Priesemann"
+      },
+      {
+        "nombre": "Sebastian Contreras"
+      }
+    ],
+    "date": "2024",
+    "id": 17,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Oróstica, K. Y., Mohr, S. B., Dehning, J., Bauer, S., Medina-Ortiz, D., Iftekhar, E. N., Mujica, K., Covarrubias, P. C., Ulloa, S., Castillo, A. E., Daza-Sánchez, A., Verdugo, R. A., Fernández, J., Olivera-Nappa, Á., Priesemann, V., & Contreras, S. (2024). Early mutational signatures and transmissibility of SARS-CoV-2 Gamma and Lambda variants in Chile. Scientific Reports, 14(1). https://doi.org/10.1038/s41598-024-66885-2"
+      }
+    ]
+  },
+  {
+    "name": "Beyond tobacco: genomic disparities in lung cancer between smokers and never-smokers",
+    "path": "https://link.springer.com/article/10.1186/s12885-024-12737-1#citeas",
+    "keys": "Lung Adenocarcinoma, Chilean, Tobacco consumption, Latin American populations, EGFR mutation, KRAS, MAP2K1, Cancer disparities",
+    "journal": "BMC Cancer",
+    "resume": "Tobacco use is one of the main risk factors for Lung Cancer (LC) development. However, about 10–20% of those diagnosed with the disease are never-smokers. For Non-Small Cell Lung Cancer (NSCLC) there are clear differences in both the clinical presentation and the tumor genomic profiles between smokers and never-smokers. For example, the Lung Adenocarcinoma (LUAD) histological subtype in never-smokers is predominately found in young women of European, North American, and Asian descent. While the clinical presentation and tumor genomic profiles of smokers have been widely examined, never-smokers are usually underrepresented, especially those of a Latin American (LA) background. In this work, we characterize, for the first time, the difference in the genomic profiles between smokers and never-smokers LC patients from Chile.",
+    "description": "",
+    "doi": "https://doi.org/10.1186/s12885-024-12737-1",
+    "author": "Javiera Garrido",
+    "co-author": [
+      {
+        "nombre": "Yanara Bernal"
+      },
+      {
+        "nombre": "Evelin González"
+      },
+      {
+        "nombre": "Alejandro Blanco"
+      },
+      {
+        "nombre": "Gonzalo Sepúlveda-Hermosilla"
+      },
+      {
+        "nombre": "Matías Freire"
+      },
+      {
+        "nombre": "Karen Y. Oróstica"
+      },
+      {
+        "nombre": "Solange Rivas"
+      },
+      {
+        "nombre": "Katherine Marcelain"
+      },
+      {
+        "nombre": "Gareth Owen"
+      },
+      {
+        "nombre": "Carolina Ibañez"
+      },
+      {
+        "nombre": "Alejandro Corvalan"
+      },
+      {
+        "nombre": "Marcelo Garrido"
+      },
+      {
+        "nombre": "Rodrigo Assar"
+      },
+      {
+        "nombre": "Rodrigo Lizana"
+      },
+      {
+        "nombre": "Javier Cáceres-Molina"
+      },
+      {
+        "nombre": "Diego Ampuero"
+      },
+      {
+        "nombre": "Liliana Ramos"
+      },
+      {
+        "nombre": "Paola Pérez"
+      },
+      {
+        "nombre": "Osvaldo Aren"
+      },
+      {
+        "nombre": "Sara Chernilo"
+      },
+      {
+        "nombre": "Cristina Fernández"
+      },
+      {
+        "nombre": "María Loreto Spencer"
+      },
+      {
+        "nombre": "Jacqueline Flores Aguila"
+      },
+      {
+        "nombre": "Giuliano Bernal Dossetto"
+      },
+      {
+        "nombre": "Mónica Ahumada Olea"
+      },
+      {
+        "nombre": "Germán Rasse"
+      },
+      {
+        "nombre": "Carolina Sánchez"
+      },
+      {
+        "nombre": "Maria Galli de Amorim"
+      },
+      {
+        "nombre": "Thais F. Bartelli"
+      },
+      {
+        "nombre": "Diana Noronha Nunes"
+      },
+      {
+        "nombre": "Emmanuel Dias-Neto"
+      },
+      {
+        "nombre": "Helano C. Freitas"
+      },
+      {
+        "nombre": "Ricardo Arminsén"
+      }
+    ],
+    "date": "2024",
+    "id": 18,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Garrido, J., Bernal, Y., González, E., Blanco, A., Sepúlveda-Hermosilla, G., Freire, M., Oróstica, K., Rivas, S., Marcelain, K., Owen, G., Ibañez, C., Corvalan, A., Garrido, M., Assar, R., Lizana, R., Cáceres-Molina, J., Ampuero, D., Ramos, L., Pérez, P., … Armisén, R. (2024). Beyond tobacco: genomic disparities in lung cancer between smokers and never-smokers. BMC Cancer, 24(1). https://doi.org/10.1186/s12885-024-12737-1"
+      }
+    ]
+  },
+  {
+    "name": "Advances in Machine Learning for Tumour Classification in Cancer of Unknown Primary: A Mini-Review",
+    "path": "https://www.sciencedirect.com/science/article/pii/S0304383524007432",
+    "keys": "Cancer of unknown primary (CUP), Machine Learning (ML), mutational signatures, somatic mutations, Diagnostic methods, Tumour classification",
+    "journal": "Cancer Letters",
+    "resume": "Cancers of unknown primary (CUP) are a heterogeneous group of aggressive metastatic cancers where standardised diagnostic techniques fail to identify the organ where it originated, resulting in a poor prognosis and resistance to treatment. Recent advances in large-scale sequencing techniques have enabled the identification of mutational signatures specific to particular tumour subtypes, even from liquid biopsy samples such as blood. This breakthrough paves the way for the development of new cost-effective diagnostic strategies. This mini-review explores recent advancements in Machine Learning (ML) and its application to tumour classification methods for CUP patients, identifying its weaknesses and strengths when classifying the tumour type. In the era of multi-omics, integrating several sources of information (e.g., imaging, molecular biomarkers, and family history) requires important theoretical advancements: increasing the dimensionality of the problem can result in lowering the predictive accuracy and robustness when data is scarce. Here, we review and discuss different architectures and strategies for incorporating cutting-edge machine learning into CUP diagnosis, aiming to bridge the gap between theory and clinical practice.",
+    "description": "",
+    "doi": "https://doi.org/10.1016/j.canlet.2024.217348",
+    "author": "Karen Y. Oróstica",
+    "co-author": [
+      {
+        "nombre": "Felipe Mardones"
+      },
+      {
+        "nombre": "Yanara Bernal"
+      },
+      {
+        "nombre": "Samuel Molina"
+      },
+      {
+        "nombre": "Marcos Ochard"
+      },
+      {
+        "nombre": "Ricardo A. Verdugo"
+      },
+      {
+        "nombre": "Daniel Carvajal-Hausdorf"
+      },
+      {
+        "nombre": "Katherine Marcelain"
+      },
+      {
+        "nombre": "Sebastian Contreras"
+      },
+      {
+        "nombre": "Ricardo Arminsén"
+      }
+    ],
+    "date": "2024",
+    "id": 19,
+    "pdf": "",
+    "cite": [
+      {
+        "apa": "Oróstica, K., Mardones, F., Bernal, Y. A., Molina, S., Orchard, M., Verdugo, R. A., Carvajal-Hausdorf, D., Marcelain, K., Contreras, S., & Armisen, R. (2025). Advances in machine learning for tumour classification in cancer of unknown primary: A mini-review. Cancer Letters, 611, 217348. https://doi.org/10.1016/J.CANLET.2024.217348"
+      }
+    ]
+  }
+]

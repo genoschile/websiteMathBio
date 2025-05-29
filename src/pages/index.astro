@@ -14,38 +14,22 @@ import SlotButton from "../components/ui/slotButton.astro";
 import Github from "../icons/github.astro";
 import Layout from "../layouts/Layout.astro";
 
-export const recentPublications = [
-  {
-    id: "pub-001",
-    title: "Advancements in Quantum Computing Algorithms",
-    authors: ["Alice Smith", "Bob Johnson", "Carol Lee"],
-    year: 2025,
-    journal: "Journal of Computer Science and Engineering",
-    abstract:
-      "This paper explores novel quantum algorithms that significantly reduce the computational complexity of solving large-scale optimization problems.",
-    link: "https://doi.org/10.1234/jcse.2025.001",
-  },
-  {
-    id: "pub-002",
-    title: "Innovations in Renewable Energy Storage",
-    authors: ["David Kim", "Eve Martinez"],
-    year: 2024,
-    journal: "Renewable Energy Letters",
-    abstract:
-      "A new battery technology is introduced that improves energy density and charging speed, enabling more efficient renewable energy storage solutions.",
-    link: "https://doi.org/10.5678/rel.2024.045",
-  },
-  {
-    id: "pub-003",
-    title: "Machine Learning Models for Medical Diagnosis",
-    authors: ["Frank Zhao", "Grace Patel", "Hannah Clark"],
-    year: 2025,
-    journal: "International Journal of Medical Informatics",
-    abstract:
-      "This study presents several machine learning models trained on large medical datasets to improve early diagnosis accuracy of chronic diseases.",
-    link: "https://doi.org/10.9101/ijmi.2025.789",
-  },
-];
+import { getCollection } from "astro:content";
+
+const mockPublications = await getCollection("publications");
+
+if (!mockPublications || mockPublications.length === 0) {
+  console.warn("No publications found in the collection.");
+} else {
+  console.log("Found publications:", mockPublications.length);
+}
+
+const publications = mockPublications
+  .filter((p) => p.data.year)
+  .sort((a, b) => parseInt(b.data.year) - parseInt(a.data.year))
+  .slice(0, 3);
+
+const recentPublications = publications.map((pub) => pub.data);
 
 export const mockNewsItems = [
   {
@@ -220,9 +204,7 @@ const LatestPublications = mockNewsItems.slice(0, 2);
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p class="text-sm text-muted-foreground italic">
-                  {pub.journal}
-                </p>
+                <p class="text-sm text-muted-foreground italic">{pub.type}</p>
                 {pub.abstract && (
                   <p class="mt-2 text-sm text-foreground line-clamp-2">
                     {pub.abstract}
@@ -230,13 +212,9 @@ const LatestPublications = mockNewsItems.slice(0, 2);
                 )}
               </CardContent>
               <CardFooter>
-                {pub.link && (
+                {pub.url && (
                   <Button variant="link" asChild class="p-0 text-primary">
-                    <a
-                      href={pub.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href={pub.url} target="_blank" rel="noopener noreferrer">
                       View Publication <Github class="ml-1 h-4 w-4" />
                     </a>
                   </Button>

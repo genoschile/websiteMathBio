@@ -3,6 +3,8 @@ import Facebook from "../../icons/facebook.astro";
 import Linkedin from "../../icons/linkedin.astro";
 import Github from "../../icons/github.astro";
 import Layout from "../../layouts/Layout.astro";
+import PageHeader from "../../components/layout/pageHeader.astro";
+
 import { getCollection } from "astro:content";
 
 const currentPath = Astro.url.pathname;
@@ -15,18 +17,20 @@ const members = posts.map((post) => ({
   grade: post.data.grade,
   image: post.data.image
 }));
+
 const karen = members.find((member) => member.id === 1);
 const hasKaren = karen && karen;
 ---
 
 <Layout title="Home">
 
-	
-	<div class="container">
-		<header>
-			<h1>Team MathBio</h1>
-			<i> 🔽 </i>
-		</header>
+	<PageHeader
+	title="Team"
+	description="Meet our team of dedicated researchers and developers."
+	icon={Github}
+	/>
+
+	<div class="container--team">
 
 		<main>
 			{hasKaren && (
@@ -85,7 +89,6 @@ const hasKaren = karen && karen;
 			</div>
 		</main>
 
-		<footer></footer>
 	</div>
 </Layout>
 
@@ -122,7 +125,7 @@ const hasKaren = karen && karen;
 		}
 	}
 
-	.container {
+	.container--team {
 		margin: 0 auto;
 		max-width: 1200px;
 		padding: 1rem;
@@ -133,16 +136,7 @@ const hasKaren = karen && karen;
 		place-items: center;
 		isolation: isolate;
 
-		& header {
-			display: flex;
-			align-items: center;
-			gap: 1rem;
-			flex-direction: column;
 
-			& h1 {
-				text-wrap: balance;
-			}
-		}
 
 		& main {
 			display: flex;

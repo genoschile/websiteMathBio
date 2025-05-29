@@ -8,6 +8,11 @@ const navLinks = [
   { href: "/gallery", label: "Galería", Icon: Github },
   { href: "/news", label: "News", Icon: Github },
   { href: "/contact", label: "Contacto", Icon: Github },
+  {
+    href: "/collaborations",
+    label: "Collaborations",
+    Icon: Github,
+  },
 ];
 ---
 
@@ -26,7 +31,7 @@ const navLinks = [
       {/* Desktop Nav */}
       <nav
         id="desktop-nav"
-        class="hidden md:flex space-x-2 font-medium text-sm"
+        class="hidden xl:flex space-x-2 font-medium text-sm"
       >
         {
           navLinks.map(({ href, label, Icon }) => (
@@ -47,7 +52,7 @@ const navLinks = [
       <button
         id="menu-btn"
         aria-label="Open menu"
-        class="md:hidden p-2 rounded-md hover:bg-gray-200 transition-colors"
+        class="xl:hidden p-2 rounded-md hover:bg-gray-200 transition-colors"
       >
         <Github style="width: 24px; height: 24px;" />
       </button>

@@ -9,17 +9,22 @@ import CardTitle from "../../components/ui/card/cardTitle.astro";
 import SlotButton from "../../components/ui/slotButton.astro";
 import Github from "../../icons/github.astro";
 import Layout from "../../layouts/Layout.astro";
-
-
 import { getCollection } from "astro:content";
+import FilterAndSortPublications from "./components/filterAndSort.astro";
 
 const mockPublications = await getCollection("publications");
 
-import FilterAndSortPublications from "./components/filterAndSort.astro";
+if (!mockPublications || mockPublications.length === 0) {
+  console.warn("No publications found in the collection.");
+} else {
+  console.log("Found publications:", mockPublications.length);
+}
 
+const publications = mockPublications.map((pub) => ({
+  ...pub.data,
+}));
 
-
-const filteredAndSortedPublications = mockPublications;
+const filteredAndSortedPublications = publications;
 ---
 
 <Layout title="Publications">
@@ -38,29 +43,29 @@ const filteredAndSortedPublications = mockPublications;
           {filteredAndSortedPublications.map((pub) => (
             <Card class="shadow-md hover:shadow-lg transition-shadow duration-300">
               <CardHeader>
-                <CardTitle>{pub.data.title}</CardTitle>
-                <CardDescription>{pub.data.authors.join(", ")}</CardDescription>
+                <CardTitle>{pub.title}</CardTitle>
+                <CardDescription>{pub.authors.join(", ")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <p class="text-sm text-muted-foreground italic">
-                  {pub.data.type} ({pub.data.year})
+                  {pub.type} ({pub.year} "hola")
                 </p>
-                {pub.data.abstract && (
+                {pub.abstract && (
                   <p class="mt-2 text-sm text-foreground line-clamp-3">
-                    {pub.data.abstract}
+                    {pub.abstract}
                   </p>
                 )}
-                {pub.data.tags && pub.data.tags.length > 0 && (
+                {pub.tags && pub.tags.length > 0 && (
                   <p class="mt-2 text-xs text-muted-foreground">
-                    <strong>Tags:</strong> {pub.data.tags.join(", ")}
+                    <strong>Tags:</strong> {pub.tags.join(", ")}
                   </p>
                 )}
               </CardContent>
-              {pub.data.url && (
+              {pub.url && (
                 <CardFooter>
                   <SlotButton variant="link" asChild class="p-0 text-primary">
                     <a
-                      href={pub.data.url}
+                      href={pub.url}
                       target="_blank"
                       rel="noopener noreferrer"
                     >

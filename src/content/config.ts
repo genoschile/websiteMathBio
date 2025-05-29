@@ -87,11 +87,11 @@ const publicationsCollection = defineCollection({
     description: z.string(),
     title: z.string(),
     authors: z.array(z.string()),
-    year: z.string(), 
+    year: z.string(),
     url: z.string().url(),
     abstract: z.string().optional(),
     image: z.string().optional(),
-    type: z.enum(["journal", "conference", "book", "other"]),
+    type: z.enum(["journal", "conference", "book", "book-chapter", "other", "preprint"]),
     doi: z.string().optional(),
     tags: z.array(z.string()).optional(),
     team: z
