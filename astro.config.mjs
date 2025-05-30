@@ -7,6 +7,9 @@ import node from "@astrojs/node";
 export default defineConfig({
   integrations: [],
 
+  site: "http://mathbio.genomas.cl",
+  base: "/",
+
   vite: {
     plugins: [tailwindcss()],
   },
