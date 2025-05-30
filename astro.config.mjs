@@ -16,3 +16,6 @@ export default defineConfig({
     mode: "standalone",
   }),
 });
+
+
+/* HOST=0.0.0.0 PORT=4321 pm2 start dist/server/entry.mjs --name mathbio */
