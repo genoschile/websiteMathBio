@@ -12,47 +12,12 @@ const images = [
     src: "../../components/columns/columnsGenshin/assets/20.png",
     alt: "Imagen 2",
   },
-  {
-    src: "../../components/columns/columnsGenshin/assets/20.png",
-    alt: "Imagen 3",
-  },
-  {
-    src: "../../components/columns/columnsGenshin/assets/20.png",
-    alt: "Imagen 4",
-  },
-  {
-    src: "../../components/columns/columnsGenshin/assets/20.png",
-    alt: "Imagen 5",
-  },
-  {
-    src: "../../components/columns/columnsGenshin/assets/20.png",
-    alt: "Imagen 6",
-  },
-  {
-    src: "../../components/columns/columnsGenshin/assets/20.png",
-    alt: "Imagen 7",
-  },
-  {
-    src: "../../components/columns/columnsGenshin/assets/20.png",
-    alt: "Imagen 8",
-  },
-  {
-    src: "../../components/columns/columnsGenshin/assets/20.png",
-    alt: "Imagen 9",
-  },
 ];
 
 const profileNames = [
   { name: "The squad", isDefault: true },
   { name: "Liam" },
   { name: "Olivia" },
-  { name: "Noah" },
-  { name: "Emma" },
-  { name: "Oliver" },
-  { name: "Ava" },
-  { name: "Elijah" },
-  { name: "Sophia" },
-  { name: "William" },
 ];
 ---
 
@@ -63,13 +28,15 @@ const profileNames = [
   />
 
   <section
-    class="p-4 rounded-md max-w-full w-full h-full object-cover team relative flex flex-col-reverse lg:flex-col justify-center items-center gap-10 overflow-hidden"
+    class="p-4 rounded-md max-w-full w-full h-screen object-cover team relative flex flex-col-reverse lg:flex-col items-center gap-12 overflow-hidden"
   >
-    <div class="profile-images inline-flex justify-center items-center w-max">
+    <div
+      class="profile-images gap-4 inline-flex justify-center items-center w-max my-12"
+    >
       {images.map((image) => <ImageBox src={image.src} alt={image.alt} />)}
     </div>
 
-    <div class="profile-names">
+    <div class="profile-names relative w-full h-[10rem] overflow-hidden">
       {
         profileNames.map(({ name, isDefault }) => (
           <div class={`name${isDefault ? " default" : ""}`}>
@@ -82,11 +49,13 @@ const profileNames = [
 </Layout>
 
 <style>
-  .profile-names {
-    width: 100%;
-    height: 20rem;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    overflow: hidden;
+  .profile-images {
+    height: calc(max-content + 1rem);
+  }
+
+  .name.default h1 {
+    color: black;
+    transform: translateY(-100%);
   }
 
   .name h1 {
@@ -95,26 +64,18 @@ const profileNames = [
     text-align: center;
     text-transform: uppercase;
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-    font-size: 20rem;
+    font-size: clamp(4rem, 8vw, 10rem);
     font-weight: 900;
-
     letter-spacing: -0.5rem;
     line-height: 1;
-    color: red;
     user-select: none;
-
     transform: translateY(100%);
+  }
 
-    &.default h1 {
-      color: white;
-      transform: translateY(-100%);
-    }
-
-    h1 .letter {
-      position: relative;
-      transform: translateY(0%);
-      will-change: transform;
-    }
+  .letter {
+    position: relative;
+    transform: translateY(100%);
+    will-change: transform;
   }
 
   @media (max-width: 900px) {
@@ -134,11 +95,104 @@ const profileNames = [
       font-size: 4rem;
       letter-spacing: 0;
     }
-
-    .profile-names {
-      height: 4rem;
-    }
   }
 </style>
 
-<script></script>
+<script>
+  import gsap from "gsap";
+  import { SplitText } from "gsap/SplitText";
+
+  gsap.registerPlugin(SplitText);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const $profileImageContainer = document.querySelector(".profile-images");
+    const $profileImages = document.querySelectorAll(".profile-images img");
+
+    const $nameElements = document.querySelectorAll(".profile-names .name");
+    const $nameHeadings = document.querySelectorAll(".profile-names .name h1");
+
+    $nameHeadings.forEach((heading) => {
+      const split = new SplitText(heading, { type: "chars" });
+
+      split.chars.forEach((char) => {
+        char.classList.add("letter");
+      });
+    });
+
+    const defaultLetter = $nameElements[0].querySelectorAll(".letter");
+
+    gsap.set(defaultLetter, {
+      y: "100%",
+    });
+
+    if (window.innerWidth > 900) {
+      $profileImages.forEach((image, index) => {
+        const correspondingName = $nameElements[index + 1];
+
+        const letters = correspondingName.querySelectorAll(".letter");
+
+        image.addEventListener("mouseenter", () => {
+          gsap.to(image, {
+            width: "140",
+            height: "140",
+            duration: 0.5,
+            ease: "power4.out",
+          });
+
+          gsap.to(letters, {
+            y: "-100%",
+            duration: 0.5,
+            ease: "power4.out",
+            stagger: {
+              amount: 0.025,
+              from: "center",
+            },
+          });
+        });
+
+        image.addEventListener("mouseleave", () => {
+          gsap.to(image, {
+            width: "70",
+            height: "70",
+            duration: 0.5,
+            ease: "power4.out",
+          });
+
+          gsap.to(letters, {
+            y: "0%",
+            duration: 0.75,
+            ease: "power4.out",
+            stagger: {
+              amount: 0.025,
+              from: "center",
+            },
+          });
+        });
+
+        $profileImageContainer?.addEventListener("mouseenter", () => {
+          gsap.to(defaultLetter, {
+            y: "0%",
+            duration: 0.5,
+            ease: "power4.out",
+            stagger: {
+              each: 0.025,
+              from: "center",
+            },
+          });
+        });
+      });
+
+      $profileImageContainer?.addEventListener("mouseleave", () => {
+        gsap.to(defaultLetter, {
+          y: "100%",
+          duration: 0.5,
+          ease: "power4.out",
+          stagger: {
+            each: 0.025,
+            from: "center",
+          },
+        });
+      });
+    }
+  });
+</script>
