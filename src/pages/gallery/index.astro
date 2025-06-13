@@ -2,6 +2,18 @@
 import PageHeader from "../../components/layout/pageHeader.astro";
 import Layout from "../../layouts/Layout.astro";
 
+const galleryItems = [
+  {
+    src: "/images/2.jpeg",
+    title: "Ongoing Experiment",
+    description: "Live cell imaging during a critical experiment.",
+  },
+  {
+    src: "/images/1.jpeg",
+    title: "Team Collaboration",
+    description: "The team analyzing data and discussing results.",
+  },
+];
 ---
 
 <Layout title="Home">
@@ -9,5 +21,179 @@ import Layout from "../../layouts/Layout.astro";
     title="Galería"
     description="Explora nuestra galería de imágenes y videos relacionados con nuestras investigaciones."
   />
-  <h1>Galería</h1>
+
+  <nav>
+    <a href="#">Horizontal </a>
+  </nav>
+
+  <main class="scrolltelling-gallery">
+    {
+      galleryItems.map((item, index) => (
+        <section class="gallery-item-section" data-index={index}>
+          <div class="gallery-media-wrapper">
+            <img src={item.src} alt={item.title} class="gallery-media" />
+          </div>
+          <div class="gallery-info-overlay">
+            <h2>{item.title}</h2>
+            <p>{item.description}</p>
+          </div>
+        </section>
+      ))
+    }
+  </main>
 </Layout>
+
+<style>
+  /* Basic styling for the main container */
+  .scrolltelling-gallery {
+    position: relative;
+    overflow: hidden; /* Important for containing fixed elements */
+  }
+
+  /* Each gallery item section */
+  .gallery-item-section {
+    height: 100vh; /* Make each section take the full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem; /* Add some padding */
+    box-sizing: border-box;
+  }
+
+  /* Wrapper for the media (image/video) */
+  .gallery-media-wrapper {
+    position: absolute; /* Will be toggled to fixed by JavaScript */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    opacity: 0; /* Hidden by default, faded in by JS */
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .gallery-media-wrapper.is-fixed {
+    position: fixed;
+    z-index: 10; /* Ensure it's above other content */
+  }
+
+  /* The actual image/video */
+  .gallery-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the wrapper without distortion */
+    display: block;
+  }
+
+  /* Information overlay */
+  .gallery-info-overlay {
+    position: relative; /* Stays within the flow of the section */
+    z-index: 20; /* Above the media */
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    color: white;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    max-width: 600px;
+    transform: translateY(20px); /* Start slightly below */
+    opacity: 0; /* Hidden by default */
+    transition:
+      transform 0.5s ease-out,
+      opacity 0.5s ease-out;
+  }
+
+  /* Active states managed by JavaScript */
+  .gallery-item-section.is-active .gallery-media-wrapper {
+    opacity: 1; /* Fade in the media */
+  }
+
+  .gallery-item-section.is-active .gallery-info-overlay {
+    transform: translateY(0); /* Slide up */
+    opacity: 1; /* Fade in */
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const gallerySections = document.querySelectorAll(".gallery-item-section");
+
+    const observerOptions = {
+      root: null, // Use the viewport as the root
+      rootMargin: "0px",
+      threshold: 0.75, // Trigger when 75% of the item is visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const currentSection = entry.target;
+        const mediaWrapper = currentSection.querySelector(
+          ".gallery-media-wrapper"
+        );
+        const infoOverlay = currentSection.querySelector(
+          ".gallery-info-overlay"
+        );
+
+        if (entry.isIntersecting) {
+          // Add active class to fade in content
+          currentSection.classList.add("is-active");
+
+          // Check if it's mostly in view to fix the media
+          if (entry.intersectionRatio >= observerOptions.threshold) {
+            mediaWrapper.classList.add("is-fixed");
+            // Hide previous fixed media if any
+            gallerySections.forEach((section) => {
+              if (
+                section !== currentSection &&
+                section.classList.contains("is-active")
+              ) {
+                section
+                  .querySelector(".gallery-media-wrapper")
+                  .classList.remove("is-fixed");
+              }
+            });
+          }
+        } else {
+          // Remove active class when leaving view
+          currentSection.classList.remove("is-active");
+          mediaWrapper.classList.remove("is-fixed");
+        }
+      });
+    }, observerOptions);
+
+    gallerySections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Handle the scroll event to adjust the fixed element's top position
+    // This is a more advanced technique for fine-tuning the scrolltelling
+    // For a simple fixed effect, the IntersectionObserver might be sufficient.
+    // However, for true scrolltelling where the background scrolls with content,
+    // we might need more complex logic.
+    let currentFixedElement = null;
+
+    window.addEventListener("scroll", () => {
+      gallerySections.forEach((section) => {
+        const mediaWrapper = section.querySelector(".gallery-media-wrapper");
+        if (mediaWrapper.classList.contains("is-fixed")) {
+          currentFixedElement = mediaWrapper;
+          const sectionRect = section.getBoundingClientRect();
+
+          // Calculate how much the section has scrolled relative to the viewport top
+          // This makes the fixed element move slightly if needed, creating a parallax feel
+          if (sectionRect.top < 0) {
+            // If the section is above the viewport top, adjust the fixed image
+            // For a true "fixed" effect, this might not be necessary,
+            // but for subtle scrolltelling, you can tie its position to scroll.
+            // For simplicity, let's keep it truly fixed for now.
+            mediaWrapper.style.top = "0px"; // Keep it at the top of the viewport
+          } else {
+            mediaWrapper.style.top = "0px";
+          }
+        }
+      });
+    });
+  });
+</script>

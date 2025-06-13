@@ -6,7 +6,6 @@ import { file, glob } from "astro/loaders";
 const membersCollection = defineCollection({
   loader: glob({
     pattern: "**/*.json",
-    // pattern: "src/content/members/*.js",
     base: "src/content/members",
   }),
 
@@ -104,10 +103,65 @@ const publicationsCollection = defineCollection({
   }),
 });
 
+const contactCollection = defineCollection({
+  loader: glob({
+    pattern: "**/*.json",
+    base: "src/content/contact",
+  }),
+
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    contactCard: z.object({
+      header: z.string(),
+      location: z.object({
+        title: z.string(),
+        address: z.string(),
+      }),
+      email: z.object({
+        title: z.string(),
+        address: z.string().email(),
+      }),
+      phone: z.object({
+        title: z.string(),
+        number: z.string(),
+      }),
+      officeHours: z.object({
+        title: z.string(),
+        weekdays: z.string(),
+        weekends: z.string(),
+      }),
+    }),
+    mapSection: z.object({
+      title: z.string(),
+    }),
+  }),
+});
+
+const collaborationsCollection = defineCollection({
+  loader: glob({
+    pattern: "**/*.json",
+    base: "src/content/collaborations",
+  }),
+
+  schema: z.array(
+    z.object({
+      name: z.string(),
+      position: z.string(),
+      grade: z.string(),
+      description: z.string(),
+      urlImage: z.string(),
+      urlLinkedIn: z.string().url(),
+    })
+  ),
+});
+
 export const collections = {
   members: membersCollection,
   images: imagesCollection,
   projects: projectsCollection,
   talks: talksCollection,
   publications: publicationsCollection,
+  contact: contactCollection, 
+  collaborations: collaborationsCollection,
 };

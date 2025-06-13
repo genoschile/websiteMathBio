@@ -1,0 +1,221 @@
+---
+import PageHeader from "@components/layout/pageHeader.astro";
+import Layout from "@/layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const collaborations = await getCollection("collaborations");
+
+const currentCollaboration = collaborations.map(({ data }) => ({
+  ...data,
+}));
+
+const profileNames = [{ name: "The squad" }];
+
+const collaborationObj = currentCollaboration[0];
+const collaborationArray = Object.values(collaborationObj) as Array<{
+  name: string;
+  position: string;
+  grade: string;
+  description: string;
+  urlImage: string;
+  urlLinkedIn: string;
+}>;
+
+const updatedProfileNames = [
+  ...profileNames,
+  ...collaborationArray.map((profile) => ({ name: profile.name })),
+];
+
+const updatedImages = [
+  ...collaborationArray.map((profile) => ({
+    src: profile.urlImage,
+    alt: profile.name,
+  })),
+];
+---
+
+<Layout title="Collaborations">
+  <PageHeader
+    title="Collaborations"
+    description="Explore our collaborations with other research groups and institutions."
+  />
+
+  <section
+    class="p-4 rounded-md max-w-full w-full h-screen object-cover team relative flex flex-col-reverse lg:flex-col items-center gap-12 overflow-hidden"
+  >
+    <div
+      class="profile-images gap-4 inline-flex justify-center items-center w-max my-12 overflow-hidden"
+    >
+      {
+        updatedImages.map((image) => (
+          <img src={image.src} alt={image.alt} />
+        ))
+      }
+    </div>
+
+    <div class="profile-names relative w-full h-[10rem] overflow-hidden">
+      {
+        updatedProfileNames.map(({ name }, index) => (
+          <div class={`name${index === 0 ? " default" : ""}`}>
+            <h1>{name}</h1>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .profile-images {
+    height: calc(max-content + 1rem);
+  }
+
+  .name.default h1 {
+    color: black;
+    transform: translateY(-100%);
+  }
+
+  .name h1 {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+    font-size: clamp(4rem, 8vw, 10rem);
+    font-weight: 900;
+    letter-spacing: -0.5rem;
+    line-height: 1;
+    user-select: none;
+    transform: translateY(100%);
+  }
+
+  .letter {
+    position: relative;
+    transform: translateY(100%);
+    will-change: transform;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  @media (max-width: 900px) {
+    .profile-images {
+      flex-wrap: wrap;
+      max-width: 90%;
+      justify-content: center;
+    }
+
+    .img {
+      width: 50px;
+      height: 50px;
+      padding: 2px;
+    }
+
+    h1 {
+      font-size: 4rem;
+      letter-spacing: 0;
+    }
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+  import { SplitText } from "gsap/SplitText";
+
+  gsap.registerPlugin(SplitText);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const $profileImageContainer = document.querySelector(".profile-images");
+    const $profileImages = document.querySelectorAll(".profile-images img");
+
+    const $nameElements = document.querySelectorAll(".profile-names .name");
+    const $nameHeadings = document.querySelectorAll(".profile-names .name h1");
+
+    $nameHeadings.forEach((heading) => {
+      const split = new SplitText(heading, { type: "chars" });
+
+      split.chars.forEach((char) => {
+        char.classList.add("letter");
+      });
+    });
+
+    const defaultLetter = $nameElements[0].querySelectorAll(".letter");
+
+    gsap.set(defaultLetter, {
+      y: "100%",
+    });
+
+    if (window.innerWidth > 900) {
+      $profileImages.forEach((image, index) => {
+        const correspondingName = $nameElements[index + 1];
+
+        const letters = correspondingName.querySelectorAll(".letter");
+
+        image.addEventListener("mouseenter", () => {
+          gsap.to(image, {
+            width: "140",
+            height: "140",
+            duration: 0.5,
+            ease: "power4.out",
+          });
+
+          gsap.to(letters, {
+            y: "-100%",
+            duration: 0.5,
+            ease: "power4.out",
+            stagger: {
+              amount: 0.025,
+              from: "center",
+            },
+          });
+        });
+
+        image.addEventListener("mouseleave", () => {
+          gsap.to(image, {
+            width: "70",
+            height: "70",
+            duration: 0.5,
+            ease: "power4.out",
+          });
+
+          gsap.to(letters, {
+            y: "0%",
+            duration: 0.75,
+            ease: "power4.out",
+            stagger: {
+              amount: 0.025,
+              from: "center",
+            },
+          });
+        });
+
+        $profileImageContainer?.addEventListener("mouseenter", () => {
+          gsap.to(defaultLetter, {
+            y: "0%",
+            duration: 0.5,
+            ease: "power4.out",
+            stagger: {
+              each: 0.025,
+              from: "center",
+            },
+          });
+        });
+      });
+
+      $profileImageContainer?.addEventListener("mouseleave", () => {
+        gsap.to(defaultLetter, {
+          y: "100%",
+          duration: 0.5,
+          ease: "power4.out",
+          stagger: {
+            each: 0.025,
+            from: "center",
+          },
+        });
+      });
+    }
+  });
+</script>

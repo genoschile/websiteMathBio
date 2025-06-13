@@ -1,0 +1,27 @@
+{
+  "title": "Contact Us",
+  "description": "Get in touch with our lab for inquiries, collaborations, or feedback.",
+  "contactCard": {
+    "header": "Our Address & Details",
+    "location": {
+      "title": "Lab Location",
+      "address": "123 Science Avenue, Tech Park\nResearch City, ST 90210\nUnited States"
+    },
+    "email": {
+      "title": "Email Us",
+      "address": "info@labnotes.example.com"
+    },
+    "phone": {
+      "title": "Call Us",
+      "number": "+1 (234) 567-890"
+    },
+    "officeHours": {
+      "title": "Office Hours",
+      "weekdays": "Monday - Friday: 9:00 AM - 5:00 PM",
+      "weekends": "Weekends & Holidays: Closed"
+    }
+  },
+  "mapSection": {
+    "title": "Find Us Here"
+  }
+}

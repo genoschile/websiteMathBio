@@ -8,14 +8,14 @@ import PageHeader from "../../components/layout/pageHeader.astro";
 import { getCollection } from "astro:content";
 
 const currentPath = Astro.url.pathname;
-const posts = await getCollection('members');
+const posts = await getCollection("members");
 
 const members = posts.map((post) => ({
   id: post.data.id,
   name: post.data.name,
   position: post.data.position,
   grade: post.data.grade,
-  image: post.data.image
+  image: post.data.image,
 }));
 
 const karen = members.find((member) => member.id === 1);
@@ -23,278 +23,246 @@ const hasKaren = karen && karen;
 ---
 
 <Layout title="Home">
+  <PageHeader
+    title="Investigadora a cargo"
+    description="Meet our team of dedicated researchers and developers."
+    icon={Github}
+  />
 
-	<PageHeader
-	title="Team"
-	description="Meet our team of dedicated researchers and developers."
-	icon={Github}
-	/>
+  {
+    hasKaren && (
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 rounded-2xl shadow-lg p-4 w-full max-w-[1200px] mx-auto my-8 bg-gray-400/20">
+        <div class="flex flex-col items-center md:items-start md:w-1/3 p-4">
+          <img
+            src={karen.image}
+            alt={karen.name}
+            class="w-40 h-40 object-cover rounded-full shadow-md mb-4"
+          />
+          <h2 class="font-semibold text-xl text-black/80 text-center md:text-left">
+            {karen.name}
+          </h2>
+          <p class="text-black/60 text-base text-center md:text-left">
+            {karen.position}
+          </p>
+          <p class="text-sm text-black/70 text-center md:text-left">
+            {karen.grade}
+          </p>
+        </div>
 
-	<div class="container--team">
+        <div class="md:w-2/3 text-lg text-black/80 leading-relaxed  p-4">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo,
+            suscipit veniam delectus velit quaerat debitis at molestias unde,
+            aperiam rerum recusandae aut odit a distinctio error officia, quo
+            reprehenderit sequi!
+          </p>
+        </div>
+      </div>
+    )
+  }
 
-		<main>
-			{hasKaren && (
-				<div class="principal">
-					<h2>{karen.name}</h2>
-					<p>{karen.position}</p>
-					<p>{karen.grade}</p>
-					<a href={`${currentPath}/${karen.id}`}>
-						<img
-							transition:name={`img${karen.name}`}
-							src={karen.image}
-							alt={karen.name}
-						/>
-					</a>
-				</div>
-			)}
+  <PageHeader
+    title="Equipo de investigación"
+    description="Meet our team of dedicated researchers and developers."
+    icon={Github}
+  />
 
-			<div class="resto">
-				{members.slice(1).map((member) => (
-					<div class="members-lab">
-						<h2 class="name">{member.name}</h2>
-						<p class="grade">{member.grade}</p>
-						<a href={`${currentPath}/${member.id}`}>
-							<img
-								transition:name={`img${member.name}`}
-								src={member.image}
-								alt={member.name}
-							/>
-						</a>
+  <main class="resto">
+    {
+      members.slice(1).map((member) => (
+        <div class="members-lab bg-gray-400/20">
+          <h2 class="inline-block text-center mb-1.5 font-semibold text-lg text-black/80 balance">
+            {member.name}
+          </h2>
+          <p class="text-center text-sm balance">{member.grade}</p>
+          <p class="text-center text-base balance">{member.position}</p>
 
-						<div class="social-icons">
-							<a
-								href="https://facebook.com"
-								target="_blank"
-								class="icon facebook"
-							>
-								<Facebook />
-							</a>
-							<a
-								href="https://twitter.com"
-								target="_blank"
-								class="icon twitter"
-							>
-								<Github />
-							</a>
-							<a
-								href="https://instagram.com"
-								target="_blank"
-								class="linkedin icon"
-							>
-								<Linkedin />
-							</a>
-						</div>
-					</div>
-				))}
-			</div>
-		</main>
+          <a href={`#`}>
+            {/* <a href={`${currentPath}/${member.id}`}> */}
+            <img
+              transition:name={`img${member.name}`}
+              src={member.image}
+              alt={member.name}
+              class="w-52 aspect-square rounded-full object-cover shadow-md"
+            />
+          </a>
 
-	</div>
+          <div class="social-icons">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              class="icon facebook"
+            >
+              <Facebook />
+            </a>
+            <a href="https://twitter.com" target="_blank" class="icon twitter">
+              <Github />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              class="linkedin icon"
+            >
+              <Linkedin />
+            </a>
+          </div>
+        </div>
+      ))
+    }
+  </main>
 </Layout>
 
-
 <script>
-	const grid = document.querySelector(".resto");
+  const grid = document.querySelector(".resto");
 
-	document.addEventListener("mousemove", (e) => {
-		if (grid instanceof HTMLElement) {
-			grid.style.setProperty("--x", `${e.x}px`);
-			grid.style.setProperty("--y", `${e.y}px`);
-		}
-	});
+  document.addEventListener("mousemove", (e) => {
+    if (grid instanceof HTMLElement) {
+      grid.style.setProperty("--x", `${e.x}px`);
+      grid.style.setProperty("--y", `${e.y}px`);
+    }
+  });
 </script>
 
 <style>
-	.icon {
-		width: 50px;
-		height: 50px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background-color: #333;
-		color: #fff;
-		text-decoration: none;
-		border-radius: 50%;
-		font-size: 1.2rem;
-		transition: background-color 0.3s ease;
-		padding: 0.3rem
-		cursor: pointer;
+  .icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+    padding: 0.3rem;
+    cursor: pointer;
 
-		&:hover {
-			background-color: #555;
-		}
-	}
+    &:hover {
+      background-color: #555;
+    }
+  }
 
-	.container--team {
-		margin: 0 auto;
-		max-width: 1200px;
-		padding: 1rem;
-		width: 100%;
+  .principal {
+    align-self: flex-start;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1rem;
+    gap: 0.25rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    border-radius: 1rem;
+    padding: 0.25rem;
+    width: 100%;
 
-		display: grid;
-		gap: 1rem;
-		place-items: center;
-		isolation: isolate;
+    max-inline-size: 1200px;
+    margin-inline: auto;
 
+    &:hover {
+      animation: moveUpDown 0.6s ease-in-out forwards;
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
 
+    & p {
+      text-align: center;
+      text-wrap: balance;
+      color: rgba(0, 0, 0, 0.526);
+    }
 
-		& main {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			flex-direction: column;
-			gap: 2rem;
-			width: 100%;
+    & img {
+      width: 200px;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+  }
 
-			& .principal {
-				position: relative;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-				font-size: 1rem;
-				gap: 0.25rem;
-				box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-				border-radius: 1rem;
-				padding: 0.25rem;
-				width: 100%;
-				max-width: 300px;
+  .members-lab {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap column;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    border-radius: 1rem;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
 
-				&:hover {
-					animation: moveUpDown 0.6s ease-in-out forwards;
-					box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-				}
+    overflow: hidden;
 
-				& p {
-					text-align: center;
-					text-wrap: balance;
-					color: rgba(0, 0, 0, 0.526);
-				}
+    &:hover {
+      background-attachment: fixed;
+      background-image: radial-gradient(
+        circle at var(--x, 0) var(--y, 0),
+        hsl(0 0% 100% / 0.175),
+        hsl(0 0% 100% / 0.0125) 10rem
+      );
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
 
-				& img {
-					width: 200px;
-					aspect-ratio: 1/1;
-					border-radius: 50%;
-					object-fit: cover;
-					box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-					transition: transform 0.3s;
+    &:hover .social-icons {
+      bottom: 20px;
+      opacity: 1;
+    }
 
-				}
-			}
+    &:after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background-attachment: fixed;
+      background-image: radial-gradient(
+        circle at var(--x, 0) var(--y, 0),
+        hsla(321, 61%, 77%, 0.75),
+        transparent 5rem
+      );
+      pointer-events: none;
+      z-index: -1;
+    }
+  }
 
-			& .resto {
-				display: grid;
-				place-items: center;
+  .resto {
+    display: grid;
 
-				grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-				gap: 2rem;
-				width: 100%;
-				position: relative;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
 
-				& .social-icons {
-					display: flex;
-					justify-content: center;
-					gap: 1rem;
-					position: absolute;
-					bottom: -50px;
-					left: 50%;
-					transform: translateX(-50%);
-					opacity: 0;
-					transition: all 0.3s ease;
+    max-inline-size: 1200px;
+    inline-size: 100%;
 
-				}
+    justify-content: center;
+    justify-items: center;
+    margin-inline: auto;
 
-				& .members-lab {
-					position: relative;
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					flex-flow: wrap column;
-					gap: 0.25rem;
-					width: 100%;
-					max-width: 300px;
-					box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-					border-radius: 1rem;
-					padding: 0.25rem;
-					transition:
-						transform 0.3s ease,
-						box-shadow 0.3s ease;
+    & .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+  }
 
-					overflow: hidden;
-
-					&:hover {
-						background-attachment: fixed;
-						background-image: radial-gradient(
-							circle at var(--x, 0) var(--y, 0),
-							hsl(0 0% 100% / 0.175),
-							hsl(0 0% 100% / 0.0125) 10rem
-						);
-						box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-					}
-
-					&:hover .social-icons {
-						bottom: 20px;
-						opacity: 1;
-					}
-
-					&:after {
-						content: "";
-						position: absolute;
-						inset: -1px;
-						background-attachment: fixed;
-						background-image: radial-gradient(
-							circle at var(--x, 0) var(--y, 0),
-							hsla(321, 61%, 77%, 0.75),
-							transparent 5rem
-						);
-						pointer-events: none;
-						z-index: -1;
-					}
-
-					& img {
-						width: 200px;
-						aspect-ratio: 1/1;
-						border-radius: 50%;
-						object-fit: cover;
-						box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-					}
-				}
-			}
-		}
-	}
-
-	.name {
-		display: inline-block;
-		text-align: center;
-		margin-bottom: 5px;
-		font-weight: 600;
-		font-size: 1rem;
-		text-wrap: balance;
-		color: rgba(0, 0, 0, 0.818);
-	}
-
-	.grade {
-		text-align: center;
-		text-wrap: balance;
-		font-size: 0.7rem;
-	}
-
-	.position {
-		text-align: center;
-		text-wrap: balance;
-		font-size: 0.9rem;
-	}
-
-	@keyframes moveUpDown {
-		0% {
-			transform: translateY(0);
-		}
-		50% {
-			transform: translateY(-2px); 
-		}
-		100% {
-			transform: translateY(3px); 
-		}
-	}
-
+  @keyframes moveUpDown {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+    100% {
+      transform: translateY(3px);
+    }
+  }
 </style>

@@ -74,31 +74,64 @@ const LatestPublications = mockNewsItems.slice(0, 2);
 
   <div class="space-y-12">
     <section
-      class="text-center w-fit mx-auto pb-5 bg-gradient-to-br from-primary/10 via-background to-background rounded-xl border-2 border-gray-400 "
+      class="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory px-4"
+      id="swipeContainer"
     >
-      <figure class="w-full justify-center items-center flex flex-col">
-        <img
-          src="/images/home/menu-2.jpg"
-          alt="Lab researchers working"
-          class="w-full h-auto rounded-t-xl object-cover aspect-video radius-md  mask-b-from-0.5 max-w-lg"
-          data-ai-hint="lab research"
-        />
-        <figcaption class="-mt-6 text-lg font-semibold text-black/80">
-          Research in Universidad de Talca
-        </figcaption>
-      </figure>
+      <article
+        class="text-center w-fit mx-auto pb-5 bg-gradient-to-br from-primary/10 via-background to-background rounded-xl border-2 border-gray-400"
+      >
+        <figure class="w-full justify-center items-center flex flex-col">
+          <img
+            src="/images/home/menu-2.jpg"
+            alt="Lab researchers working"
+            class="w-full h-auto rounded-t-xl object-cover aspect-video radius-md mask-b-from-0.5 max-w-lg"
+            data-ai-hint="lab research"
+          />
+          <figcaption class="-mt-6 text-lg font-semibold text-black/80">
+            Research in Universidad de Talca
+          </figcaption>
+        </figure>
 
-      <div class="mt-6 space-x-4">
-        <SlotButton variant="default" size="lg">
-          <a href="/publications" class="inline-flex items-center">
-            Explore Publications <Publications class="ml-2 h-5 w-5" />
-          </a>
-        </SlotButton>
+        <div class="mt-6 space-x-4">
+          <SlotButton variant="default" size="lg">
+            <a href="/publications" class="inline-flex items-center">
+              Explore Publications <Publications class="ml-2 h-5 w-5" />
+            </a>
+          </SlotButton>
 
-        <LinkButton variant="outline" size="lg" href="/contact">
-          Get In Touch
-        </LinkButton>
-      </div>
+          <LinkButton variant="outline" size="lg" href="/contact">
+            Get In Touch
+          </LinkButton>
+        </div>
+      </article>
+
+      <article
+        class="text-center w-fit mx-auto pb-5 bg-gradient-to-br from-primary/10 via-background to-background rounded-xl border-1 border-gray-400"
+      >
+        <figure class="w-full justify-center items-center flex flex-col">
+          <img
+            src="/images/home/menu-2.jpg"
+            alt="Lab researchers working"
+            class="w-full h-auto rounded-t-xl object-cover aspect-video radius-md mask-b-from-0.5 max-w-lg"
+            data-ai-hint="lab research"
+          />
+          <figcaption class="-mt-6 text-lg font-semibold text-black/80">
+            Research in Universidad de Talca
+          </figcaption>
+        </figure>
+
+        <div class="mt-6 space-x-4">
+          <SlotButton variant="default" size="lg">
+            <a href="/publications" class="inline-flex items-center">
+              Explore Publications <Publications class="ml-2 h-5 w-5" />
+            </a>
+          </SlotButton>
+
+          <LinkButton variant="outline" size="lg" href="/contact">
+            Get In Touch
+          </LinkButton>
+        </div>
+      </article>
     </section>
 
     <section>
@@ -247,3 +280,61 @@ const LatestPublications = mockNewsItems.slice(0, 2);
     </section>
   </div>
 </Layout>
+
+<script>
+  const container = document.getElementById("swipeContainer") as HTMLElement;
+
+  let isDown = false;
+  let startX: any;
+  let scrollLeft: any;
+
+  container.addEventListener("mousedown", (e) => {
+    isDown = true;
+    container.classList.add("grabbing");
+    startX = e.pageX - container.offsetLeft;
+    scrollLeft = container.scrollLeft;
+  });
+
+  container.addEventListener("mouseleave", () => {
+    isDown = false;
+    container.classList.remove("grabbing");
+  });
+
+  container.addEventListener("mouseup", () => {
+    isDown = false;
+    container.classList.remove("grabbing");
+  });
+
+  container.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.5; // scroll speed
+    container.scrollLeft = scrollLeft - walk;
+  });
+
+  // Touch support for mobile
+  let touchStartX = 0;
+  let touchScrollLeft = 0;
+
+  container.addEventListener("touchstart", (e) => {
+    touchStartX = e.touches[0].pageX;
+    touchScrollLeft = container.scrollLeft;
+  });
+
+  container.addEventListener("touchmove", (e) => {
+    const x = e.touches[0].pageX;
+    const walk = (touchStartX - x) * 1.5;
+    container.scrollLeft = touchScrollLeft + walk;
+  });
+</script>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+</style>
