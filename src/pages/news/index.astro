@@ -1,6 +1,14 @@
 ---
 import PageHeader from "@components/layout/pageHeader.astro";
 import Layout from "@/layouts/Layout.astro";
+
+import { getCollection } from "astro:content";
+
+const newsItems = await getCollection("news");
+const currentNews = newsItems.map((item) => ({
+  id: item.id,
+  ...item.data,
+}));
 ---
 
 <Layout title="News">
@@ -9,11 +17,32 @@ import Layout from "@/layouts/Layout.astro";
     description="Stay updated with the latest news and announcements from our team."
   />
 
-  <div class="space-y-6">
-    <h2 class="text-2xl font-bold">Latest News</h2>
-    <p class="text-muted-foreground">
-      Check back often for updates on our latest research, publications, and
-      events.
-    </p>
-  </div></Layout
->
+  <ul id="search-results" class="space-y-4">
+    {
+      currentNews.map((paper) => (
+        <li class="border rounded-md p-4 shadow-sm mb-4">
+          <h3 class="title font-semibold text-lg">{paper.title}</h3>
+          <p class="authors text-sm text-muted-foreground">{paper.summary}</p>
+
+          {paper.href && (
+            <a
+              href={paper.href}
+              class="url text-primary text-sm mt-2 inline-block hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View News
+            </a>
+          )}
+        </li>
+      ))
+    }
+    {
+      currentNews.length === 0 && (
+        <li class="text-center text-muted-foreground">
+          No News found.
+        </li>
+      )
+    }
+  </ul>
+</Layout>

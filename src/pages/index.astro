@@ -40,40 +40,6 @@ const recentPublications = publications.map((pub) => pub.data);
   <main class="space-y-12">
     <Carrousel />
 
-    <section>
-      <Card className="overflow-hidden shadow-lg">
-        <div class="md:flex">
-          <div class="md:shrink-0">
-            <img
-              src="https://placehold.co/600x400.png"
-              alt="Lab researchers working"
-              width={600}
-              height={400}
-              class="h-full w-full object-cover md:w-80"
-              data-ai-hint="lab research"
-            />
-          </div>
-          <CardHeader className="p-6 md:p-8 flex-1">
-            <CardTitle className="text-2xl font-semibold text-primary"
-              >Our Mission</CardTitle
-            >
-            <CardDescription className="mt-2 text-base">
-              We are dedicated to pushing the boundaries of scientific knowledge
-              in [Your Lab's Field, e.g., molecular biology, computational
-              neuroscience]. Our interdisciplinary team collaborates on
-              cutting-edge projects aimed at solving complex challenges and
-              making a tangible impact on society.
-            </CardDescription>
-            <SlotButton class="mt-4" variant="default" size="default">
-              <A href="/team" title="Meet Our Team">
-                <Github />
-              </A>
-            </SlotButton>
-          </CardHeader>
-        </div>
-      </Card>
-    </section>
-
     <LastNews />
 
     <section>

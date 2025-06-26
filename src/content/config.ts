@@ -90,7 +90,14 @@ const publicationsCollection = defineCollection({
     url: z.string().url(),
     abstract: z.string().optional(),
     image: z.string().optional(),
-    type: z.enum(["journal", "conference", "book", "book-chapter", "other", "preprint"]),
+    type: z.enum([
+      "journal",
+      "conference",
+      "book",
+      "book-chapter",
+      "other",
+      "preprint",
+    ]),
     doi: z.string().optional(),
     tags: z.array(z.string()).optional(),
     team: z
@@ -156,12 +163,28 @@ const collaborationsCollection = defineCollection({
   ),
 });
 
+const newsCollection = defineCollection({
+  loader: glob({
+    pattern: "**/*.json",
+    base: "src/content/news",
+  }),
+  schema: z.object({
+    title: z.string(),
+    img: z.string(), // campo 'img' obligatorio
+    href: z.string(), // campo 'href' obligatorio
+    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/), // formato de fecha YYYY-MM-DD
+    aiHint: z.string(), // campo 'aiHint' obligatorio
+    summary: z.string(), // campo 'summary' obligatorio
+  }),
+});
+
 export const collections = {
   members: membersCollection,
   images: imagesCollection,
   projects: projectsCollection,
   talks: talksCollection,
   publications: publicationsCollection,
-  contact: contactCollection, 
+  contact: contactCollection,
   collaborations: collaborationsCollection,
+  news: newsCollection,
 };

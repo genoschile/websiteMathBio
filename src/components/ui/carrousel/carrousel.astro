@@ -7,13 +7,13 @@ import "swiper/css";
 const cards = [
   {
     title: "Research in Universidad de Talca",
-    img: "/images/home/menu-2.jpg",
+    img: "/",
     href: "/publications",
     icon: Publications,
   },
   {
     title: "Innovation at Universidad de Chile",
-    img: "/images/home/menu-2.jpg",
+    img: "/",
     href: "/publications",
     icon: Publications,
   },
@@ -24,28 +24,23 @@ const cards = [
   <div class="swiper-wrapper flex gap-4">
     {
       cards.map((card) => (
-        <article class="swiper-slide text-center mx-auto pb-5 bg-gradient-to-br from-primary/10 via-background to-background rounded-xl border border-gray-400">
-          <figure class="w-full justify-center items-center flex flex-col">
+        <article class="swiper-slide text-center mx-auto bg-gradient-to-br from-primary/10 via-background to-background rounded-xl border border-gray-400">
+          <figure class="relative w-full justify-center items-center flex flex-col">
             <img
               src={card.img}
               alt={card.title}
-              class="w-full h-auto rounded-t-xl object-cover aspect-video radius-md mask-b-from-0.5 max-w-"
+              class="w-full aspect-[3/1] object-cover rounded-t-xl fallback-img"
             />
-            <figcaption class="-mt-6 text-lg font-semibold text-black/80">
+            <figcaption class="sr-only -mt-6 text-lg font-semibold text-black/80">
               {card.title}
             </figcaption>
+            <A
+              href={card.href}
+              title="Explore Publications"
+              icon={card.icon}
+              className="mx-auto absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-white text-primary rounded-full p-2 shadow-lg hover:bg-primary hover:text-white transition-colors duration-300"
+            />
           </figure>
-
-          <div class="mt-6 space-x-4">
-            <SlotButton variant="default" size="lg">
-              <A
-                href={card.href}
-                title="Explore Publications"
-                icon={card.icon}
-                className="mx-auto"
-              />
-            </SlotButton>
-          </div>
         </article>
       ))
     }
@@ -70,6 +65,30 @@ const cards = [
     content: none !important;
   }
 </style>
+
+<script is:inline>
+  const fallbackColors = ['#f87171', '#60a5fa', '#34d399', '#fbbf24', '#a78bfa'];
+
+  document.querySelectorAll('.fallback-img').forEach((img) => {
+    img.onerror = () => {
+      const parent = img.parentElement;
+      const color = fallbackColors[Math.floor(Math.random() * fallbackColors.length)];
+
+      const fallbackDiv = document.createElement('div');
+      fallbackDiv.className = img.className;
+      fallbackDiv.style.backgroundColor = color;
+      fallbackDiv.style.display = 'flex';
+      fallbackDiv.style.alignItems = 'center';
+      fallbackDiv.style.justifyContent = 'center';
+      fallbackDiv.style.color = 'white';
+      fallbackDiv.style.fontWeight = 'bold';
+      fallbackDiv.innerText = img.alt || 'No image';
+
+      img.replaceWith(fallbackDiv);
+    };
+  });
+</script>
+
 
 <script>
   import Swiper from "swiper";
