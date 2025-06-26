@@ -1,0 +1,106 @@
+---
+import Stack from "@/icons/stack.astro";
+import { A } from "dist/chunks/astro/server_B0oqiVdH.mjs";
+import Card from "./ui/card/card.astro";
+import CardContent from "./ui/card/cardContent.astro";
+import CardDescription from "./ui/card/cardDescription.astro";
+import CardFooter from "./ui/card/cardFooter.astro";
+import CardHeader from "./ui/card/cardHeader.astro";
+import CardTitle from "./ui/card/cardTitle.astro";
+import SlotButton from "./ui/slotButton.astro";
+
+export const mockNewsItems = [
+  {
+    id: "breakthrough-1",
+    title: "New AI Model Outperforms State-of-the-Art",
+    date: "2025-05-20",
+    summary:
+      "Researchers at Lab Notes have developed a new AI model that surpasses current benchmarks on natural language understanding tasks.",
+    imageUrl: "/images/news/ai-model.jpg",
+    link: "/news/ai-model-outperforms",
+    aiHint: "AI model breakthrough",
+  },
+  {
+    id: "climate-study",
+    title: "Climate Change Study Reveals Surprising Trends",
+    date: "2025-05-15",
+    summary:
+      "A long-term study conducted by our environmental science team shows unexpected changes in temperature patterns across Europe.",
+    imageUrl: "/images/news/climate-study.jpg",
+    link: "/news/climate-trends",
+    aiHint: "climate change data",
+  },
+  {
+    id: "team-award",
+    title: "Lab Notes Team Wins Innovation Award",
+    date: "2025-05-10",
+    summary:
+      "The team has received recognition for their innovative approach to collaborative scientific research and development.",
+    imageUrl: "/images/news/award.jpg",
+    link: "/news/innovation-award",
+    aiHint: "team award",
+  },
+];
+
+const LatestPublications = mockNewsItems.slice(0, 2);
+---
+
+<section>
+  <h2
+    class="text-2xl font-semibold tracking-tight mb-6 flex items-center gap-2"
+  >
+    Latest News
+  </h2>
+  <div class="grid gap-6 md:grid-cols-2">
+    {
+      LatestPublications.map((item) => (
+        <Card
+          key={item.id}
+          className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300"
+        >
+          {item.imageUrl && (
+            <div class="relative h-48 w-full">
+              <img
+                src={item.imageUrl}
+                alt={item.title}
+                class="rounded-t-lg object-cover"
+                data-ai-hint={item.aiHint}
+              />
+            </div>
+          )}
+          <CardHeader>
+            <CardTitle>{item.title}</CardTitle>
+            <CardDescription>{item.date}</CardDescription>
+          </CardHeader>
+          <CardContent className="flex-grow">
+            <p class="text-sm text-muted-foreground">{item.summary}</p>
+          </CardContent>
+          <CardFooter>
+            <SlotButton
+              class="mt-4"
+              variant="link"
+              size="default"
+              class="p-0 text-primary"
+            >
+              <A
+                href={item.link || `/news#${item.id}`}
+                title="Read More"
+                icon={Stack}
+                className="mx-auto"
+              >
+                Read More
+              </A>
+            </SlotButton>
+          </CardFooter>
+        </Card>
+      ))
+    }
+  </div>
+  {
+    mockNewsItems.length > 2 && (
+      <div class="mt-6 text-center mx-auto w-full">
+        <A href="/news" title="View all News" className="mx-auto" />
+      </div>
+    )
+  }
+</section>

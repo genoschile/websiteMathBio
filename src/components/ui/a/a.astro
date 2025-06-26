@@ -1,0 +1,14 @@
+---
+const { title, href, rel, target, icon, className } = Astro.props;
+const Icon = icon;
+---
+
+<a
+  href={href}
+  class={`px-3 py-2 rounded-md text-lg font-medium transition-colors flex items-center justify-center gap-2  max-w-fit hover:bg-indigo-100 hover:underline hover:text-indigo-600 ${className ?? ""}`}
+  {...rel && { rel }}
+  {...target && { target }}
+>
+  {title}
+  {Icon && <Icon class="ml-2 h-5 w-5" />}
+</a>

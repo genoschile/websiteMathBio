@@ -100,42 +100,46 @@ const currentPapers = publications.map((pub) => ({
     />
 
     <ul id="search-results" class="space-y-4">
-      {currentPapers.map((paper) => (
-        <li class="border rounded-md p-4 shadow-sm mb-4">
-          <h3 class="title font-semibold text-lg">{paper.title}</h3>
-          <p class="authors text-sm text-muted-foreground">
-            {paper.authors.join(", ")}
-          </p>
-          <p class="meta text-xs italic">
-            {paper.type} ({paper.year})
-          </p>
-          {paper.abstract && (
-            <p class="abstract mt-2 text-sm text-foreground line-clamp-3">
-              {paper.abstract}
+      {
+        currentPapers.map((paper) => (
+          <li class="border rounded-md p-4 shadow-sm mb-4">
+            <h3 class="title font-semibold text-lg">{paper.title}</h3>
+            <p class="authors text-sm text-muted-foreground">
+              {paper.authors.join(", ")}
             </p>
-          )}
-          {paper.tags && paper.tags.length > 0 && (
-            <p class="tags mt-2 text-xs text-muted-foreground">
-              <strong>Tags:</strong> {paper.tags.join(", ")}
+            <p class="meta text-xs italic">
+              {paper.type} ({paper.year})
             </p>
-          )}
-          {paper.url && (
-            <a
-              href={paper.url}
-              class="url text-primary text-sm mt-2 inline-block"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View Publication
-            </a>
-          )}
-        </li>
-      ))}
-      {currentPapers.length === 0 && (
-        <li class="text-center text-muted-foreground">
-          No publications found.
-        </li>
-      )}
+            {paper.abstract && (
+              <p class="abstract mt-2 text-sm text-foreground line-clamp-3">
+                {paper.abstract}
+              </p>
+            )}
+            {paper.tags && paper.tags.length > 0 && (
+              <p class="tags mt-2 text-xs text-muted-foreground">
+                <strong>Tags:</strong> {paper.tags.join(", ")}
+              </p>
+            )}
+            {paper.url && (
+              <a
+                href={paper.url}
+                class="url text-primary text-sm mt-2 inline-block hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Publication
+              </a>
+            )}
+          </li>
+        ))
+      }
+      {
+        currentPapers.length === 0 && (
+          <li class="text-center text-muted-foreground">
+            No publications found.
+          </li>
+        )
+      }
     </ul>
   </div>
 </Layout>

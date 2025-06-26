@@ -1,5 +1,4 @@
 ---
-import Publications from "@/icons/publications.astro";
 import PageHeader from "../components/layout/pageHeader.astro";
 import Button from "../components/ui/button.astro";
 import Card from "../components/ui/card/card.astro";
@@ -8,12 +7,13 @@ import CardDescription from "../components/ui/card/cardDescription.astro";
 import CardFooter from "../components/ui/card/cardFooter.astro";
 import CardHeader from "../components/ui/card/cardHeader.astro";
 import CardTitle from "../components/ui/card/cardTitle.astro";
-import LinkButton from "../components/ui/linkButton.astro";
 import SlotButton from "../components/ui/slotButton.astro";
 import Github from "../icons/github.astro";
 import Layout from "../layouts/Layout.astro";
-
 import { getCollection } from "astro:content";
+import A from "@/components/ui/a/a.astro";
+import Carrousel from "@/components/ui/carrousel/carrousel.astro";
+import LastNews from "@/components/LastNews.astro";
 
 const mockPublications = await getCollection("publications");
 
@@ -29,41 +29,6 @@ const publications = mockPublications
   .slice(0, 3);
 
 const recentPublications = publications.map((pub) => pub.data);
-
-export const mockNewsItems = [
-  {
-    id: "breakthrough-1",
-    title: "New AI Model Outperforms State-of-the-Art",
-    date: "2025-05-20",
-    summary:
-      "Researchers at Lab Notes have developed a new AI model that surpasses current benchmarks on natural language understanding tasks.",
-    imageUrl: "/images/news/ai-model.jpg",
-    link: "/news/ai-model-outperforms",
-    aiHint: "AI model breakthrough",
-  },
-  {
-    id: "climate-study",
-    title: "Climate Change Study Reveals Surprising Trends",
-    date: "2025-05-15",
-    summary:
-      "A long-term study conducted by our environmental science team shows unexpected changes in temperature patterns across Europe.",
-    imageUrl: "/images/news/climate-study.jpg",
-    link: "/news/climate-trends",
-    aiHint: "climate change data",
-  },
-  {
-    id: "team-award",
-    title: "Lab Notes Team Wins Innovation Award",
-    date: "2025-05-10",
-    summary:
-      "The team has received recognition for their innovative approach to collaborative scientific research and development.",
-    imageUrl: "/images/news/award.jpg",
-    link: "/news/innovation-award",
-    aiHint: "team award",
-  },
-];
-
-const LatestPublications = mockNewsItems.slice(0, 2);
 ---
 
 <Layout title="home">
@@ -72,67 +37,8 @@ const LatestPublications = mockNewsItems.slice(0, 2);
     description="Advancing the frontiers of science through innovative research and collaboration. Discover our work, team, and latest breakthroughs."
   />
 
-  <div class="space-y-12">
-    <section
-      class="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory px-4"
-      id="swipeContainer"
-    >
-      <article
-        class="text-center w-fit mx-auto pb-5 bg-gradient-to-br from-primary/10 via-background to-background rounded-xl border-2 border-gray-400"
-      >
-        <figure class="w-full justify-center items-center flex flex-col">
-          <img
-            src="/images/home/menu-2.jpg"
-            alt="Lab researchers working"
-            class="w-full h-auto rounded-t-xl object-cover aspect-video radius-md mask-b-from-0.5 max-w-lg"
-            data-ai-hint="lab research"
-          />
-          <figcaption class="-mt-6 text-lg font-semibold text-black/80">
-            Research in Universidad de Talca
-          </figcaption>
-        </figure>
-
-        <div class="mt-6 space-x-4">
-          <SlotButton variant="default" size="lg">
-            <a href="/publications" class="inline-flex items-center">
-              Explore Publications <Publications class="ml-2 h-5 w-5" />
-            </a>
-          </SlotButton>
-
-          <LinkButton variant="outline" size="lg" href="/contact">
-            Get In Touch
-          </LinkButton>
-        </div>
-      </article>
-
-      <article
-        class="text-center w-fit mx-auto pb-5 bg-gradient-to-br from-primary/10 via-background to-background rounded-xl border-1 border-gray-400"
-      >
-        <figure class="w-full justify-center items-center flex flex-col">
-          <img
-            src="/images/home/menu-2.jpg"
-            alt="Lab researchers working"
-            class="w-full h-auto rounded-t-xl object-cover aspect-video radius-md mask-b-from-0.5 max-w-lg"
-            data-ai-hint="lab research"
-          />
-          <figcaption class="-mt-6 text-lg font-semibold text-black/80">
-            Research in Universidad de Talca
-          </figcaption>
-        </figure>
-
-        <div class="mt-6 space-x-4">
-          <SlotButton variant="default" size="lg">
-            <a href="/publications" class="inline-flex items-center">
-              Explore Publications <Publications class="ml-2 h-5 w-5" />
-            </a>
-          </SlotButton>
-
-          <LinkButton variant="outline" size="lg" href="/contact">
-            Get In Touch
-          </LinkButton>
-        </div>
-      </article>
-    </section>
+  <main class="space-y-12">
+    <Carrousel />
 
     <section>
       <Card className="overflow-hidden shadow-lg">
@@ -159,79 +65,21 @@ const LatestPublications = mockNewsItems.slice(0, 2);
               making a tangible impact on society.
             </CardDescription>
             <SlotButton class="mt-4" variant="default" size="default">
-              <a href="/team" class="inline-flex items-center">
-                Meet Our Team <Github class="ml-2 h-4 w-4" />
-              </a>
+              <A href="/team" title="Meet Our Team">
+                <Github />
+              </A>
             </SlotButton>
           </CardHeader>
         </div>
       </Card>
     </section>
 
-    <section>
-      <h2
-        class="text-2xl font-semibold tracking-tight mb-6 flex items-center gap-2"
-      >
-        <Github class="h-6 w-6 text-primary" />
-        Latest News
-      </h2>
-      <div class="grid gap-6 md:grid-cols-2">
-        {
-          LatestPublications.map((item) => (
-            <Card
-              key={item.id}
-              className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300"
-            >
-              {item.imageUrl && (
-                <div class="relative h-48 w-full">
-                  <img
-                    src={item.imageUrl}
-                    alt={item.title}
-                    class="rounded-t-lg object-cover"
-                    data-ai-hint={item.aiHint}
-                  />
-                </div>
-              )}
-              <CardHeader>
-                <CardTitle>{item.title}</CardTitle>
-                <CardDescription>{item.date}</CardDescription>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <p class="text-sm text-muted-foreground">{item.summary}</p>
-              </CardContent>
-              <CardFooter>
-                <SlotButton
-                  class="mt-4"
-                  variant="link"
-                  size="default"
-                  class="p-0 text-primary"
-                >
-                  <a href={item.link || `/news#${item.id}`}>
-                    Read More <Github class="ml-1 h-4 w-4" />
-                  </a>
-                </SlotButton>
-              </CardFooter>
-            </Card>
-          ))
-        }
-      </div>
-      {
-        mockNewsItems.length > 2 && (
-          <div class="mt-6 text-center">
-            <SlotButton asChild variant="outline">
-              <a href="/news">View All News</a>
-            </SlotButton>
-          </div>
-        )
-      }
-    </section>
+    <LastNews />
 
-    {/* Recent Publications Section */}
     <section>
       <h2
         class="text-2xl font-semibold tracking-tight mb-6 flex items-center gap-2"
       >
-        <Github className="h-6 w-6 text-primary" />
         Recent Publications
       </h2>
       <div class="space-y-6">
@@ -255,12 +103,15 @@ const LatestPublications = mockNewsItems.slice(0, 2);
                   </p>
                 )}
               </CardContent>
-              <CardFooter>
+              <CardFooter className="">
                 {pub.url && (
                   <Button variant="link" asChild class="p-0 text-primary">
-                    <a href={pub.url} target="_blank" rel="noopener noreferrer">
-                      View Publication <Github class="ml-1 h-4 w-4" />
-                    </a>
+                    <A
+                      href={pub.url}
+                      title="View Publication"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    />
                   </Button>
                 )}
               </CardFooter>
@@ -269,72 +120,22 @@ const LatestPublications = mockNewsItems.slice(0, 2);
         }
       </div>
       {
-        mockNewsItems.length > 2 && (
+        recentPublications.length > 2 && (
           <div class="mt-6 text-center">
             <SlotButton asChild variant="outline">
-              <a href="/publications">View All Publications</a>
+              <A
+                href="/publications"
+                title="View All Publications"
+                className="mx-auto"
+              />
             </SlotButton>
           </div>
         )
       }
     </section>
-  </div>
+  </main>
 </Layout>
 
-<script>
-  const container = document.getElementById("swipeContainer") as HTMLElement;
+<script></script>
 
-  let isDown = false;
-  let startX: any;
-  let scrollLeft: any;
-
-  container.addEventListener("mousedown", (e) => {
-    isDown = true;
-    container.classList.add("grabbing");
-    startX = e.pageX - container.offsetLeft;
-    scrollLeft = container.scrollLeft;
-  });
-
-  container.addEventListener("mouseleave", () => {
-    isDown = false;
-    container.classList.remove("grabbing");
-  });
-
-  container.addEventListener("mouseup", () => {
-    isDown = false;
-    container.classList.remove("grabbing");
-  });
-
-  container.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - container.offsetLeft;
-    const walk = (x - startX) * 1.5; // scroll speed
-    container.scrollLeft = scrollLeft - walk;
-  });
-
-  // Touch support for mobile
-  let touchStartX = 0;
-  let touchScrollLeft = 0;
-
-  container.addEventListener("touchstart", (e) => {
-    touchStartX = e.touches[0].pageX;
-    touchScrollLeft = container.scrollLeft;
-  });
-
-  container.addEventListener("touchmove", (e) => {
-    const x = e.touches[0].pageX;
-    const walk = (touchStartX - x) * 1.5;
-    container.scrollLeft = touchScrollLeft + walk;
-  });
-</script>
-
-<style>
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
-</style>
+<style></style>

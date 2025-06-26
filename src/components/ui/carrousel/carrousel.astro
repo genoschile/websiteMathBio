@@ -1,0 +1,99 @@
+---
+import Publications from "@/icons/publications.astro";
+import A from "../a/a.astro";
+import SlotButton from "../slotButton.astro";
+import "swiper/css";
+
+const cards = [
+  {
+    title: "Research in Universidad de Talca",
+    img: "/images/home/menu-2.jpg",
+    href: "/publications",
+    icon: Publications,
+  },
+  {
+    title: "Innovation at Universidad de Chile",
+    img: "/images/home/menu-2.jpg",
+    href: "/publications",
+    icon: Publications,
+  },
+];
+---
+
+<section class="swiper px-4" id="swipeContainer">
+  <div class="swiper-wrapper flex gap-4">
+    {
+      cards.map((card) => (
+        <article class="swiper-slide text-center mx-auto pb-5 bg-gradient-to-br from-primary/10 via-background to-background rounded-xl border border-gray-400">
+          <figure class="w-full justify-center items-center flex flex-col">
+            <img
+              src={card.img}
+              alt={card.title}
+              class="w-full h-auto rounded-t-xl object-cover aspect-video radius-md mask-b-from-0.5 max-w-"
+            />
+            <figcaption class="-mt-6 text-lg font-semibold text-black/80">
+              {card.title}
+            </figcaption>
+          </figure>
+
+          <div class="mt-6 space-x-4">
+            <SlotButton variant="default" size="lg">
+              <A
+                href={card.href}
+                title="Explore Publications"
+                icon={card.icon}
+                className="mx-auto"
+              />
+            </SlotButton>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="h-10"></div>
+
+  <div class="swiper-pagination"></div>
+  <div
+    class="swiper-button-prev px-4 py-4 rounded-full bg-red-200/50 text-white flex items-center justify-center cursor-pointer hover:bg-red-700 transition-colors duration-300 shadow-lg"
+  >
+  </div>
+  <div
+    class="swiper-button-next h-10 w-10 px-2 py-2 aspect-square rounded-full bg-red-200/50 text-white flex items-center justify-center cursor-pointer hover:bg-red-700 transition-colors duration-300 shadow-lg"
+  >
+  </div>
+</section>
+
+<style>
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    content: none !important;
+  }
+</style>
+
+<script>
+  import Swiper from "swiper";
+  import { Navigation } from "swiper/modules";
+  import { Pagination } from "swiper/modules";
+
+  import "swiper/css";
+  import "swiper/css/navigation";
+  import "swiper/css/pagination";
+
+  Swiper.use([Navigation, Pagination]);
+
+  const swiper = new Swiper("#swipeContainer", {
+    slidesPerView: "auto",
+    spaceBetween: 16,
+    centeredSlides: false,
+    grabCursor: true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
+</script>

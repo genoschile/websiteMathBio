@@ -2,6 +2,6 @@
 const { class: className = "", ...props } = Astro.props;
 ---
 
-<div class={`flex items-center p-6 pt-0 ${className}`} {...props}>
+<div class={`flex items-center py-6 pt-0 ${className} px-2`} {...props}>
   <slot />
 </div>
