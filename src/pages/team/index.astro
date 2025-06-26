@@ -7,7 +7,6 @@ import PageHeader from "../../components/layout/pageHeader.astro";
 
 import { getCollection } from "astro:content";
 
-const currentPath = Astro.url.pathname;
 const posts = await getCollection("members");
 
 const members = posts.map((post) => ({
@@ -20,6 +19,8 @@ const members = posts.map((post) => ({
 
 const karen = members.find((member) => member.id === 1);
 const hasKaren = karen && karen;
+
+const membersWithoutKaren = members.filter((member) => member.id !== 1);
 ---
 
 <Layout title="Home">
@@ -67,10 +68,12 @@ const hasKaren = karen && karen;
     icon={Github}
   />
 
-  <main class="resto">
+  <main
+    class="resto grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 max-w-[1200px] w-full justify-center justify-items-center mx-auto"
+  >
     {
-      members.slice(1).map((member) => (
-        <div class="members-lab bg-white/90">
+      membersWithoutKaren.map((member) => (
+        <div class="members-lab bg-white/90 members-lab relative flex flex-wrap flex-col justify-center items-center gap-2 w-full max-w-[400px] shadow-[0_0_5px_rgba(0,0,0,0.4)] rounded-2xl transition duration-300 ease-in-out overflow-hidden">
           <h2 class="inline-block text-center mb-1.5 font-semibold text-lg text-black/80 balance">
             {member.name}
           </h2>
@@ -83,11 +86,11 @@ const hasKaren = karen && karen;
               transition:name={`img${member.name}`}
               src={member.image}
               alt={member.name}
-              class="w-52 aspect-square rounded-full object-cover shadow-md"
+              class="rounded-full object-cover shadow-md w-[200px] aspect-square transition-transform duration-300"
             />
           </a>
 
-          <div class="social-icons">
+          <div class="social-icons flex justify-center gap-4 absolute -bottom-[50px] left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-in-out">
             <a
               href="https://facebook.com"
               target="_blank"
@@ -133,60 +136,7 @@ const hasKaren = karen && karen;
     }
   }
 
-  .principal {
-    align-self: flex-start;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 1rem;
-    gap: 0.25rem;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-    border-radius: 1rem;
-    padding: 0.25rem;
-    width: 100%;
-
-    max-inline-size: 1200px;
-    margin-inline: auto;
-
-    &:hover {
-      animation: moveUpDown 0.6s ease-in-out forwards;
-      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    & p {
-      text-align: center;
-      text-wrap: balance;
-      color: rgba(0, 0, 0, 0.526);
-    }
-
-    & img {
-      width: 200px;
-      aspect-ratio: 1/1;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s;
-    }
-  }
-
   .members-lab {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: wrap column;
-    gap: 0.5rem;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-    border-radius: 1rem;
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
-
-    overflow: hidden;
-
     &:hover {
       background-attachment: fixed;
       background-image: radial-gradient(
@@ -200,32 +150,6 @@ const hasKaren = karen && karen;
     &:hover .social-icons {
       bottom: 20px;
       opacity: 1;
-    }
-  }
-
-  .resto {
-    display: grid;
-
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-
-    max-inline-size: 1200px;
-    inline-size: 100%;
-
-    justify-content: center;
-    justify-items: center;
-    margin-inline: auto;
-
-    & .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      position: absolute;
-      bottom: -50px;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0;
-      transition: all 0.3s ease;
     }
   }
 

@@ -3,8 +3,21 @@ import Publications from "@/icons/publications.astro";
 import A from "../a/a.astro";
 import SlotButton from "../slotButton.astro";
 import "swiper/css";
+import PublicationsCard from "@/pages/publications/components/publicationsCard.astro";
 
 const cards = [
+  {
+    title: "Research in Universidad de Talca",
+    img: "/",
+    href: "/publications",
+    icon: Publications,
+  },
+  {
+    title: "Innovation at Universidad de Chile",
+    img: "/",
+    href: "/publications",
+    icon: Publications,
+  },
   {
     title: "Research in Universidad de Talca",
     img: "/",
@@ -49,46 +62,39 @@ const cards = [
   <div class="h-10"></div>
 
   <div class="swiper-pagination"></div>
-  <div
-    class="swiper-button-prev px-4 py-4 rounded-full bg-red-200/50 text-white flex items-center justify-center cursor-pointer hover:bg-red-700 transition-colors duration-300 shadow-lg"
-  >
-  </div>
-  <div
-    class="swiper-button-next h-10 w-10 px-2 py-2 aspect-square rounded-full bg-red-200/50 text-white flex items-center justify-center cursor-pointer hover:bg-red-700 transition-colors duration-300 shadow-lg"
-  >
-  </div>
 </section>
 
-<style>
-  .swiper-button-prev::after,
-  .swiper-button-next::after {
-    content: none !important;
-  }
-</style>
+<style></style>
 
 <script is:inline>
-  const fallbackColors = ['#f87171', '#60a5fa', '#34d399', '#fbbf24', '#a78bfa'];
+  const fallbackColors = [
+    "#f87171",
+    "#60a5fa",
+    "#34d399",
+    "#fbbf24",
+    "#a78bfa",
+  ];
 
-  document.querySelectorAll('.fallback-img').forEach((img) => {
+  document.querySelectorAll(".fallback-img").forEach((img) => {
     img.onerror = () => {
       const parent = img.parentElement;
-      const color = fallbackColors[Math.floor(Math.random() * fallbackColors.length)];
+      const color =
+        fallbackColors[Math.floor(Math.random() * fallbackColors.length)];
 
-      const fallbackDiv = document.createElement('div');
+      const fallbackDiv = document.createElement("div");
       fallbackDiv.className = img.className;
       fallbackDiv.style.backgroundColor = color;
-      fallbackDiv.style.display = 'flex';
-      fallbackDiv.style.alignItems = 'center';
-      fallbackDiv.style.justifyContent = 'center';
-      fallbackDiv.style.color = 'white';
-      fallbackDiv.style.fontWeight = 'bold';
-      fallbackDiv.innerText = img.alt || 'No image';
+      fallbackDiv.style.display = "flex";
+      fallbackDiv.style.alignItems = "center";
+      fallbackDiv.style.justifyContent = "center";
+      fallbackDiv.style.color = "white";
+      fallbackDiv.style.fontWeight = "bold";
+      fallbackDiv.innerText = img.alt || "No image";
 
       img.replaceWith(fallbackDiv);
     };
   });
 </script>
-
 
 <script>
   import Swiper from "swiper";
@@ -113,6 +119,10 @@ const cards = [
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
+    },
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
     },
   });
 </script>

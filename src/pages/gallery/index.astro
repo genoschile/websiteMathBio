@@ -29,13 +29,16 @@ const galleryItems = [
       {
         galleryItems.map((item, index) => (
           <li class="aspect-square cursor-pointer " data-index={index}>
-            <div class="h-full w-full overflow-hidden relative rounded-2xl">
+            <button
+              light-box
+              class="h-full w-full overflow-hidden relative rounded-2xl"
+            >
               <img
                 src={item.src}
                 alt={item.title}
                 class="max-w-full  object-cover h-full"
               />
-            </div>
+            </button>
             <div class="sr-only">
               <h2>{item.title}</h2>
               <p>{item.description}</p>
@@ -45,10 +48,11 @@ const galleryItems = [
       }
     </ul>
   </article>
+
+  <figure id="lightbox" popover></figure>
 </Layout>
 
 <style>
-
   ul:has(li:hover) li {
     filter: grayscale(1);
     transition: filter 0.3s ease;
@@ -57,4 +61,93 @@ const galleryItems = [
   ul:has(li:hover) li:hover {
     filter: none;
   }
+
+  /* popover */
+
+  :where(#lightbox) {
+    border: none;
+    padding: 0;
+
+    /* popover transition out/in */
+    &,
+    &::backdrop {
+      transition:
+        display 0.3s allow-discrete,
+        opacity 0.3s allow-discrete,
+        transform 0.3s,
+        overlay 0.3s;
+      opacity: 0;
+    }
+
+    /* open state */
+    &:popover-open {
+      opacity: 1;
+      transform: scale(1);
+
+      &::backdrop {
+        opacity: 1;
+      }
+    }
+
+    @starting-style {
+      &:popover-open,
+      &:popover-open::backdrop {
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      transform: scale(0.95);
+    }
+
+    &::backdrop {
+      background-image: radial-gradient(#0003, 25%, #000e);
+    }
+
+    /* lightbox sizing image */
+
+    inline-size: 100%;
+    max-inline-size: 50vw;
+    block-size: 100%;
+    max-block-size: 60vh;
+    margin-block: auto;
+    margin-inline: auto;
+
+    overflow: hidden;
+
+    > img {
+      display: flex;
+      max-inline-size: 100%;
+      block-size: auto;
+    }
+  }
 </style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const $pictures = document.querySelectorAll("[light-box]");
+
+    const state = {
+      open: false,
+    };
+
+    $pictures.forEach((picture) => {
+      picture.addEventListener("click", (e) => {
+        if (!state.open) {
+          lightBoxImage(picture);
+        }
+        // console.log("click", picture);
+      });
+    });
+
+    function lightBoxImage(picture) {
+      lightbox.innerHTML = picture.querySelector(":scope img").outerHTML;
+
+      lightbox.showPopover();
+    }
+
+    lightbox.addEventListener("toggle", (e) => {
+      state.open = e.newState === "open";
+    });
+  });
+</script>
