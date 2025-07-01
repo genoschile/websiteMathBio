@@ -13,6 +13,16 @@ const galleryItems = [
     title: "Team Collaboration",
     description: "The team analyzing data and discussing results.",
   },
+    {
+    src: "/images/2.jpeg",
+    title: "Ongoing Experiment",
+    description: "Live cell imaging during a critical experiment.",
+  },
+  {
+    src: "/images/1.jpeg",
+    title: "Team Collaboration",
+    description: "The team analyzing data and discussing results.",
+  },
 ];
 ---
 
@@ -50,7 +60,9 @@ const galleryItems = [
     </ul>
   </article>
 
-  <figure id="lightbox" popover></figure>
+  <figure id="lightbox" popover>
+    <div class="lightbox-inner"></div>
+  </figure>
 </Layout>
 
 <style>
@@ -68,6 +80,21 @@ const galleryItems = [
   :where(#lightbox) {
     border: none;
     padding: 0;
+
+    inline-size: fit-content;
+    block-size: 100%;
+    max-inline-size: 90vw;
+    max-block-size: 90vh;
+    aspect-ratio: 16 / 9;
+    margin: auto;
+
+    & .lightbox-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+    }
 
     /* popover transition out/in */
     &,
@@ -106,20 +133,12 @@ const galleryItems = [
     }
 
     /* lightbox sizing image */
-
-    inline-size: 100%;
-    max-inline-size: 50vw;
-    block-size: 100%;
-    aspect-ratio: 16 / 9;
-    margin-block: auto;
-    margin-inline: auto;
-
-    overflow: hidden;
-
     > img {
-      display: flex;
+      display: block;
       max-inline-size: 100%;
+      max-block-size: 100%;
       block-size: auto;
+      object-fit: contain;
     }
   }
 
@@ -151,9 +170,15 @@ const galleryItems = [
     });
   });
 
-  function lightBoxImage(picture) {
-    lightbox.innerHTML = picture.querySelector(":scope img").outerHTML;
+  // function lightBoxImage(picture) {
+  //   lightbox.innerHTML = picture.querySelector(":scope img").outerHTML;
 
+  //   lightbox.showPopover();
+  // }
+
+  function lightBoxImage(picture) {
+    const imgHTML = picture.querySelector(":scope img").outerHTML;
+    lightbox.querySelector(".lightbox-inner").innerHTML = imgHTML;
     lightbox.showPopover();
   }
 
