@@ -1,18 +1,13 @@
 ---
 import PageHeader from "@components/layout/pageHeader.astro";
 import Layout from "@/layouts/Layout.astro";
-import { getCollection } from "astro:content";
 import ArrowdownIcon from "@icons/arrowdowIcon.astro";
+import { getCollectionsTrue } from "@/utils/content/getCollections";
 
-const collaborations = await getCollection("collaborations");
-const publications = await getCollection("publications");
-const currentPapers = publications.map((pub) => ({
-  ...pub.data,
-}));
+const currentPapers = await getCollectionsTrue("publications");
 
-const currentCollaboration = collaborations.map(({ data }) => ({
-  ...data,
-}));
+const currentCollaboration = await getCollectionsTrue("collaborations");
+
 const collaborationObj = currentCollaboration[0];
 const collaborationArray = Object.values(collaborationObj) as Array<{
   name: string;
@@ -154,7 +149,7 @@ const updatedImages = [
 </style>
 
 <script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     const $listElements = document.querySelectorAll(".list-element");
 
     const closeAllAccordions = () => {

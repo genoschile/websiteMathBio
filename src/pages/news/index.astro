@@ -1,14 +1,15 @@
 ---
+/* components */
 import PageHeader from "@components/layout/pageHeader.astro";
+
+/* layout */
 import Layout from "@/layouts/Layout.astro";
 
-import { getCollection } from "astro:content";
+/* helpers */
+import { getCollectionsTrue } from "@/utils/content/getCollections";
 
-const newsItems = await getCollection("news");
-const currentNews = newsItems.map((item) => ({
-  id: item.id,
-  ...item.data,
-}));
+const currentNews = await getCollectionsTrue("news")
+
 ---
 
 <Layout title="News">

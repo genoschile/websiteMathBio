@@ -1,23 +1,23 @@
 ---
-import Facebook from "../../icons/facebook.astro";
-import Linkedin from "../../icons/linkedin.astro";
-import Github from "../../icons/github.astro";
-import Layout from "../../layouts/Layout.astro";
-import PageHeader from "../../components/layout/pageHeader.astro";
+/* icons */
+import Facebook from "@icons/facebook.astro";
+import Linkedin from "@icons/linkedin.astro";
+import Github from "@icons/github.astro";
 
-import { getCollection } from "astro:content";
+/* layout */
+import Layout from "@layouts/Layout.astro";
 
-const posts = await getCollection("members");
+/* components */
+import PageHeader from "@components/layout/pageHeader.astro";
 
-const members = posts.map((post) => ({
-  id: post.data.id,
-  name: post.data.name,
-  position: post.data.position,
-  grade: post.data.grade,
-  image: post.data.image,
-}));
+/* helpers */
+import { getCollectionsTrue } from "@/utils/content/getCollections";
 
-const karen = members.find((member) => member.id === 1);
+const members = await getCollectionsTrue("members");
+
+const karenEmail = "korostica09@gmail.com"
+
+const karen = members.find((member) => member.email === karenEmail);
 const hasKaren = karen && karen;
 
 const membersWithoutKaren = members.filter((member) => member.id !== 1);
@@ -167,5 +167,3 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
     }
   }
 </style>
-
-

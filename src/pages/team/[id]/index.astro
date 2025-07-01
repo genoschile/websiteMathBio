@@ -4,26 +4,26 @@ import A from "@/components/ui/a/a.astro";
 import ArrowdowIcon from "@/icons/arrowdowIcon.astro";
 import Github from "@/icons/github.astro";
 import Layout from "@/layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import { getCollectionsTrue } from "@/utils/content/getCollections";
 
-const members = await getCollection("members");
+const members = await getCollectionsTrue("members");
 
 export function getStaticPaths() {
   return members.map((member) => ({
-    params: { id: String(member.data.id) },
+    params: { id: String(member.id) },
   }));
 }
 
 const { id } = Astro.params;
 
-const currentMember = members.find((m) => String(m.data.id) === id);
+const currentMember = members.find((m) => String(m.id) === id);
 
 if (!currentMember) {
   throw new Error(`Miembro con ID ${id} no encontrado`);
 }
 ---
 
-<Layout title={currentMember.data.name}>
+<Layout title={currentMember.name}>
   <button
     id="go-back"
     type="button"
@@ -49,25 +49,25 @@ if (!currentMember) {
     >
       <div class="flex items-center flex-col md:flex-row gap-4 shrink-0 images">
         <img
-          transition:name={`img${currentMember.data.name}`}
-          src={currentMember.data.image}
-          alt={`Imágen de ${currentMember.data.name}`}
+          transition:name={`img${currentMember.name}`}
+          src={currentMember.image}
+          alt={`Imágen de ${currentMember.name}`}
           class="profile-image aspect-square max-w-[150px] rounded-lg object-cover w-full rounded-full mb-4"
         />
         <div class="details flex-1 flex flex-col gap-2">
-          <h1 class="text-2xl mb-4">{currentMember.data.name}</h1>
+          <h1 class="text-2xl mb-4">{currentMember.name}</h1>
           <p class="text-xl">
             <strong>Posición:</strong>
-            {currentMember.data.position}
+            {currentMember.position}
           </p>
-          <p><strong>Grado:</strong> {currentMember.data.grade}</p>
+          <p><strong>Grado:</strong> {currentMember.grade}</p>
           <p>
             <strong>Email:</strong>
-            {currentMember.data.email || "No disponible"}
+            {currentMember.email || "No disponible"}
           </p>
         </div>
       </div>
-      <A title="Contáctme" className="cursor-pointer" />
+      <A title="Contáctame" className="cursor-pointer" />
     </article>
   </section>
 </Layout>
@@ -80,14 +80,23 @@ if (!currentMember) {
   }
 </style>
 
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
+<script>
+  document.addEventListener("astro:page-load", () => {
     const goBackBtn = document.getElementById("go-back");
-    if (goBackBtn) {
-      goBackBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        window.history.back();
-      });
+
+    if (!goBackBtn) {
+      console.error("Botón de volver atrás no encontrado");
+      return;
     }
+
+    goBackBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      console.log("Volver atrás");
+      if (document.referrer && window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "/miembros";
+      }
+    });
   });
 </script>

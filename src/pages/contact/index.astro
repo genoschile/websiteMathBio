@@ -102,7 +102,7 @@ const data = contact[0]?.data;
 </Layout>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     const iframe = document.querySelector("#mapWrapper iframe");
     const wrapper = document.getElementById("mapWrapper");
 
@@ -130,9 +130,7 @@ const data = contact[0]?.data;
   .contact-card:hover {
     transform: translateY(-5px);
   }
-</style>
 
-<style>
   .map-container {
     position: relative;
     width: 100%;

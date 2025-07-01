@@ -1,32 +1,29 @@
 ---
+/* components */
 import PageHeader from "@components/layout/pageHeader.astro";
 import Card from "@components/ui/card/card.astro";
 import CardContent from "@components/ui/card/cardContent.astro";
 import CardHeader from "@components/ui/card/cardHeader.astro";
 import CardTitle from "@components/ui/card/cardTitle.astro";
+import Input from "@components/ui/input.astro";
 
-import Layout from "@layouts/Layout.astro";
-
+/* icons */
 import Publications from "@/icons/publications.astro";
-
-const url = new URL(Astro.request.url);
-
 import Searcheyes from "@/icons/searcheyes.astro";
 
-import Input from "@components/ui/input.astro";
-import { getCollection } from "astro:content";
+/* layout */
+import Layout from "@layouts/Layout.astro";
 
-const currentSearchTerm = url.searchParams.get("q") || "";
-const currentYearFilter = url.searchParams.get("year") || "all";
-const currentSortBy = url.searchParams.get("sort") || "year_desc";
+/* helpers */
+import { getCollectionsTrue } from "@/utils/content/getCollections";
 
-const availableYears = ["all", "2024", "2023", "2022", "2021", "2020"];
+// const currentSearchTerm = url.searchParams.get("q") || "";
+// const currentYearFilter = url.searchParams.get("year") || "all";
+// const currentSortBy = url.searchParams.get("sort") || "year_desc";
 
-const publications = await getCollection("publications");
+// const availableYears = ["all", "2024", "2023", "2022", "2021", "2020"];
 
-const currentPapers = publications.map((pub) => ({
-  ...pub.data,
-}));
+const currentPapers = await getCollectionsTrue("publications");
 ---
 
 <template id="publication-template">
