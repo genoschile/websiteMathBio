@@ -32,6 +32,7 @@ const galleryItems = [
             <button
               light-box
               class="h-full w-full overflow-hidden relative rounded-2xl"
+              hidden-on-mobile
             >
               <img
                 src={item.src}
@@ -109,7 +110,7 @@ const galleryItems = [
     inline-size: 100%;
     max-inline-size: 50vw;
     block-size: 100%;
-    max-block-size: 60vh;
+    aspect-ratio: 16 / 9;
     margin-block: auto;
     margin-inline: auto;
 
@@ -121,9 +122,20 @@ const galleryItems = [
       block-size: auto;
     }
   }
+
+  @media (max-width: 640px) {
+    [light-box] {
+      pointer-events: none;
+      cursor: default;
+    }
+
+    #lightbox {
+      display: none !important;
+    }
+  }
 </style>
 
-<script>
+<script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
     const $pictures = document.querySelectorAll("[light-box]");
 

@@ -1,9 +1,7 @@
 ---
 import Publications from "@/icons/publications.astro";
 import A from "../a/a.astro";
-import SlotButton from "../slotButton.astro";
 import "swiper/css";
-import PublicationsCard from "@/pages/publications/components/publicationsCard.astro";
 
 const cards = [
   {
@@ -34,25 +32,19 @@ const cards = [
 ---
 
 <section class="swiper px-4" id="swipeContainer">
-  <div class="swiper-wrapper flex gap-4">
+  <div class="swiper-wrapper flex gap-4 h-full min-h-[400px]">
     {
       cards.map((card) => (
-        <article class="swiper-slide text-center mx-auto bg-gradient-to-br from-primary/10 via-background to-background rounded-xl border border-gray-400">
-          <figure class="relative w-full justify-center items-center flex flex-col">
+        <article class="swiper-slide text-center mx-auto bg-gradient-to-br from-primary/10 via-background to-background rounded-xl border border-gray-400 h-full min-h-full flex flex-col">
+          <figure class="flex-1 relative w-full flex flex-col justify-center items-center">
             <img
               src={card.img}
               alt={card.title}
-              class="w-full aspect-[3/1] object-cover rounded-t-xl fallback-img"
+              class="w-full aspect-video md:aspect-[3/1]  object-cover rounded-t-xl fallback-img mask-b-from-0.5"
             />
             <figcaption class="sr-only -mt-6 text-lg font-semibold text-black/80">
               {card.title}
             </figcaption>
-            <A
-              href={card.href}
-              title="Explore Publications"
-              icon={card.icon}
-              className="mx-auto absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-white text-primary rounded-full p-2 shadow-lg hover:bg-primary hover:text-white transition-colors duration-300"
-            />
           </figure>
         </article>
       ))

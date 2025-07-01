@@ -21,6 +21,8 @@ const karen = members.find((member) => member.id === 1);
 const hasKaren = karen && karen;
 
 const membersWithoutKaren = members.filter((member) => member.id !== 1);
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "");
 ---
 
 <Layout title="Home">
@@ -80,13 +82,13 @@ const membersWithoutKaren = members.filter((member) => member.id !== 1);
           <p class="text-center text-sm balance">{member.grade}</p>
           <p class="text-center text-base balance">{member.position}</p>
 
-          <a href={`#`}>
-            {/* <a href={`${currentPath}/${member.id}`}> */}
+          <a href={`${currentPath}/${member.id}`}>
             <img
               transition:name={`img${member.name}`}
               src={member.image}
               alt={member.name}
               class="rounded-full object-cover shadow-md w-[200px] aspect-square transition-transform duration-300"
+              transition:persist
             />
           </a>
 
@@ -165,3 +167,5 @@ const membersWithoutKaren = members.filter((member) => member.id !== 1);
     }
   }
 </style>
+
+

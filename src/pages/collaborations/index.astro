@@ -2,16 +2,17 @@
 import PageHeader from "@components/layout/pageHeader.astro";
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import Card from "@/components/ui/card/card.astro";
+import ArrowdownIcon from "@icons/arrowdowIcon.astro";
 
 const collaborations = await getCollection("collaborations");
+const publications = await getCollection("publications");
+const currentPapers = publications.map((pub) => ({
+  ...pub.data,
+}));
 
 const currentCollaboration = collaborations.map(({ data }) => ({
   ...data,
 }));
-
-const profileNames = [{ name: "The squad" }];
-
 const collaborationObj = currentCollaboration[0];
 const collaborationArray = Object.values(collaborationObj) as Array<{
   name: string;
@@ -21,11 +22,6 @@ const collaborationArray = Object.values(collaborationObj) as Array<{
   urlImage: string;
   urlLinkedIn: string;
 }>;
-
-const updatedProfileNames = [
-  ...profileNames,
-  ...collaborationArray.map((profile) => ({ name: profile.name })),
-];
 
 const updatedImages = [
   ...collaborationArray.map((profile) => ({
@@ -42,121 +38,184 @@ const updatedImages = [
   />
 
   <section
-    class="p-4 rounded-md max-w-full w-full h-screen object-cover team relative flex flex-col-reverse lg:flex-col items-center gap-12 overflow-hidden"
+    class="p-4 rounded-md max-w-full size-full min-h-screen object-cover relative gap-12 overflow-hidden"
   >
-    <div
-      class="profile-images gap-4 inline-flex justify-center items-center w-max my-12 overflow-hidden"
+    <ul
+      class="profile-images flex flex-col gap-10 justify-center items-center w-full overflow-hidden"
     >
       {
         updatedImages.map((image, index) => (
-          <div class="profile-item">
-            <img src={image.src} alt={image.alt} />
-            <div class="profile-name">
-              {updatedProfileNames[index + 1]?.name ?? ""}
+          <li class="rounded-lg border bg-card text-card-foreground shadow-sm w-full px-4 py-2 flex flex-col cursor-pointer hover:bg-card-hover transition-colors transition-width duration-200 ease-in-out relative group list-element">
+            <div class="flex items-center gap-4 ">
+              <figure class="h-20 w-20  ">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  class="max-w-full max-h-full object-cover rounded-sm"
+                />
+                <figcaption class="sr-only">{image.alt}</figcaption>
+              </figure>
+
+              <h2 class="text-2xl font-bold ">
+                {collaborationArray[index].name}
+              </h2>
+
+              <button
+                class="ml-auto toggle-btn transition-transform duration-300 "
+                aria-expanded="false"
+              >
+                <ArrowdownIcon aria-label="View profile details" />
+              </button>
             </div>
-          </div>
+
+            <div class="accordion-content h-0 overflow-hidden">
+              <h1 class="text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+                {collaborationArray[index].position} -{" "}
+                {collaborationArray[index].grade}
+              </h1>
+
+              <hr class="mt-2" />
+
+              <p class="text-lg font-semibold mt-2 text-muted-foreground my-4 text-center">
+                {collaborationArray[index].description}
+              </p>
+
+              <h1 class="text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+                Publications by {collaborationArray[index].name}
+              </h1>
+
+              <hr class="mt-2" />
+
+              <ul id="search-results" class="space-y-4">
+                {currentPapers.filter(
+                  (paper) =>
+                    paper.authors &&
+                    paper.authors.includes(collaborationArray[index].name)
+                ).length > 0 ? (
+                  currentPapers
+                    .filter(
+                      (paper) =>
+                        paper.authors &&
+                        paper.authors.includes(collaborationArray[index].name)
+                    )
+                    .map((paper) => (
+                      <li class="border rounded-md p-4 shadow-sm mb-4 list-papers-team">
+                        <h3 class="title font-semibold text-lg">
+                          {paper.title}
+                        </h3>
+                        <p class="authors text-sm text-muted-foreground">
+                          {paper.authors.join(", ")}
+                        </p>
+                        <p class="meta text-xs italic">
+                          {paper.type} ({paper.year})
+                        </p>
+                        {paper.abstract && (
+                          <p class="abstract mt-2 text-sm text-foreground line-clamp-3">
+                            {paper.abstract}
+                          </p>
+                        )}
+                        {paper.tags && paper.tags.length > 0 && (
+                          <p class="tags mt-2 text-xs text-muted-foreground">
+                            <strong>Tags:</strong> {paper.tags.join(", ")}
+                          </p>
+                        )}
+                        {paper.url && (
+                          <a
+                            href={paper.url}
+                            class="url text-primary text-sm mt-2 inline-block hover:underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View Publication
+                          </a>
+                        )}
+                      </li>
+                    ))
+                ) : (
+                  <li class="border rounded-md p-4 shadow-sm mb-4 text-center text-muted-foreground mt-4">
+                    No publications found.
+                  </li>
+                )}
+              </ul>
+            </div>
+          </li>
         ))
       }
-    </div>
-
-    <div class="profile-names relative w-full h-[10rem] overflow-hidden">
-      {
-        updatedProfileNames.map(({ name }, index) => (
-          <div class={`name${index === 0 ? " default" : ""}`}>
-            <h1>{name}</h1>
-          </div>
-        ))
-      }
-    </div>
-
-    <Card className="overflow-hidden shadow-lg w-full h-[400px]">
-      <h1>hola</h1>
-    </Card>
+    </ul>
   </section>
 </Layout>
 
 <style>
-  .profile-images {
-    height: auto;
-  }
-
-  .profile-item {
-    position: relative;
-    width: 100px; /* Tamaño fijo para que scale se note mejor */
-    cursor: pointer;
-    text-align: center;
-  }
-
-  .profile-item img {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-  }
-
-  .profile-name {
-    opacity: 0;
-    font-weight: 600;
-    margin-top: 0.5rem;
-    font-family: Arial, sans-serif;
-    font-size: 1rem;
-    color: #222;
-    transition: opacity 0.3s ease;
-    user-select: none;
-  }
-
-  .profile-item:hover img {
-    transform: scale(1.1);
-  }
-
-  .profile-item:hover .profile-name {
-    opacity: 1;
-  }
-
-  .name.default h1 {
-    color: black;
-    transform: translateY(-100%);
-  }
-
-  .name h1 {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    text-transform: uppercase;
-    font-family: Arial, sans-serif;
-    font-size: clamp(4rem, 8vw, 10rem);
-    font-weight: 900;
-    letter-spacing: -0.5rem;
-    line-height: 1;
-    user-select: none;
-    transform: translateY(100%);
-  }
-
-  @media (max-width: 900px) {
-    .profile-images {
-      flex-wrap: wrap;
-      max-width: 90%;
-      justify-content: center;
-    }
-
-    .profile-item {
-      width: 70px;
-      height: auto;
-      margin-bottom: 1rem;
-    }
-
-    .profile-item img {
-      height: 70px;
-    }
-
-    .profile-name {
-      font-size: 0.85rem;
-    }
-
-    h1 {
-      font-size: 4rem;
-      letter-spacing: 0;
+  .list-papers-team {
+    &:nth-child(1) {
+      margin-block-start: 1rem;
     }
   }
 </style>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const $listElements = document.querySelectorAll(".list-element");
+
+    const closeAllAccordions = () => {
+      $listElements.forEach((el) => {
+        const btn = el.querySelector(".toggle-btn");
+        const content = el.querySelector(".accordion-content");
+
+        btn.setAttribute("aria-expanded", "false");
+        btn.classList.remove("rotate-180");
+
+        content.style.height = "0px";
+        content.classList.remove("pt-4");
+        content.classList.remove("open");
+      });
+    };
+
+    $listElements.forEach((element) => {
+      const button = element.querySelector(".toggle-btn");
+      const content = element.querySelector(".accordion-content");
+
+      content.style.overflow = "hidden";
+      content.style.transition = "height 300ms ease-in-out";
+
+      const toggleAccordion = () => {
+        const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+        if (!isExpanded) {
+          closeAllAccordions();
+        }
+
+        const nowExpanded = !isExpanded;
+        button.setAttribute("aria-expanded", String(nowExpanded));
+        button.classList.toggle("rotate-180", nowExpanded);
+
+        if (nowExpanded) {
+          const scrollHeight = content.scrollHeight;
+          content.style.height = scrollHeight + "px";
+          content.classList.add("pt-4");
+          content.classList.add("open");
+        } else {
+          content.style.height = "0px";
+          content.classList.remove("pt-4");
+          content.classList.remove("open");
+        }
+      };
+
+      element.addEventListener("click", () => {
+        toggleAccordion();
+      });
+
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+        toggleAccordion();
+      });
+
+      // Reset height to 'auto' after transition for flexibility
+      content.addEventListener("transitionend", (e) => {
+        if (content.classList.contains("open")) {
+          content.style.height = "auto";
+        }
+      });
+    });
+  });
+</script>
