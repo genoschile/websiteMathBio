@@ -91,11 +91,10 @@ if (!currentMember) {
 
     goBackBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      console.log("Volver atrás");
       if (document.referrer && window.history.length > 1) {
         window.history.back();
       } else {
-        window.location.href = "/miembros";
+        window.location.href = "/team";
       }
     });
   });
