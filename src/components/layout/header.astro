@@ -116,16 +116,28 @@ const navLinks = [
     const closeBtn = document.getElementById("close-btn") as HTMLButtonElement;
     const mobileMenu = document.getElementById("mobile-menu") as HTMLElement;
 
+    function lockBodyScroll() {
+      const scrollBarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = scrollBarWidth + "px";
+    }
+
+    function unlockBodyScroll() {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    }
+
     function openMenu(): void {
       mobileMenu.classList.remove("translate-x-full");
       mobileMenu.classList.add("translate-x-0");
-      document.body.style.overflow = "hidden"; // bloquear scroll fondo
+      lockBodyScroll();
     }
 
     function closeMenu(): void {
       mobileMenu.classList.add("translate-x-full");
       mobileMenu.classList.remove("translate-x-0");
-      document.body.style.overflow = ""; // permitir scroll
+      unlockBodyScroll();
     }
 
     menuBtn.addEventListener("click", openMenu);
