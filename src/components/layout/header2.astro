@@ -5,7 +5,6 @@ import Gallery from "@/icons/gallery.astro";
 import Init from "@/icons/init.astro";
 import News from "@/icons/news.astro";
 import Teams from "@/icons/teams.astro";
-import Github from "@icons/github.astro";
 import Menu from "@icons/menu.astro";
 import Publications from "@icons/publications.astro";
 
@@ -29,25 +28,27 @@ const navLinks = [
 ];
 ---
 
-<header class="hero">
+<header class="hero h-16">
   <div class="header-container">
-    <div>
+    <div class="px-4 sm:px-6 ">
       <a
         href="/"
-        class="flex items-center gap-2 text-indigo-600 hover:text-indigo-500 transition-colors font-semibold text-xl"
+        class="text-indigo-600 hover:text-indigo-500 transition-colors font-semibold text-xl"
       >
         <!-- <Github style="width: 28px; height: 28px;" /> -->
         MathBio Lab
       </a>
     </div>
-    <div>
+
+    <div class="px-4 sm:px-6 ">
       <input type="checkbox" id="sidebar-active" class="hidden" />
       <label for="sidebar-active" class="open-sidebar-button">
         <Menu />
       </label>
 
       <label id="overlay" for="sidebar-active"></label>
-      <div class="links-container">
+
+      <nav id="desktop-nav" class="links-container">
         <label for="sidebar-active" class="close-sidebar-button">
           <a
             href="/"
@@ -58,27 +59,24 @@ const navLinks = [
           </a>
           <Close />
         </label>
-
-        <nav id="desktop-nav" >
-          <ul class="space-x-2 font-medium text-sm">
-            {
-              navLinks.map(({ href, label, Icon }) => (
-                <li>
-                  <a
-                    href={href}
-                    class={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2
+        <ul class="space-x-2 font-medium text-sm">
+          {
+            navLinks.map(({ href, label, Icon }) => (
+              <li>
+                <a
+                  href={href}
+                  class={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2
               ${Astro.url.pathname === href ? "bg-indigo-600 text-white" : "text-gray-700 hover:bg-indigo-100 hover:text-indigo-600"}
             `}
-                  >
-                    <Icon style="width: 18px; height: 18px;" />
-                    {label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </nav>
-      </div>
+                >
+                  <Icon style="width: 18px; height: 18px;" />
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
     </div>
   </div>
 </header>
@@ -111,14 +109,8 @@ const navLinks = [
     position: sticky;
     top: 0;
     z-index: 1000;
-
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-    height: 60px;
     background-color: white;
-    display: flex;
-    align-items: center;
-
     color: var(--text-color);
 
     nav {
@@ -133,11 +125,20 @@ const navLinks = [
 
     .header-container {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      inline-size: 100%;
-      max-inline-size: 1200px;
-      margin: 0 auto;
+      block-size: 100%;
+      width: 100%;
+      max-width: 1480px;
+      margin-inline: auto;
+
+      > * {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      > :first-child {
+        margin-right: auto;
+      }
     }
 
     .home-link {
@@ -153,7 +154,7 @@ const navLinks = [
     align-items: center;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
     .hero {
       nav {
         ul {

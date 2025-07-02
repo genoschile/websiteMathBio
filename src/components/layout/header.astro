@@ -46,17 +46,24 @@ const navLinks = [
         class="hidden xl:flex space-x-2 font-medium text-sm"
       >
         {
-          navLinks.map(({ href, label, Icon }) => (
-            <a
-              href={href}
-              class={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2
-              ${Astro.url.pathname === href ? "bg-indigo-600 text-white" : "text-gray-700 hover:bg-indigo-100 hover:text-indigo-600"}
-            `}
-            >
-              <Icon style="width: 18px; height: 18px;" />
-              {label}
-            </a>
-          ))
+          navLinks.map(({ href, label, Icon }) => {
+            const isActive =
+              href === "/"
+                ? Astro.url.pathname === "/"
+                : Astro.url.pathname.startsWith(href);
+
+            return (
+              <a
+                href={href}
+                class={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2
+          ${isActive ? "bg-indigo-600 text-white" : "text-gray-700 hover:bg-indigo-100 hover:text-indigo-600"}
+        `}
+              >
+                <Icon style="width: 18px; height: 18px;" />
+                {label}
+              </a>
+            );
+          })
         }
       </nav>
 
@@ -95,17 +102,24 @@ const navLinks = [
   </div>
   <nav id="mobile-nav" class="flex flex-col space-y-2 font-medium text-sm">
     {
-      navLinks.map(({ href, label, Icon }) => (
-        <a
-          href={href}
-          class={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2
-          ${Astro.url.pathname === href ? "bg-indigo-600 text-white" : "text-gray-700 hover:bg-indigo-100 hover:text-indigo-600"}
+      navLinks.map(({ href, label, Icon }) => {
+        const isActive =
+          href === "/"
+            ? Astro.url.pathname === "/"
+            : Astro.url.pathname.startsWith(href);
+
+        return (
+          <a
+            href={href}
+            class={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2
+          ${isActive ? "bg-indigo-600 text-white" : "text-gray-700 hover:bg-indigo-100 hover:text-indigo-600"}
         `}
-        >
-          <Icon style="width: 18px; height: 18px;" />
-          {label}
-        </a>
-      ))
+          >
+            <Icon style="width: 18px; height: 18px;" />
+            {label}
+          </a>
+        );
+      })
     }
   </nav>
 </div>
