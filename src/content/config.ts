@@ -11,7 +11,6 @@ const membersCollection = defineCollection({
 
   schema: z.object({
     name: z.string(),
-    id: z.number(),
     position: z.string(),
     grade: z.string(),
     email: z.string().email().optional(),

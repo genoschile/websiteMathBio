@@ -20,7 +20,9 @@ const karenEmail = "korostica09@gmail.com";
 const karen = members.find((member) => member.email === karenEmail);
 const hasKaren = karen && karen;
 
-const membersWithoutKaren = members.filter((member) => member.id !== 1);
+const membersWithoutKaren = members.filter(
+  (member) => member.email !== karenEmail
+);
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "");
 ---
