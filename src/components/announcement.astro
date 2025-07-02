@@ -1,21 +1,17 @@
 ---
+// Component or page in Astro
 const currentText = "¡Bienvenido a MathBio-Lab!";
 ---
 
-<section class="announcement-bar animate-fade-in">
+<section
+  id="welcomeBar"
+  class="announcement-bar hidden px-8 py-4 text-white text-center font-bold text-lg bg-gradient-to-r from-blue-800 to-purple-600 shadow-md rounded-b-md sm:px-4 sm:py-3 sm:text-base"
+>
   {currentText}
 </section>
 
 <style>
   .announcement-bar {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    text-align: center;
-    font-weight: 700;
-    color: white;
-    background: linear-gradient(90deg, #1e3a8a, #9333ea);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 0 0 0.5rem 0.5rem;
     opacity: 0;
     transform: translateY(-10px);
     animation: fade-in 0.8s ease forwards;
@@ -27,23 +23,15 @@ const currentText = "¡Bienvenido a MathBio-Lab!";
       transform: translateY(0);
     }
   }
-
-  @media (max-width: 640px) {
-    .announcement-bar {
-      font-size: 1rem;
-      padding: 0.75rem 1rem;
-    }
-  }
-  .announcement-bar.hidden {
-    display: none;
-  }
 </style>
 
 <script is:inline>
-  const bar = document.getElementById("welcomeBar");
+  window.addEventListener("astro:page-load", () => {
+    const bar = document.getElementById("welcomeBar");
 
-  if (!sessionStorage.getItem("seenWelcome")) {
-    bar.classList.remove("hidden");
-    sessionStorage.setItem("seenWelcome", "true");
-  }
+    if (!sessionStorage.getItem("seenWelcome") && bar) {
+      bar.classList.remove("hidden");
+      sessionStorage.setItem("seenWelcome", "true");
+    }
+  });
 </script>

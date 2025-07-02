@@ -4,22 +4,22 @@ import Layout from "../../layouts/Layout.astro";
 
 const galleryItems = [
   {
-    src: "/images/2.jpeg",
+    src: "/gallery/2.jpeg",
     title: "Ongoing Experiment",
     description: "Live cell imaging during a critical experiment.",
   },
   {
-    src: "/images/1.jpeg",
+    src: "/gallery/1.jpeg",
     title: "Team Collaboration",
     description: "The team analyzing data and discussing results.",
   },
-    {
-    src: "/images/2.jpeg",
+  {
+    src: "/gallery/3.jpeg",
     title: "Ongoing Experiment",
     description: "Live cell imaging during a critical experiment.",
   },
   {
-    src: "/images/1.jpeg",
+    src: "/gallery/4.jpeg",
     title: "Team Collaboration",
     description: "The team analyzing data and discussing results.",
   },
@@ -155,34 +155,36 @@ const galleryItems = [
 </style>
 
 <script is:inline>
-  const $pictures = document.querySelectorAll("[light-box]");
+  document.addEventListener("astro:page-load", () => {
+    const $pictures = document.querySelectorAll("[light-box]");
 
-  const state = {
-    open: false,
-  };
+    const state = {
+      open: false,
+    };
 
-  $pictures.forEach((picture) => {
-    picture.addEventListener("click", (e) => {
-      if (!state.open) {
-        lightBoxImage(picture);
-      }
-      // console.log("click", picture);
+    $pictures.forEach((picture) => {
+      picture.addEventListener("click", (e) => {
+        if (!state.open) {
+          lightBoxImage(picture);
+        }
+        // console.log("click", picture);
+      });
     });
-  });
 
-  // function lightBoxImage(picture) {
-  //   lightbox.innerHTML = picture.querySelector(":scope img").outerHTML;
+    // function lightBoxImage(picture) {
+    //   lightbox.innerHTML = picture.querySelector(":scope img").outerHTML;
 
-  //   lightbox.showPopover();
-  // }
+    //   lightbox.showPopover();
+    // }
 
-  function lightBoxImage(picture) {
-    const imgHTML = picture.querySelector(":scope img").outerHTML;
-    lightbox.querySelector(".lightbox-inner").innerHTML = imgHTML;
-    lightbox.showPopover();
-  }
+    function lightBoxImage(picture) {
+      const imgHTML = picture.querySelector(":scope img").outerHTML;
+      lightbox.querySelector(".lightbox-inner").innerHTML = imgHTML;
+      lightbox.showPopover();
+    }
 
-  lightbox.addEventListener("toggle", (e) => {
-    state.open = e.newState === "open";
+    lightbox.addEventListener("toggle", (e) => {
+      state.open = e.newState === "open";
+    });
   });
 </script>

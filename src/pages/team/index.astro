@@ -75,7 +75,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
   >
     {
       membersWithoutKaren.map((member) => (
-        <div class="members-lab bg-white/90 members-lab relative flex flex-wrap flex-col justify-center items-center gap-2 w-full max-w-[400px] shadow-[0_0_5px_rgba(0,0,0,0.4)] rounded-2xl transition duration-300 ease-in-out overflow-hidden">
+        <div class="members-lab bg-white/90 members-lab relative flex flex-wrap flex-col justify-center items-center gap-2 w-full max-w-[400px] shadow-[0_0_5px_rgba(0,0,0,0.4)] rounded-2xl transition duration-300 ease-in-out overflow-hidden px-2 py-4">
           <h2 class="inline-block text-center mb-1.5 font-semibold text-lg text-black/80 balance">
             {member.name}
           </h2>
@@ -92,21 +92,25 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
             />
           </a>
 
-          <div class="social-icons flex justify-center gap-4 absolute -bottom-[50px] left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-in-out">
+          <div class="social-icons flex justify-center gap-4 absolute -bottom-[50px] left-1/2 -translate-x-1/2 opacity-0 transition-all duration-300 ease-in-out ">
             <a
               href="https://facebook.com"
               target="_blank"
-              class="icon facebook"
+              class="icon facebook w-[50px] h-[50px] flex justify-center items-center bg-indigo-100  hover:bg-indigo-600 text-black no-underline rounded-full text-[1.2rem] transition-colors duration-300 p-[0.3rem] cursor-pointer hover:text-white"
             >
               <Facebook />
             </a>
-            <a href="https://twitter.com" target="_blank" class="icon twitter">
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              class="icon twitter w-[50px] h-[50px] flex justify-center items-center bg-indigo-100  hover:bg-indigo-600 hover:text-white text-black no-underline rounded-full text-[1.2rem] transition-colors duration-300 p-[0.3rem] cursor-pointer"
+            >
               <Github />
             </a>
             <a
               href="https://instagram.com"
               target="_blank"
-              class="linkedin icon"
+              class="linkedin icon w-[50px] h-[50px] flex justify-center items-center bg-indigo-100 hover:bg-indigo-600 text-black no-underline rounded-full text-[1.2rem] transition-colors duration-300 p-[0.3rem] cursor-pointer hover:text-white"
             >
               <Linkedin />
             </a>
@@ -118,26 +122,6 @@ const currentPath = Astro.url.pathname.replace(/\/$/, "");
 </Layout>
 
 <style>
-  .icon {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #333;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    transition: background-color 0.3s ease;
-    padding: 0.3rem;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #555;
-    }
-  }
-
   .members-lab {
     &:hover {
       background-attachment: fixed;

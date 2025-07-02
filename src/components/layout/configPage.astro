@@ -1,10 +1,21 @@
 ---
-
+const menuOptions = [
+  {
+    label: "Change language",
+    action: "changeLanguage",
+    href: "#",
+  },
+  {
+    label: "Toggle theme",
+    action: "toggleTheme",
+    href: "#",
+  },
+];
 ---
 
 <nav
-  class="fixed left-4 bottom-4 z-10 bg-red-300 rounded-full p-2 grid content-center shadow-lg cursor-pointer hover:bg-red-400 transition-colors"
   id="dropdownToggle"
+  class="fixed left-4 bottom-4 z-10 bg-red-300 rounded-full p-2 grid content-center shadow-lg cursor-pointer hover:bg-red-400 transition-all duration-300"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -22,35 +33,103 @@
   id="dropdownMenu"
   class="hidden fixed left-10 bottom-24 bg-white shadow-lg rounded-lg p-2 space-y-2 border border-gray-200"
 >
-  <li>
-    <a href="/option1" class="block px-4 py-2 hover:bg-gray-100 rounded"
-      >Opción 1</a
-    >
-  </li>
-  <li>
-    <a href="/option2" class="block px-4 py-2 hover:bg-gray-100 rounded"
-      >Opción 2</a
-    >
-  </li>
-  <li>
-    <a href="/option3" class="block px-4 py-2 hover:bg-gray-100 rounded"
-      >Opción 3</a
-    >
-  </li>
+  {
+    menuOptions.map((item) => (
+      <li>
+        <a
+          href={item.href}
+          data-action={item.action}
+          class="block px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
+        >
+          {item.label}
+        </a>
+      </li>
+    ))
+  }
 </ul>
 
+<style>
+  .nav-hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+</style>
+
 <script is:inline>
-  const toggle = document.getElementById("dropdownToggle");
-  const menu = document.getElementById("dropdownMenu");
+  document.addEventListener("astro:page-load", () => {
+    const toggle = document.getElementById("dropdownToggle");
+    const menu = document.getElementById("dropdownMenu");
 
-  toggle.addEventListener("click", () => {
-    menu.classList.toggle("hidden");
+    toggle.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.add("hidden");
+      }
+    });
   });
+</script>
 
-  // Cierra al hacer clic fuera
-  document.addEventListener("click", (e) => {
-    if (!toggle.contains(e.target) && !menu.contains(e.target)) {
-      menu.classList.add("hidden");
+<script is:inline>
+  document.addEventListener("astro:page-load", () => {
+    const $nav = document.getElementById("dropdownToggle");
+
+    let [lastScroll, ticking] = [window.scrollY, false];
+
+    function handleScroll() {
+      const currentScroll = window.scrollY;
+
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        // Scrolling down → Ocultar nav
+        $nav.classList.add("nav-hidden");
+      } else if (currentScroll < lastScroll) {
+        // Scrolling up → Mostrar nav
+        $nav.classList.remove("nav-hidden");
+      }
+
+      lastScroll = currentScroll;
+      ticking = false;
     }
+
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(handleScroll);
+        ticking = true;
+      }
+    });
+  });
+</script>
+
+<script is:inline>
+  document.addEventListener("astro:page-load", () => {
+    const menu = document.getElementById("dropdownMenu");
+
+    menu?.addEventListener("click", (e) => {
+      const target = e.target.closest("a[data-action]");
+      if (!target) return;
+
+      const action = target.dataset.action;
+
+      switch (action) {
+        case "changeLanguage":
+          alert("Change language clicked");
+          break;
+        case "toggleTheme":
+          alert("Change language clicked");
+          // document.documentElement.classList.toggle("dark");
+          break;
+        case "openSettings":
+          alert("Open settings clicked");
+          break;
+      }
+
+      e.preventDefault();
+    });
   });
 </script>

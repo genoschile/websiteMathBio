@@ -2,26 +2,48 @@
 import Github from "../../icons/github.astro";
 
 const currentYear = new Date().getFullYear();
+
+const socialLinks = [
+  {
+    href: "https://twitter.com",
+    label: "Twitter",
+    icon: Github,
+  },
+  {
+    href: "https://linkedin.com",
+    label: "LinkedIn",
+    icon: Github,
+  },
+  {
+    href: "https://github.com",
+    label: "GitHub",
+    icon: Github,
+  },
+];
 ---
 
-<footer class="bg-card border-t border-border py-8 text-center text-muted-foreground ">
+<footer
+  class="bg-card border-t border-border py-8 text-center text-muted-foreground"
+>
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-center space-x-6 mb-4 ">
-      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="hover:text-primary transition-colors">
-        <Github />
-      </a>
-      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="hover:text-primary transition-colors">
-        <Github/>
-      </a>
-      <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="hover:text-primary transition-colors">
-        <Github  />
-      </a>
+    <div class="flex justify-center space-x-6 mb-4">
+      {
+        socialLinks.map(({ href, label, icon: Icon }) => (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+            class="hover:text-primary transition-colors p-2 rounded-full hover:bg-indigo-100"
+          >
+            <Icon />
+          </a>
+        ))
+      }
     </div>
     <p class="text-sm">
       &copy; {currentYear} MathBio Research Group. All rights reserved.
     </p>
-    <p class="text-xs mt-2">
-      Powered by MathBio
-    </p>
+    <p class="text-xs mt-2">Powered by MathBio</p>
   </div>
 </footer>

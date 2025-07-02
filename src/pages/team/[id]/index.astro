@@ -27,7 +27,7 @@ if (!currentMember) {
   <button
     id="go-back"
     type="button"
-    class="btn-back inline-block px-4 py-2 mb-4 bg-black text-white no-underline rounded self-start transition-colors duration-300 hover:bg-black/70 hover:text-black"
+    class="btn-back inline-block px-4 py-2 mb-4 bg-indigo-600 text-white no-underline rounded self-start transition-colors duration-300 hover:bg-indigo-500 cursor-pointer"
     aria-label="Volver atrás"
   >
     <ArrowdowIcon />
@@ -67,7 +67,11 @@ if (!currentMember) {
           </p>
         </div>
       </div>
-      <A title="Contáctame" className="cursor-pointer" />
+      <A
+        href={`mailto:${currentMember.email}`}
+        title="Contáctame"
+        className="cursor-pointer"
+      />
     </article>
   </section>
 </Layout>

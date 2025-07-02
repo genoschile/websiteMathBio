@@ -17,7 +17,7 @@ const navLinks = [
   {
     href: "/pdfs",
     label: "PDFs",
-    Icon: Publications
+    Icon: Publications,
   },
   {
     href: "/collaborations",
@@ -111,22 +111,24 @@ const navLinks = [
 </div>
 
 <script>
-  const menuBtn = document.getElementById("menu-btn") as HTMLButtonElement;
-  const closeBtn = document.getElementById("close-btn") as HTMLButtonElement;
-  const mobileMenu = document.getElementById("mobile-menu") as HTMLElement;
+  document.addEventListener("astro:page-load", () => {
+    const menuBtn = document.getElementById("menu-btn") as HTMLButtonElement;
+    const closeBtn = document.getElementById("close-btn") as HTMLButtonElement;
+    const mobileMenu = document.getElementById("mobile-menu") as HTMLElement;
 
-  function openMenu(): void {
-    mobileMenu.classList.remove("translate-x-full");
-    mobileMenu.classList.add("translate-x-0");
-    document.body.style.overflow = "hidden"; // bloquear scroll fondo
-  }
+    function openMenu(): void {
+      mobileMenu.classList.remove("translate-x-full");
+      mobileMenu.classList.add("translate-x-0");
+      document.body.style.overflow = "hidden"; // bloquear scroll fondo
+    }
 
-  function closeMenu(): void {
-    mobileMenu.classList.add("translate-x-full");
-    mobileMenu.classList.remove("translate-x-0");
-    document.body.style.overflow = ""; // permitir scroll
-  }
+    function closeMenu(): void {
+      mobileMenu.classList.add("translate-x-full");
+      mobileMenu.classList.remove("translate-x-0");
+      document.body.style.overflow = ""; // permitir scroll
+    }
 
-  menuBtn.addEventListener("click", openMenu);
-  closeBtn.addEventListener("click", closeMenu);
+    menuBtn.addEventListener("click", openMenu);
+    closeBtn.addEventListener("click", closeMenu);
+  });
 </script>
