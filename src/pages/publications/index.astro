@@ -74,17 +74,17 @@ const currentPapers = await getCollectionsTrue("publications");
             </div>
           </div>
 
-          <div class="md:col-span-3 flex justify-end mt-4">
+          <!-- <div class="md:col-span-3 flex justify-end mt-4">
             <button
               type="submit"
               class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-900 cursor-pointer transition-colors "
             >
               Apply Filters
             </button>
-          </div>
+          </div> -->
         </form>
 
-        <div class="search-readout text-sm text-muted-foreground mb-4">
+        <div class="search-readout text-sm text-muted-foreground mb-4 mt-5">
           Showing all publications
         </div>
       </CardContent>
@@ -183,7 +183,7 @@ const currentPapers = await getCollectionsTrue("publications");
 				}
 				</style></svg>`;
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     const $inputSearch = document.querySelector(
       "#search-publications"
     ) as HTMLInputElement;
