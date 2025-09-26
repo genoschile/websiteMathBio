@@ -1,0 +1,37 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark;
+  --inline-width: 800px;
+}
+
+body {
+  min-block-size: 100dvh;
+  inline-size: 100%;
+}
+
+@layer utilities {
+  .limit {
+    display: grid;
+    background-color: red;
+    inline-size: 100%;
+    grid-template-columns:
+      [full-width]
+      minmax(2rem, 1fr)
+      [content-start]
+      min(1400px, 100% - 4rem)
+      [content-end]
+      minmax(2rem, 1fr)
+      [full-width-end];
+
+    > * {
+      grid-column: content-start / content-end;
+    }
+  }
+}
