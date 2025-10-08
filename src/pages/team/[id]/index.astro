@@ -6,9 +6,10 @@ import Github from "@/icons/github.astro";
 import Layout from "@/layouts/Layout.astro";
 import { getCollectionsTrue } from "@/utils/content/getCollections";
 
-const members = await getCollectionsTrue("members");
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const members = await getCollectionsTrue("members");
+
   return members.map((member) => ({
     params: { id: String(member.id) },
   }));
@@ -16,6 +17,7 @@ export function getStaticPaths() {
 
 const { id } = Astro.params;
 
+const members = await getCollectionsTrue("members");
 const currentMember = members.find((m) => String(m.id) === id);
 
 if (!currentMember) {
